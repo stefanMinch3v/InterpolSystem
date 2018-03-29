@@ -2,11 +2,14 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using static Data.DataConstants;
+
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [MaxLength(UserNamesMaxLength)]
+        [MinLength(UserNamesMinLength)]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
