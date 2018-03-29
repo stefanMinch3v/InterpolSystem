@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Web", "InterpolSystem.Web\InterpolSystem.Web.csproj", "{02B92826-7BC8-4BAD-B481-43482C896A78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Data", "InterpolSystem.Data\InterpolSystem.Data.csproj", "{F60FEB24-0504-4732-86D6-781C6DEEDF58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02B92826-7BC8-4BAD-B481-43482C896A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B92826-7BC8-4BAD-B481-43482C896A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B92826-7BC8-4BAD-B481-43482C896A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B92826-7BC8-4BAD-B481-43482C896A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1026EB1B-F172-49C7-BC6C-95A72DB2DBE8}
+	EndGlobalSection
+EndGlobal
