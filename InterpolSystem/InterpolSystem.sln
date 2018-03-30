@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Web", "InterpolSystem.Web\InterpolSystem.Web.csproj", "{02B92826-7BC8-4BAD-B481-43482C896A78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Web", "InterpolSystem.Web\InterpolSystem.Web.csproj", "{02B92826-7BC8-4BAD-B481-43482C896A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Data", "InterpolSystem.Data\InterpolSystem.Data.csproj", "{F60FEB24-0504-4732-86D6-781C6DEEDF58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Data", "InterpolSystem.Data\InterpolSystem.Data.csproj", "{F60FEB24-0504-4732-86D6-781C6DEEDF58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Services", "InterpolSystem.Services\InterpolSystem.Services.csproj", "{7FDD4DE8-CF4C-4A53-95DF-054E11F62807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Common", "InterpolSystem.Common\InterpolSystem.Common.csproj", "{8191B4E3-5831-414A-A9F0-32EAC0F49931}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Test", "InterpolSystem.Test\InterpolSystem.Test.csproj", "{42517C54-5CF7-49C3-AFBA-F9144C97D36A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F60FEB24-0504-4732-86D6-781C6DEEDF58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FDD4DE8-CF4C-4A53-95DF-054E11F62807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FDD4DE8-CF4C-4A53-95DF-054E11F62807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FDD4DE8-CF4C-4A53-95DF-054E11F62807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FDD4DE8-CF4C-4A53-95DF-054E11F62807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8191B4E3-5831-414A-A9F0-32EAC0F49931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8191B4E3-5831-414A-A9F0-32EAC0F49931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8191B4E3-5831-414A-A9F0-32EAC0F49931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8191B4E3-5831-414A-A9F0-32EAC0F49931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42517C54-5CF7-49C3-AFBA-F9144C97D36A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42517C54-5CF7-49C3-AFBA-F9144C97D36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42517C54-5CF7-49C3-AFBA-F9144C97D36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42517C54-5CF7-49C3-AFBA-F9144C97D36A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿namespace InterpolSystem.Web
 {
+    using AutoMapper;
     using Data;
     using Data.Models;
     using Infrastructure.Extensions;
@@ -59,6 +60,12 @@
             .AddEntityFrameworkStores<InterpolDbContext>()
             .AddDefaultTokenProviders();
 
+            services.AddDomainServices(); // auto adds services
+
+            services.AddAutoMapper();
+
+            services.AddRouting(routing => routing.LowercaseUrls = true); // user friendly urls
+
             services.AddMvc(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>(); // sets it global to all actions
@@ -86,6 +93,11 @@
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

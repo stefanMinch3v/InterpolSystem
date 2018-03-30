@@ -1,0 +1,29 @@
+﻿@model UserListingsViewModel
+
+@{
+    ViewData["Title"] = "All users";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>
+                    @string.Join(Environment.NewLine, user.RoleNames)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
