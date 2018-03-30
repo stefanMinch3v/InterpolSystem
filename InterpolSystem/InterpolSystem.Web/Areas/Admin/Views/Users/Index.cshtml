@@ -21,7 +21,14 @@
                 <td>@user.Username</td>
                 <td>@user.Email</td>
                 <td>
-                    @string.Join(Environment.NewLine, user.RoleNames)
+                    @if (user.RoleNames.Any())
+                    {
+                        @string.Join(Environment.NewLine, user.RoleNames)
+                    }
+                    else
+                    {
+                        <p class="text-danger">Does not have any roles.</p>
+                    }
                 </td>
             </tr>
         }
