@@ -1,7 +1,7 @@
 ﻿@model UserListingsViewModel
 
 @{
-    ViewData["Title"] = "All users";
+    ViewData["Title"] = "User Administration";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -12,25 +12,56 @@
             <th>Username</th>
             <th>Email</th>
             <th>Roles</th>
+            <th>Add to role</th>
+            <th>Remove from role</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var user in Model.Users)
         {
-            <tr>
-                <td>@user.Username</td>
-                <td>@user.Email</td>
-                <td>
-                    @if (user.RoleNames.Any())
-                    {
-                        @string.Join(Environment.NewLine, user.RoleNames)
-                    }
-                    else
-                    {
-                        <p class="text-danger">Does not have any roles.</p>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>@user.Username</td>
+            <td>@user.Email</td>
+            <td>
+                @if (user.RoleNames.Any())
+                {
+                    @string.Join(", ", user.RoleNames)
+                }
+                else
+                {
+                    <p class="text-danger">Does not have any roles.</p>
+                }
+            </td>
+            @*Try to fix the button add/remove to a single form.*@
+            <td>
+                <form asp-controller="Users" asp-action="AddToRole" method="post">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="hidden" name="UserId" value="@user.Id" />
+                            <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+                        </div>
+                        <div class="col-md-4">
+                            @*name="buttonValue"*@
+                            <input class="btn btn-sm btn-primary" type="submit" value="Add" />
+                            @*<input class="btn btn-sm btn-danger" type="submit" value="Remove" />*@
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-controller="Users" asp-action="RemoveFromRole" method="post">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="hidden" name="UserId" value="@user.Id" />
+                            <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="btn btn-sm btn-danger" type="submit" value="Remove" />
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

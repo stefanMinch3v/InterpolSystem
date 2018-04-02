@@ -24,7 +24,6 @@
                     .Database
                     .Migrate();
 
-                // add administrator to the system
                 var userManager = serviceScope
                     .ServiceProvider
                     .GetService<UserManager<User>>();
@@ -35,16 +34,27 @@
 
                 Task.Run(async () =>
                 {
-                    var existingRole = await roleManager.RoleExistsAsync(AdministratorRole);
-
-                    if (!existingRole)
+                    // add roles
+                    var roles = new[]
                     {
-                        await roleManager.CreateAsync(new IdentityRole
+                        AdministratorRole,
+                        TestRole
+                    };
+
+                    foreach (var role in roles)
+                    {
+                        var existingRole = await roleManager.RoleExistsAsync(role);
+
+                        if (!existingRole)
                         {
-                            Name = AdministratorRole
-                        });
+                            await roleManager.CreateAsync(new IdentityRole
+                            {
+                                Name = role
+                            });
+                        }
                     }
 
+                    // add administrator 
                     var adminUsername = "admin";
                     var adminEmail = "admin@mymail.com";
                     var adminFromDb = await userManager.FindByEmailAsync(adminEmail);
