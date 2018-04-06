@@ -11,6 +11,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using System;
 
     public class Startup
     {
@@ -66,6 +67,12 @@
 
             services.AddRouting(routing => routing.LowercaseUrls = true); // user friendly urls
 
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                // enables immediate logout, after updating the user's stats.
+                options.ValidationInterval = TimeSpan.Zero;
+            });
+
             services.AddMvc(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>(); // sets it global to all actions
@@ -96,7 +103,7 @@
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                  );
+                );
 
                 routes.MapRoute(
                     name: "default",

@@ -14,6 +14,7 @@
             <th>Roles</th>
             <th>Add to role</th>
             <th>Remove from role</th>
+            <th>User options</th>
         </tr>
     </thead>
     <tbody>
@@ -56,7 +57,26 @@
                             <select name="Role" asp-items="Model.Roles" class="form-control"></select>
                         </div>
                         <div class="col-md-4">
-                            <input class="btn btn-sm btn-danger" type="submit" value="Remove" />
+                            <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                        </div>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form asp-controller="Users" asp-action="Delete" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <input class="btn btn-sm btn-danger" type="submit" value="Delete User" />
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <form asp-controller="Users" asp-action="ChangePassword" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <input class="btn btn-sm btn-info" type="submit" value="Reset password" />
                         </div>
                     </div>
                 </form>

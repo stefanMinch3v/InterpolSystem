@@ -32,7 +32,16 @@
                 <ul class="nav navbar-nav">
                     @if (this.User.IsInRole(WebConstants.AdministratorRole))
                     {
-                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">All Users</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Manage Users
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">All Users</a></li>
+                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Create">Create User</a></li>
+                            </ul>
+                        </li>
                     }
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 </ul>
