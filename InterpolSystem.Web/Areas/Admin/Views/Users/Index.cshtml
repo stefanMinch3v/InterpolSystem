@@ -20,68 +20,68 @@
     <tbody>
         @foreach (var user in Model.Users)
         {
-        <tr>
-            <td>@user.Username</td>
-            <td>@user.Email</td>
-            <td>
-                @if (user.RoleNames.Any())
-                {
-                    @string.Join(", ", user.RoleNames)
-                }
-                else
-                {
-                    <p class="text-danger">Does not have any roles.</p>
-                }
-            </td>
-            @*Try to fix the button add/remove to a single form.*@
-            <td>
-                <form asp-controller="Users" asp-action="AddToRole" method="post">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="hidden" name="UserId" value="@user.Id" />
-                            <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>
+                    @if (user.RoleNames.Any())
+                    {
+                        @string.Join(", ", user.RoleNames)
+                    }
+                    else
+                    {
+                        <p class="text-danger">Does not have any roles.</p>
+                    }
+                </td>
+                @*Try to fix the button add/remove to a single form.*@
+                <td>
+                    <form asp-controller="Users" asp-action="AddToRole" method="post">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="hidden" name="UserId" value="@user.Id" />
+                                <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+                            </div>
+                            <div class="col-md-4">
+                                @*name="buttonValue"*@
+                                <input class="btn btn-sm btn-primary" type="submit" value="Add" />
+                                @*<input class="btn btn-sm btn-danger" type="submit" value="Remove" />*@
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            @*name="buttonValue"*@
-                            <input class="btn btn-sm btn-primary" type="submit" value="Add" />
-                            @*<input class="btn btn-sm btn-danger" type="submit" value="Remove" />*@
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Users" asp-action="RemoveFromRole" method="post">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="hidden" name="UserId" value="@user.Id" />
+                                <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </td>
-            <td>
-                <form asp-controller="Users" asp-action="RemoveFromRole" method="post">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="hidden" name="UserId" value="@user.Id" />
-                            <select name="Role" asp-items="Model.Roles" class="form-control"></select>
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Users" asp-action="Delete" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <input class="btn btn-sm btn-danger" type="submit" value="Delete User" onclick="return confirm('Are you sure you want to delete this user?')" />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
+                    </form>
+                    <br />
+                    <form asp-controller="Users" asp-action="ChangePassword" method="post">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <input class="btn btn-sm btn-info" type="submit" value="Reset password" onclick="return confirm('Are you sure you want to reset user`s password?')" />
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </td>
-            <td>
-                <form asp-controller="Users" asp-action="Delete" method="post">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="hidden" name="id" value="@user.Id" />
-                            <input class="btn btn-sm btn-danger" type="submit" value="Delete User" />
-                        </div>
-                    </div>
-                </form>
-                <br />
-                <form asp-controller="Users" asp-action="ChangePassword" method="post">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="hidden" name="id" value="@user.Id" />
-                            <input class="btn btn-sm btn-info" type="submit" value="Reset password" />
-                        </div>
-                    </div>
-                </form>
-            </td>
-        </tr>
+                    </form>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -38,7 +38,8 @@
                     var roles = new[]
                     {
                         AdministratorRole,
-                        TestRole
+                        TestRole,
+                        WantedMissingPeopleRole
                     };
 
                     foreach (var role in roles)

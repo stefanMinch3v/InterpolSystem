@@ -26,6 +26,18 @@
     margin: 15px;
 }
 
+#main-nav-bar {
+    background-color: #993366;
+}
+
+.main-logo {
+    height: 3em;
+}
+
+#fixedHeight {
+    height: 15em;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

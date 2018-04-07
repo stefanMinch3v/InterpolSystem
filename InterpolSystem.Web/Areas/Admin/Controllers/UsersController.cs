@@ -122,10 +122,11 @@
                 return new BadRequestObjectResult("Failed to reset the password.");
             }
 
-            this.TempData.AddSuccessMessage($"Successfully reset the password. Password is {newPassword}.");
+            this.TempData.AddSuccessMessage($"Successfully reset the password. The new password is: {newPassword}");
             return RedirectToAction(nameof(Index));
         }
 
+        // add javascript on click to ask for confirmation yes/no.
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
