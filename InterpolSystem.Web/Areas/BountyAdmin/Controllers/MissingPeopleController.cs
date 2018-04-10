@@ -27,43 +27,58 @@
         [HttpPost]
         public IActionResult Create(MissingPeopleCreateFormViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    model.Languages = this.GetLanguages();
-            //    model.Countries = this.GetCountries();
+            if (!ModelState.IsValid)
+            {
+                model.Languages = this.GetLanguages();
+                model.Countries = this.GetCountries();
 
-            //    return View(model);
-            //}
+                return View(model);
+            }
 
-            //var existingLanguages = this.bountyAdminService.IsLanguagesExisting(model.SelectedLanguages);
-            //var existingCountries = this.bountyAdminService.IsCountriesExisting(model.SelectedCountries);
+            var existingLanguages = this.bountyAdminService.IsLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.IsCountriesExisting(model.SelectedCountries);
 
-            //if (!existingLanguages || !existingCountries)
-            //{
-            //    return new BadRequestObjectResult("Unexisting language or country.");
-            //}
+            if (!existingLanguages || !existingCountries)
+            {
+                return new BadRequestObjectResult("Unexisting language or country.");
+            }
 
-            //this.bountyAdminService.Create(
-            //    model.FirstName,
-            //    model.LastName,
-            //    model.Gender,
-            //    model.DateOfBirth,
-            //    model.PlaceOfBirth,
-            //    model.DateOfDisappearance,
-            //    model.PlaceOfDisappearance,
-            //    model.Height,
-            //    model.Weight,
-            //    model.HairColor,
-            //    model.EyeColor,
-            //    model.PictureUrl,
-            //    model.SelectedCountries,
-            //    model.SelectedLanguages,
-            //    model.AllNames,
-            //    model.ScarsOrDistinguishingMarks);
+            this.bountyAdminService.Create(
+                model.FirstName,
+                model.LastName,
+                model.Gender,
+                model.DateOfBirth,
+                model.PlaceOfBirth,
+                model.DateOfDisappearance,
+                model.PlaceOfDisappearance,
+                model.Height,
+                model.Weight,
+                model.HairColor,
+                model.EyeColor,
+                model.PictureUrl,
+                model.SelectedCountries,
+                model.SelectedLanguages,
+                model.AllNames,
+                model.ScarsOrDistinguishingMarks);
 
             TempData.AddSuccessMessage("Person successfully added to the system.");
 
             return RedirectToAction(nameof(Create));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            // to do
+
+            return null;
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MissingPeopleCreateFormViewModel model)
+        {
+            // to do
+
+            return null;
         }
 
         private List<SelectListItem> GetLanguages()
