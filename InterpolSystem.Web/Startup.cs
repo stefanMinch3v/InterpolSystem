@@ -101,6 +101,11 @@
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "missingpeople",
+                    template: "missingpeople/index",
+                    defaults: new { controller = "MissingPeople", action = "Index" });
+
+                routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );

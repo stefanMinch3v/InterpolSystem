@@ -17,12 +17,6 @@
             this.bountyAdminService = bountyAdminService;
         }
 
-        public IActionResult Index()
-        {
-            // TO DO
-            return View();
-        }
-
         public IActionResult Create()
          => View(new MissingPeopleCreateFormViewModel
          {
@@ -69,7 +63,7 @@
 
             TempData.AddSuccessMessage("Person successfully added to the system.");
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(null);//fix this !
         }
 
         private List<SelectListItem> GetLanguages()

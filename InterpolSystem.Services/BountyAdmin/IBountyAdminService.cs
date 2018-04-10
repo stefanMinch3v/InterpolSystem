@@ -29,8 +29,8 @@
 
         bool IsCountriesExisting(IEnumerable<int> ids);
 
-        IEnumerable<LanguageListingModel> GetLanguagesList();
+        IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 
-        IEnumerable<CountryListingModel> GetCountriesList();
+        IEnumerable<CountryListingServiceModel> GetCountriesList();
     }
 }

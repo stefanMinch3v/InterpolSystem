@@ -1,0 +1,49 @@
+﻿@model MissingPeopleDetailsServiceModel
+
+@{
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName}";
+}
+
+<a asp-controller="MissingPeople" asp-action="Index" class="btn btn-primary">Back to all</a>
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Model.PhysicalDescription.PictureUrl" class="img-responsive center-block" alt="@Model.LastName picture" />
+    </div>
+    <div class="col-md-8">
+        <p>First name: <span class="text-custom">@Model.FirstName</span></p>
+        <p>Last name: <span class="text-custom">@Model.LastName</span></p>
+
+        @if (Model.AllNames != null)
+        {
+            <p>Full name: <span class="text-custom">@Model.AllNames</span></p>
+        }
+
+        <p>Sex: <span class="text-custom">@Model.Gender.ToString()</span></p>
+        <p>Date of birth: <span class="text-custom">@Model.DateOfBirth.ToShortDateString()</span></p>
+        <p>Place of birth: <span class="text-custom">@Model.PlaceOfBirth</span></p>
+        <p>Nationality: <span class="text-custom">@(string.Join(", ", Model.Nationalities.Select(n => n.Name)))</span></p>
+        <hr />
+        <p>Color of hair: <span class="text-custom">@Model.PhysicalDescription.HairColor.ToString()</span></p>
+        <p>Color of eyes: <span class="text-custom">@Model.PhysicalDescription.EyeColor.ToString()</span></p>
+        <p>Height: <span class="text-custom">@Model.PhysicalDescription.Height cm</span></p>
+        <p>Weight: <span class="text-custom">@Model.PhysicalDescription.Weight kg</span></p>
+
+        @if (Model.PhysicalDescription.ScarsOrDistinguishingMarks != null)
+        {
+            <p>Scars or distinguishing marks: <span class="text-custom">@Model.PhysicalDescription.ScarsOrDistinguishingMarks</span></p>
+        }
+
+        <p>Languages spoken: <span class="text-custom">@(string.Join(", ", Model.SpokenLanguages.Select(l => l.Name)))</span></p>
+        <hr />
+        <p>Date of disappearance: <span class="text-custom">@Model.DateOfDisappearance.ToShortDateString()</span></p>
+        <p>Place of disappearance: <span class="text-custom">@Model.PlaceOfDisappearance</span></p>
+        <hr />
+        <p class="text-danger">IF YOU HAVE ANY INFORMATION PLEASE CONTACT:</p>
+        <p>Your national or local police</p>
+        <p><a href="#" class="text-primary">General Secretariat of INTERPOL</a></p>
+    </div>
+</div>
+

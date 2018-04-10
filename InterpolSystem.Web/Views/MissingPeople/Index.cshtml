@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MissingPeopleListingServiceModel>
+
+@{
+    ViewData["Title"] = "Missing People";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row missing-people-listings">
+    @foreach (var person in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <a asp-controller="MissingPeople" asp-action="Details" asp-route-id="@person.Id">Details</a>
+                </div>
+                <div class="panel-body">
+                    <img src="@person.PictureUrl" class="img-responsive center-block" />
+                    <br />
+                    <p class="text-center">
+                        @($"Name: {person.FirstName} {person.LastName}")
+                    </p>
+                    <p class="text-center">
+                        @($"Age today: {DateTime.UtcNow.Year - person.DateOfBirth.Year} years old")
+                    </p>
+                    <p class="text-center">
+                        @($"Nationality: {person.GivenNationalities}")
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

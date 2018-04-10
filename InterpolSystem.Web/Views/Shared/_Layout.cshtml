@@ -45,7 +45,8 @@
                             </ul>
                         </li>
                     }
-                    
+
+                    <li><a asp-controller="MissingPeople" asp-action="Index">Missing people</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -67,8 +68,8 @@
 
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2018 - Interpol Official Website</p>
+        <footer class="text-center">
+            <p>&copy; INTERPOL 2018. All rights reserved</p>
         </footer>
     </div>
 

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InterpolSystem.Common\InterpolSystem.Common.csproj" />
     <ProjectReference Include="..\InterpolSystem.Data\InterpolSystem.Data.csproj" />
   </ItemGroup>

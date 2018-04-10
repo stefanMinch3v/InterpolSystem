@@ -3,7 +3,7 @@
     using Common.Mapping;
     using Data.Models;
 
-    public class LanguageListingModel : IMapFrom<Language>
+    public class CountryListingServiceModel : IMapFrom<Country>
     {
         public int Id { get; set; }
 

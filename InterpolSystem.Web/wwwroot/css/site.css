@@ -6,6 +6,7 @@
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+    margin-top: 1em;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -32,6 +33,15 @@
 
 .main-logo {
     height: 3em;
+}
+
+.missing-people-listings .img-responsive {
+    height: 200px !important;
+    width: 200px !important;
+}
+
+.text-custom {
+    font-weight: bold;
 }
 
 #fixedHeight {

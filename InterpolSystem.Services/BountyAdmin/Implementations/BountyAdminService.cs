@@ -85,16 +85,16 @@
             this.db.SaveChanges();
         }
 
-        public IEnumerable<CountryListingModel> GetCountriesList()
+        public IEnumerable<CountryListingServiceModel> GetCountriesList()
             => this.db.Countries
                 .OrderBy(c => c.Name)
-                .ProjectTo<CountryListingModel>()
+                .ProjectTo<CountryListingServiceModel>()
                 .ToList();
 
-        public IEnumerable<LanguageListingModel> GetLanguagesList()
+        public IEnumerable<LanguageListingServiceModel> GetLanguagesList()
             => this.db.Languages
                 .OrderBy(l => l.Name)
-                .ProjectTo<LanguageListingModel>()
+                .ProjectTo<LanguageListingServiceModel>()
                 .ToList();
 
         public bool IsCountriesExisting(IEnumerable<int> ids)
