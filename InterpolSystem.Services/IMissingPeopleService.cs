@@ -7,8 +7,10 @@
     {
         MissingPeopleDetailsServiceModel GetPerson(int id);
 
-        IEnumerable<MissingPeopleListingServiceModel> All();
+        IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10);
 
-        bool IsExistingPerson(int id);
+        bool IsPersonExisting(int id);
+
+        int Total();
     }
 }

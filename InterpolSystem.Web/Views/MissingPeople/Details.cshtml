@@ -6,7 +6,7 @@
 
 <a asp-controller="MissingPeople" asp-action="Index" class="btn btn-primary">Back to all</a>
 
-@if (this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
+@if (this.User.IsInRole(WebConstants.WantedMissingPeopleRole) || this.User.IsInRole(WebConstants.AdministratorRole))
 {
     <a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
 }
@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-8">
         <div class="panel panel-default panel-heading">
-            <p class="panel-title panel-heading">IDENTITY PARTICULARS</p>
+            <p class="panel-title panel-heading text-capitalize">identity particulars</p>
             <div class="panel-body">
                 <p>First name: <span class="text-custom">@Model.FirstName</span></p>
                 <p>Last name: <span class="text-custom">@Model.LastName</span></p>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="panel panel-default panel-heading">
-            <p class="panel-title panel-heading">PHYSICAL DESCRIPTION</p>
+            <p class="panel-title panel-heading text-capitalize">physical description</p>
             <div class="panel-body">
                 <p>Color of hair: <span class="text-custom">@Model.PhysicalDescription.HairColor.ToString()</span></p>
                 <p>Color of eyes: <span class="text-custom">@Model.PhysicalDescription.EyeColor.ToString()</span></p>
@@ -52,14 +52,14 @@
             </div>
         </div>
         <div class="panel panel-default panel-heading">
-            <p class="panel-title panel-heading">DATE OF DISAPPEARANCE</p>
+            <p class="panel-title panel-heading text-capitalize">date of disappearance</p>
             <div class="panel-body">
                 <p>Date of disappearance: <span class="text-custom">@Model.DateOfDisappearance.ToShortDateString()</span></p>
                 <p>Place of disappearance: <span class="text-custom">@Model.PlaceOfDisappearance</span></p>
             </div>
         </div>    
         <div class="panel-footer">
-            <p class="text-danger">IF YOU HAVE ANY INFORMATION PLEASE CONTACT:</p>
+            <p class="text-danger text-capitalize">if you have any information please contact:</p>
             <p>Your national or local police</p>
             <p><a href="#" class="text-primary">General Secretariat of INTERPOL</a></p>
         </div>

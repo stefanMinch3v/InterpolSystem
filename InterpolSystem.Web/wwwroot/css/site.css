@@ -44,6 +44,10 @@
     font-weight: bold;
 }
 
+.disabled {
+    pointer-events: none;
+}
+
 #fixedHeight {
     height: 15em;
 }

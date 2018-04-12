@@ -3,30 +3,45 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.MissingPeople;
+    using Services;
     using Services.BountyAdmin;
     using System.Collections.Generic;
     using System.Linq;
     using Web.Infrastructure.Extensions;
 
+    using static WebConstants;
+
     public class MissingPeopleController : BaseBountyAdminController
     {
         private readonly IBountyAdminService bountyAdminService;
+        private readonly IMissingPeopleService missingPeopleService;
 
-        public MissingPeopleController(IBountyAdminService bountyAdminService)
+        public MissingPeopleController(
+            IBountyAdminService bountyAdminService, 
+            IMissingPeopleService missingPeopleService)
         {
             this.bountyAdminService = bountyAdminService;
+            this.missingPeopleService = missingPeopleService;
         }
 
         public IActionResult Create()
-         => View(new MissingPeopleCreateFormViewModel
+         => View(new MissingPeopleFormViewModel
          {
              Languages = this.GetLanguages(),
              Countries = this.GetCountries()
          });
 
         [HttpPost]
-        public IActionResult Create(MissingPeopleCreateFormViewModel model)
+        public IActionResult Create(MissingPeopleFormViewModel model)
         {
+            var selectedLanguages = model.SelectedLanguages;
+            var selectedCountries = model.SelectedCountries;
+
+            if (selectedCountries == null || selectedLanguages == null)
+            {
+                ModelState.AddModelError(string.Empty, "Please choose language and nationality.");
+            }
+
             if (!ModelState.IsValid)
             {
                 model.Languages = this.GetLanguages();
@@ -68,17 +83,93 @@
 
         public IActionResult Edit(int id)
         {
-            // to do
+            var existingPerson = this.missingPeopleService.IsPersonExisting(id);
 
-            return null;
+            if (!existingPerson)
+            {
+                return new BadRequestObjectResult("Invalid person");
+            }
+
+            var person = this.missingPeopleService.GetPerson(id);
+
+            return View(new MissingPeopleFormViewModel
+            {
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                AllNames = person.AllNames,
+                DateOfBirth = person.DateOfBirth,
+                DateOfDisappearance = person.DateOfDisappearance,
+                EyeColor = person.PhysicalDescription.EyeColor,
+                Gender = person.Gender,
+                HairColor = person.PhysicalDescription.HairColor,
+                Height = person.PhysicalDescription.Height,
+                PictureUrl = person.PhysicalDescription.PictureUrl,
+                Weight = person.PhysicalDescription.Weight,
+                PlaceOfBirth = person.PlaceOfBirth,
+                PlaceOfDisappearance = person.PlaceOfDisappearance,
+                ScarsOrDistinguishingMarks = person.PhysicalDescription.ScarsOrDistinguishingMarks,
+                Countries = this.GetCountries(),
+                Languages = this.GetLanguages(),
+                SelectedCountries = person.Nationalities.Select(n => n.Id).ToList(),
+                SelectedLanguages = person.SpokenLanguages.Select(l => l.Id).ToList()
+            });
         }
 
         [HttpPost]
-        public IActionResult Edit(MissingPeopleCreateFormViewModel model)
+        public IActionResult Edit(int id, MissingPeopleFormViewModel model)
         {
-            // to do
+            var exsitingPerson = this.missingPeopleService.IsPersonExisting(id);
 
-            return null;
+            if (!exsitingPerson)
+            {
+                return new BadRequestResult();
+            }
+
+            var selectedLanguages = model.SelectedLanguages;
+            var selectedCountries = model.SelectedCountries;
+
+            if (selectedCountries == null || selectedLanguages == null)
+            {
+                ModelState.AddModelError(string.Empty, "Please choose language and nationality! Refresh the page in order to see the old languages and nationalities!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.Languages = this.GetLanguages();
+                model.Countries = this.GetCountries();
+                return View(model);
+            }
+
+            var existingLanguages = this.bountyAdminService.IsLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.IsCountriesExisting(model.SelectedCountries);
+
+            if (!existingLanguages || !existingCountries)
+            {
+                return new BadRequestObjectResult("Unexisting language or country.");
+            }
+
+            this.bountyAdminService.Edit(
+                id,
+                model.FirstName,
+                model.LastName,
+                model.Gender,
+                model.DateOfBirth,
+                model.PlaceOfBirth,
+                model.DateOfDisappearance,
+                model.PlaceOfDisappearance,
+                model.Height,
+                model.Weight,
+                model.HairColor,
+                model.EyeColor,
+                model.PictureUrl,
+                model.SelectedCountries,
+                model.SelectedLanguages,
+                model.AllNames,
+                model.ScarsOrDistinguishingMarks);
+
+            TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
+
+            return RedirectToAction(nameof(Web.Controllers.MissingPeopleController.Index), MissingPeopleControllerName);
         }
 
         private List<SelectListItem> GetLanguages()

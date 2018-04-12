@@ -15,9 +15,11 @@
             this.db = db;
         }
 
-        public IEnumerable<MissingPeopleListingServiceModel> All()
+        public IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10)
             => this.db.IdentityParticularsMissing
                 .OrderByDescending(ipm => ipm.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ProjectTo<MissingPeopleListingServiceModel>()
                 .ToList();
 
@@ -27,7 +29,9 @@
                 .ProjectTo<MissingPeopleDetailsServiceModel>()
                 .FirstOrDefault();
 
-        public bool IsExistingPerson(int id)
+        public bool IsPersonExisting(int id)
             => this.db.IdentityParticularsMissing.Any(m => m.Id == id);
+
+        public int Total() => this.db.IdentityParticularsMissing.Count();
     }
 }

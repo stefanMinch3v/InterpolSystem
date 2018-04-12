@@ -7,7 +7,7 @@
 
     using static Data.DataConstants;
 
-    public class MissingPeopleCreateFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
+    public class MissingPeopleFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
     {
         private const string InvalidDateInThePast = "01/01/1800";
 
