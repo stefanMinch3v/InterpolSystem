@@ -98,13 +98,11 @@
                 return;
             }
 
-            // get the whole info, cuz we forget to add one additional table for inheritance between missing and wanted people and navigation id key in the physical description table. The FirstOrDefault doesnt work here, perhaps is a bug from ef core.
             var existingPerson = this.db.IdentityParticularsMissing
-                .FromSql($"SELECT * FROM IdentityParticularsMissing WHERE Id = {id}")
                 .Include(p => p.PhysicalDescription)
                 .Include(p => p.Nationalities)
                 .Include(p => p.SpokenLanguages)
-                .FirstOrDefault();
+                .FirstOrDefault(p => p.Id == id);
 
             if (existingPerson == null)
             {
