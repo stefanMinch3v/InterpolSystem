@@ -8,10 +8,10 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using static WebConstants;
+
     public class MissingPeopleController : Controller
     {
-        private const int PageSize = 6;
-
         private readonly IMissingPeopleService peopleService;
 
         public MissingPeopleController(IMissingPeopleService peopleService)
@@ -42,6 +42,7 @@
             return View(person);
         }
 
+        // TO DO add pagination on the search result
         public IActionResult Search(SearchFormViewModel model, int page = 1)
         {
             var viewModel = new MissingPeoplePageListingModel

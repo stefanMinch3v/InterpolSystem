@@ -16,5 +16,7 @@
         public const string TempDataSuccessMessageKey = "SuccessMessage";
 
         public const string MissingPeopleControllerName = "MissingPeople";
+
+        public const int PageSize = 6;
     }
 }
