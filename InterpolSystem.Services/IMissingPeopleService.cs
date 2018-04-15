@@ -12,6 +12,8 @@
 
         int Total();
 
+        int SearchPeopleCriteriaCounter { get; }
+
         IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10);
 
         IEnumerable<MissingPeopleListingServiceModel> SearchByComponents(
@@ -22,7 +24,9 @@
             string firstName, 
             string lastName,
             string distinguishMarks, 
-            int age);
+            int age,
+            int page = 1,
+            int pageSize = 10);
 
         IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 

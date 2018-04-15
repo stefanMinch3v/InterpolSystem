@@ -18,6 +18,8 @@
             this.db = db;
         }
 
+        public int SearchPeopleCriteriaCounter { get; set; }
+
         public MissingPeopleDetailsServiceModel GetPerson(int id)
             => this.db.IdentityParticularsMissing
                 .Where(m => m.Id == id)
@@ -45,7 +47,9 @@
             string firstName, 
             string lastName, 
             string distinguishMarks, 
-            int age)
+            int age,
+            int page = 1,
+            int pageSize = 10)
         {
             var searchData = this.db.IdentityParticularsMissing
                 .Include(m => m.PhysicalDescription)
@@ -95,7 +99,12 @@
                     .AsQueryable();
             }
 
+            this.SearchPeopleCriteriaCounter = searchData.Count();
+
             return searchData
+                .OrderByDescending(m => m.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ProjectTo<MissingPeopleListingServiceModel>()
                 .ToList();
         }

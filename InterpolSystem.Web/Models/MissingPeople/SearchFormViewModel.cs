@@ -26,5 +26,7 @@
         public IEnumerable<SelectListItem> Countries { get; set; }
 
         public int? SelectedCountryId { get; set; }
+
+        public int SearchCriteriaTotalPages { get; set; }
     }
 }

@@ -42,30 +42,24 @@
             return View(person);
         }
 
-        // TO DO add pagination on the search result
         public IActionResult Search(SearchFormViewModel model, int page = 1)
-        {
-            var viewModel = new MissingPeoplePageListingModel
+            => View(new MissingPeoplePageListingModel
             {
-                CurrentPage = page
-            };
-
-            viewModel.MissingPeople = this.peopleService.SearchByComponents(
-                model.EnableCountrySearch,
-                model.SelectedCountryId ?? 0,
-                model.EnableGenderSearch,
-                model.SelectedGender,
-                model.SearchByFirstName,
-                model.SearchByLastName,
-                model.SearchByDistinguishMarks,
-                model.SearchByAge ?? 0);
-
-            var totalResults = viewModel.MissingPeople.Any() ? viewModel.MissingPeople.Count() : 0;
-
-            viewModel.TotalPages = (int)Math.Ceiling(totalResults / (double)PageSize);
-
-            return View(viewModel);
-        }
+                CurrentPage = page,
+                MissingPeople = this.peopleService.SearchByComponents(
+                    model.EnableCountrySearch,
+                    model.SelectedCountryId ?? 0,
+                    model.EnableGenderSearch,
+                    model.SelectedGender,
+                    model.SearchByFirstName,
+                    model.SearchByLastName,
+                    model.SearchByDistinguishMarks,
+                    model.SearchByAge ?? 0,
+                    page,
+                    PageSize),
+                SearchCriteriaTotalPages = this.peopleService.SearchPeopleCriteriaCounter,
+                TotalPages = (int)Math.Ceiling(this.peopleService.SearchPeopleCriteriaCounter / (double)PageSize)
+            });
 
         private List<SelectListItem> GetCountries()
             => this.peopleService.GetCountriesList()
