@@ -30,12 +30,14 @@
         public Gender Gender { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = DateFormatString)]
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
         [MaxLength(IdentityMissingPlaceOfBirthMaxLength)]
         [MinLength(IdentityMissingPlaceOfBirthMinLength)]
+        [DisplayFormat(DataFormatString = DateFormatString)]
         [Display(Name = "Place of birth")]
         public string PlaceOfBirth { get; set; }
 

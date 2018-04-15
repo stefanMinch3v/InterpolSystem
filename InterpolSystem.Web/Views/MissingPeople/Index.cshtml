@@ -8,36 +8,39 @@
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
-
-<div class="row missing-people-listings">
-    <div class="col-md-9">
-        @foreach (var person in Model.MissingPeople)
-        {
-            <div class="col-md-4 col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">
-                        <a asp-controller="MissingPeople" asp-action="Details" asp-route-id="@person.Id">Details</a>
-                    </div>
-                    <div class="panel-body">
-                        <img src="@person.PictureUrl" class="img-responsive center-block" />
-                        <br />
-                        <p class="text-center">
-                            @($"Name: {person.FirstName} {person.LastName}")
-                        </p>
-                        <p class="text-center">
-                            @($"Age today: {DateTime.UtcNow.Year - person.DateOfBirth.Year} years old")
-                        </p>
-                        <p class="text-center">
-                            @($"Nationality: {person.GivenNationalities}")
-                        </p>
-                    </div>
+<br/>
+<div class="row form-group">
+    <form asp-action="Search">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <input asp-for="SearchByFirstName" placeholder="First name..." class="form-control form-search-margin" />
+                <input asp-for="SearchByLastName" placeholder="Last name..." class="form-control form-search-margin" />
+                <input asp-for="SearchByDistinguishMarks" placeholder="Distinguish marks..." class="form-control form-search-margin" />
+                <input asp-for="SearchByAge" min="0" max="120" step="1" placeholder="Age..." class="form-control form-search-margin" />
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label asp-for="EnableGenderSearch"></label>
+                    <input asp-for="EnableGenderSearch" />
+                    <select asp-for="SelectedGender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="EnableCountrySearch"></label>
+                    <input asp-for="EnableCountrySearch" />
+                    <select name="SelectedCountryId" asp-items="Model.Countries" class="form-control dropdown">
+                        <option disabled selected>--- SELECT ---</option>
+                    </select>
+                </div>
+                <div class="col-md-2 pull-right">
+                    <input type="submit" name="submit" value="Search" class="btn btn-primary pull-right search-button" />
                 </div>
             </div>
-        }
-    </div>
-    <div class="col-md-3">
-        <p>Nav menu for news/add also border*</p>
-    </div>
+        </div>
+    </form>
+</div>
+<hr class="custom-hr"/>
+<div class="row col-md-12">
+    @await Html.PartialAsync("_MissingPeopleListingsPartial", Model)
 </div>
 <ul class="pagination pagination-lg">
     <li class="@previousDisabled">

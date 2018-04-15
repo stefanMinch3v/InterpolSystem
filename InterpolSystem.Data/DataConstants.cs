@@ -34,5 +34,7 @@
 
         public const int UserNamesMaxLength = 50;
         public const int UserNamesMinLength = 2;
+
+        public const string DateFormatString = "{0:dd-MM-yyyy}";
     }
 }

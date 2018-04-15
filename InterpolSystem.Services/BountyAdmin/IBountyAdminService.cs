@@ -1,6 +1,5 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin
 {
-    using BountyAdmin.Models;
     using Data.Models.Enums;
     using System;
     using System.Collections.Generic;
@@ -47,9 +46,5 @@
         bool IsLanguagesExisting(IEnumerable<int> ids);
 
         bool IsCountriesExisting(IEnumerable<int> ids);
-
-        IEnumerable<LanguageListingServiceModel> GetLanguagesList();
-
-        IEnumerable<CountryListingServiceModel> GetCountriesList();
     }
 }

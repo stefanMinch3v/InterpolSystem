@@ -4,7 +4,6 @@
     using Common.Mapping;
     using Data.Models;
     using Data.Models.Enums;
-    using Services.BountyAdmin.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;

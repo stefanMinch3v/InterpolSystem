@@ -1,7 +1,5 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin.Implementations
 {
-    using AutoMapper.QueryableExtensions;
-    using BountyAdmin.Models;
     using Data;
     using Data.Models;
     using Data.Models.Enums;
@@ -138,18 +136,6 @@
             this.db.IdentityParticularsMissing.Update(existingPerson);
             this.db.SaveChanges();
         }
-
-        public IEnumerable<CountryListingServiceModel> GetCountriesList()
-            => this.db.Countries
-                .OrderBy(c => c.Name)
-                .ProjectTo<CountryListingServiceModel>()
-                .ToList();
-
-        public IEnumerable<LanguageListingServiceModel> GetLanguagesList()
-            => this.db.Languages
-                .OrderBy(l => l.Name)
-                .ProjectTo<LanguageListingServiceModel>()
-                .ToList();
 
         public bool IsCountriesExisting(IEnumerable<int> ids)
             => this.db.Countries.Any(c => !ids.Contains(c.Id));

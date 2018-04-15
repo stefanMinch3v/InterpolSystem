@@ -12,8 +12,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Roles</th>
-            <th>Add to role</th>
-            <th>Remove from role</th>
+            <th>Manage Roles</th>
             <th>User options</th>
         </tr>
     </thead>
@@ -33,50 +32,27 @@
                         <p class="text-danger">Does not have any roles.</p>
                     }
                 </td>
-                @*Try to fix the button add/remove to a single form.*@
                 <td>
-                    <form asp-controller="Users" asp-action="AddToRole" method="post">
+                    <form asp-controller="Users"  method="post">
                         <div class="row">
                             <div class="col-md-8">
                                 <input type="hidden" name="UserId" value="@user.Id" />
                                 <select name="Role" asp-items="Model.Roles" class="form-control"></select>
                             </div>
                             <div class="col-md-4">
-                                @*name="buttonValue"*@
-                                <input class="btn btn-sm btn-primary" type="submit" value="Add" />
-                                @*<input class="btn btn-sm btn-danger" type="submit" value="Remove" />*@
+                                <input asp-action="AddToRole" class="btn btn-sm btn-primary custom-buttons" type="submit" value="Add" />
+                                <input asp-action="RemoveFromRole" class="btn btn-sm btn-danger admin-usersmenu-buttons custom-buttons" type="submit" value="Remove" />
                             </div>
                         </div>
                     </form>
                 </td>
                 <td>
-                    <form asp-controller="Users" asp-action="RemoveFromRole" method="post">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <input type="hidden" name="UserId" value="@user.Id" />
-                                <select name="Role" asp-items="Model.Roles" class="form-control"></select>
-                            </div>
-                            <div class="col-md-4">
-                                <input class="btn btn-sm btn-warning" type="submit" value="Remove" />
-                            </div>
-                        </div>
-                    </form>
-                </td>
-                <td>
-                    <form asp-controller="Users" asp-action="Delete" method="post">
+                    <form asp-controller="Users" method="post">
                         <div class="row">
                             <div class="col-md-4">
                                 <input type="hidden" name="id" value="@user.Id" />
-                                <input class="btn btn-sm btn-danger" type="submit" value="Delete User" onclick="return confirm('Are you sure you want to delete this user?')" />
-                            </div>
-                        </div>
-                    </form>
-                    <br />
-                    <form asp-controller="Users" asp-action="ChangePassword" method="post">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="hidden" name="id" value="@user.Id" />
-                                <input class="btn btn-sm btn-info" type="submit" value="Reset password" onclick="return confirm('Are you sure you want to reset user`s password?')" />
+                                <input asp-action="Delete" class="btn btn-sm btn-danger custom-buttons" type="submit" value="Delete User" onclick="return confirm('Are you sure you want to delete this user?')" />     
+                                <input asp-action="ChangePassword" class="btn btn-sm btn-info admin-usersmenu-buttons custom-buttons" type="submit" value="Reset password" onclick="return confirm('Are you sure you want to reset user`s password?')" />
                             </div>
                         </div>
                     </form>

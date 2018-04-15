@@ -3,9 +3,9 @@
     using Services.Models.MissingPeople;
     using System.Collections.Generic;
 
-    public class MissingPeoplePageListingModel
+    public class MissingPeoplePageListingModel : SearchFormViewModel
     {
-        public IEnumerable<MissingPeopleListingServiceModel> MissingPeople { get; set; }
+        public IEnumerable<MissingPeopleListingServiceModel> MissingPeople { get; set; } = new List<MissingPeopleListingServiceModel>();
 
         public int TotalPages { get; set; }
 

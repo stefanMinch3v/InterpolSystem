@@ -1,0 +1,21 @@
+﻿@model MissingPeoplePageListingModel
+
+@{
+    ViewData["Title"] = "Search results";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.MissingPeople.Any())
+{
+    <h3>Found @Model.MissingPeople.Count() matched results.</h3>
+
+    <div class="row">
+        @await Html.PartialAsync("_MissingPeopleListingsPartial", Model)
+    </div>
+}
+else
+{
+    <h3>No people to show.</h3>
+}
+

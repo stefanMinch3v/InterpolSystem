@@ -48,6 +48,28 @@
     pointer-events: none;
 }
 
+.admin-usersmenu-buttons {
+    margin-top: 10em;
+}
+
+.custom-buttons {
+    width: 10em;
+}
+
+.search-button {
+    margin-top: 3.5em;
+    width: 120px;
+}
+
+.form-search-margin {
+    margin-top: 2px;
+}
+
+.custom-hr {
+    background-color: #337ab7;
+    height: 1.5px;
+}
+
 #fixedHeight {
     height: 15em;
 }

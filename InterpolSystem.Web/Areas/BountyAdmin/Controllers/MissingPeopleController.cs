@@ -173,7 +173,7 @@
         }
 
         private List<SelectListItem> GetLanguages()
-            => this.bountyAdminService.GetLanguagesList()
+            => this.missingPeopleService.GetLanguagesList()
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,
@@ -182,7 +182,7 @@
                 .ToList();
 
         private List<SelectListItem> GetCountries()
-            => this.bountyAdminService.GetCountriesList()
+            => this.missingPeopleService.GetCountriesList()
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,

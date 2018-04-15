@@ -2,7 +2,10 @@
 {
     using AutoMapper.QueryableExtensions;
     using Data;
+    using Data.Models.Enums;
+    using Microsoft.EntityFrameworkCore;
     using Models.MissingPeople;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -15,14 +18,6 @@
             this.db = db;
         }
 
-        public IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10)
-            => this.db.IdentityParticularsMissing
-                .OrderByDescending(ipm => ipm.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ProjectTo<MissingPeopleListingServiceModel>()
-                .ToList();
-
         public MissingPeopleDetailsServiceModel GetPerson(int id)
             => this.db.IdentityParticularsMissing
                 .Where(m => m.Id == id)
@@ -33,5 +28,88 @@
             => this.db.IdentityParticularsMissing.Any(m => m.Id == id);
 
         public int Total() => this.db.IdentityParticularsMissing.Count();
+
+        public IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10)
+            => this.db.IdentityParticularsMissing
+                .OrderByDescending(m => m.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ProjectTo<MissingPeopleListingServiceModel>()
+                .ToList();
+
+        public IEnumerable<MissingPeopleListingServiceModel> SearchByComponents(
+            bool enableCountrySearch,
+            int selectedCountry,
+            bool enableGenderSearch,
+            Gender selectedGender,
+            string firstName, 
+            string lastName, 
+            string distinguishMarks, 
+            int age)
+        {
+            var searchData = this.db.IdentityParticularsMissing
+                .Include(m => m.PhysicalDescription)
+                .Include(m => m.SpokenLanguages)
+                .Include(m => m.Nationalities)
+                .AsQueryable();
+
+            if (enableCountrySearch && selectedCountry > 0)
+            {
+                searchData = searchData
+                    .Where(d => d.Nationalities.Any(n => n.CountryId == selectedCountry))
+                    .AsQueryable();
+            }
+
+            if (enableGenderSearch)
+            {
+                searchData = searchData
+                    .Where(d => d.Gender == selectedGender)
+                    .AsQueryable();
+            }
+
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                searchData = searchData
+                    .Where(d => d.FirstName.Contains(firstName))
+                    .AsQueryable();
+            }
+
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                searchData = searchData
+                    .Where(d => d.LastName.Contains(lastName))
+                    .AsQueryable();
+            }
+
+            if (!string.IsNullOrEmpty(distinguishMarks))
+            {
+                searchData = searchData
+                    .Where(d => d.PhysicalDescription.ScarsOrDistinguishingMarks.Contains(distinguishMarks))
+                    .AsQueryable();
+            }
+
+            if (age > 0)
+            {
+                searchData = searchData
+                    .Where(d => (DateTime.UtcNow.Year - d.DateOfBirth.Year) == age)
+                    .AsQueryable();
+            }
+
+            return searchData
+                .ProjectTo<MissingPeopleListingServiceModel>()
+                .ToList();
+        }
+
+        public IEnumerable<CountryListingServiceModel> GetCountriesList()
+            => this.db.Countries
+                .OrderBy(c => c.Name)
+                .ProjectTo<CountryListingServiceModel>()
+                .ToList();
+
+        public IEnumerable<LanguageListingServiceModel> GetLanguagesList()
+            => this.db.Languages
+                .OrderBy(l => l.Name)
+                .ProjectTo<LanguageListingServiceModel>()
+                .ToList();
     }
 }

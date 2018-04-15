@@ -23,7 +23,7 @@
         public void ConfigureMapping(Profile mapper)
             => mapper
                 .CreateMap<IdentityParticularsMissing, MissingPeopleListingServiceModel>()
-                .ForMember(mp => mp.GivenNationalities, cfg => cfg.MapFrom(ipm => string.Join(", ", ipm.Nationalities.Select(n => n.Country.Name))))
+                .ForMember(mp => mp.GivenNationalities, cfg => cfg.MapFrom(ipm => ipm.Nationalities.Select(n => n.Country.Name).FirstOrDefault()))
                 .ForMember(mp => mp.PictureUrl, cfg => cfg.MapFrom(ipm => ipm.PhysicalDescription.PictureUrl));
     }
 }

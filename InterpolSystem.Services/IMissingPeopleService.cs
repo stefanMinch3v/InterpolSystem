@@ -1,5 +1,6 @@
 ﻿namespace InterpolSystem.Services
 {
+    using Data.Models.Enums;
     using Models.MissingPeople;
     using System.Collections.Generic;
 
@@ -7,10 +8,24 @@
     {
         MissingPeopleDetailsServiceModel GetPerson(int id);
 
-        IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10);
-
         bool IsPersonExisting(int id);
 
         int Total();
+
+        IEnumerable<MissingPeopleListingServiceModel> All(int page = 1, int pageSize = 10);
+
+        IEnumerable<MissingPeopleListingServiceModel> SearchByComponents(
+            bool enableCountrySearch,
+            int selectedCountry,
+            bool enableGenderSearch,
+            Gender selectedGender,
+            string firstName, 
+            string lastName,
+            string distinguishMarks, 
+            int age);
+
+        IEnumerable<LanguageListingServiceModel> GetLanguagesList();
+
+        IEnumerable<CountryListingServiceModel> GetCountriesList();
     }
 }
