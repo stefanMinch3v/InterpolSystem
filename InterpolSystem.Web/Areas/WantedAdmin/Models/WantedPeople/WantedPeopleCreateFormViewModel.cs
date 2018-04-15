@@ -1,13 +1,14 @@
-﻿    namespace InterpolSystem.Web.Areas.BountyAdmin.Models.MissingPeople
+﻿namespace InterpolSystem.Web.Areas.WantedAdmin.Models.WantedPeople
 {
     using Data.Models.Enums;
+    using InterpolSystem.Web.Areas.Wanted.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.DataConstants;
 
-    public class MissingPeopleCreateFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
+    public class WantedPeopleCreateFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
     {
         private const string InvalidDateInThePast = "01/01/1800";
 
@@ -38,16 +39,6 @@
         [MinLength(IdentityMissingPlaceOfBirthMinLength)]
         [Display(Name = "Place of birth")]
         public string PlaceOfBirth { get; set; }
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Date of disappearance")]
-        public DateTime DateOfDisappearance { get; set; }
-
-        [Required]
-        [MaxLength(IdentityMissingPlaceOfDisappearanceMaxLength)]
-        [MinLength(IdentityMissingPlaceOfDisappearanceMinLength)]
-        [Display(Name = "Place of disappearance")]
-        public string PlaceOfDisappearance { get; set; }
 
         [Range(0, double.MaxValue)]
         [Display(Name = "Height (in meters)")]
@@ -81,10 +72,6 @@
                 yield return new ValidationResult("Date of birth should be after 1800.");
             }
 
-            if (this.DateOfDisappearance <= DateTime.Parse(InvalidDateInThePast))
-            {
-                yield return new ValidationResult("Date of disappearance should be after 1800.");
-            }
         }
     }
 }

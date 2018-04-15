@@ -11,6 +11,8 @@
 
         public const string AdminArea = "Admin";
         public const string BountyAdminArea = "BountyAdmin";
+        public const string WantedAdminArea = "WantedAdmin";
+
 
         public const string TempDataErrorMessageKey = "ErrorMessage";
         public const string TempDataSuccessMessageKey = "SuccessMessage";
