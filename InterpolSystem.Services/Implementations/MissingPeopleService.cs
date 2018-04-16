@@ -108,17 +108,5 @@
                 .ProjectTo<MissingPeopleListingServiceModel>()
                 .ToList();
         }
-
-        public IEnumerable<CountryListingServiceModel> GetCountriesList()
-            => this.db.Countries
-                .OrderBy(c => c.Name)
-                .ProjectTo<CountryListingServiceModel>()
-                .ToList();
-
-        public IEnumerable<LanguageListingServiceModel> GetLanguagesList()
-            => this.db.Languages
-                .OrderBy(l => l.Name)
-                .ProjectTo<LanguageListingServiceModel>()
-                .ToList();
     }
 }

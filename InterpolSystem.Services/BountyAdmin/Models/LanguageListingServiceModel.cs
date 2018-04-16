@@ -1,4 +1,4 @@
-﻿namespace InterpolSystem.Services.Models.MissingPeople
+﻿namespace InterpolSystem.Services.BountyAdmin.Models
 {
     using Common.Mapping;
     using Data.Models;

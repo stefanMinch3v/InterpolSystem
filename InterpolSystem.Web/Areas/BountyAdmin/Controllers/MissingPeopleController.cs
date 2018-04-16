@@ -50,15 +50,15 @@
                 return View(model);
             }
 
-            var existingLanguages = this.bountyAdminService.IsLanguagesExisting(model.SelectedLanguages);
-            var existingCountries = this.bountyAdminService.IsCountriesExisting(model.SelectedCountries);
+            var existingLanguages = this.bountyAdminService.AreLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.AreCountriesExisting(model.SelectedCountries);
 
             if (!existingLanguages || !existingCountries)
             {
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-            this.bountyAdminService.Create(
+            this.bountyAdminService.CreateMissingPerson(
                 model.FirstName,
                 model.LastName,
                 model.Gender,
@@ -140,15 +140,15 @@
                 return View(model);
             }
 
-            var existingLanguages = this.bountyAdminService.IsLanguagesExisting(model.SelectedLanguages);
-            var existingCountries = this.bountyAdminService.IsCountriesExisting(model.SelectedCountries);
+            var existingLanguages = this.bountyAdminService.AreLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.AreCountriesExisting(model.SelectedCountries);
 
             if (!existingLanguages || !existingCountries)
             {
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-            this.bountyAdminService.Edit(
+            this.bountyAdminService.EditMissingPerson(
                 id,
                 model.FirstName,
                 model.LastName,
@@ -173,7 +173,7 @@
         }
 
         private List<SelectListItem> GetLanguages()
-            => this.missingPeopleService.GetLanguagesList()
+            => this.bountyAdminService.GetLanguagesList()
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,
@@ -182,7 +182,7 @@
                 .ToList();
 
         private List<SelectListItem> GetCountries()
-            => this.missingPeopleService.GetCountriesList()
+            => this.bountyAdminService.GetCountriesList()
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,

@@ -1,12 +1,13 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin
 {
+    using BountyAdmin.Models;
     using Data.Models.Enums;
     using System;
     using System.Collections.Generic;
 
     public interface IBountyAdminService
     {
-        void Create(
+        void CreateMissingPerson(
             string firstName,
             string lastName,
             Gender gender,
@@ -24,7 +25,7 @@
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
 
-        void Edit(
+        void EditMissingPerson(
             int id,
             string firstName,
             string lastName,
@@ -43,8 +44,30 @@
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
 
-        bool IsLanguagesExisting(IEnumerable<int> ids);
+        void CreateWantedPerson(
+            string firstName,
+            string lastName,
+            Gender gender,
+            DateTime dateOfBirth,
+            string placeOfBirth,
+            double height,
+            double weight,
+            Color hairColor,
+            Color eyesColor,
+            string pictureUrl,
+            IEnumerable<int> nationalitiesIds,
+            IEnumerable<int> languagesIds,
+            string description,
+            //IEnumerable<Charges> chargesList,
+            string allNames = null,
+            string scarsOrDistinguishingMarks = null);
 
-        bool IsCountriesExisting(IEnumerable<int> ids);
+        bool AreLanguagesExisting(IEnumerable<int> ids);
+
+        bool AreCountriesExisting(IEnumerable<int> ids);
+
+        IEnumerable<LanguageListingServiceModel> GetLanguagesList();
+
+        IEnumerable<CountryListingServiceModel> GetCountriesList();
     }
 }

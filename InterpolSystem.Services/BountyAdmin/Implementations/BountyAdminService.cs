@@ -1,9 +1,11 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin.Implementations
 {
+    using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
     using Data.Models.Enums;
     using Microsoft.EntityFrameworkCore;
+    using Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -17,7 +19,7 @@
             this.db = db;
         }
 
-        public void Create(
+        public void CreateMissingPerson(
             string firstName, 
             string lastName, 
             Gender gender, 
@@ -89,7 +91,7 @@
             }
         }
 
-        public void Edit(
+        public void EditMissingPerson(
             int id,
             string firstName, 
             string lastName, 
@@ -156,11 +158,87 @@
             this.db.SaveChanges();
         }
 
-        public bool IsCountriesExisting(IEnumerable<int> ids)
+        public bool AreCountriesExisting(IEnumerable<int> ids)
             => this.db.Countries.Any(c => !ids.Contains(c.Id));
 
-        public bool IsLanguagesExisting(IEnumerable<int> ids)
+        public bool AreLanguagesExisting(IEnumerable<int> ids)
             => this.db.Languages.Any(l => !ids.Contains(l.Id));
+
+        public void CreateWantedPerson(
+            string firstName, 
+            string lastName,
+            Gender gender, 
+            DateTime dateOfBirth, 
+            string placeOfBirth, 
+            double height, 
+            double weight, 
+            Color hairColor, 
+            Color eyesColor, 
+            string pictureUrl,
+            IEnumerable<int> nationalitiesIds, 
+            IEnumerable<int> languagesIds, 
+            string description, 
+            string allNames = null, 
+            string scarsOrDistinguishingMarks = null)
+        {
+            var physicalDescription = new PhysicalDescription
+            {
+                Height = height,
+                Weight = weight,
+                HairColor = hairColor,
+                EyeColor = eyesColor,
+                PictureUrl = pictureUrl,
+                ScarsOrDistinguishingMarks = scarsOrDistinguishingMarks
+            };
+
+            var wantedPerson = new IdentityParticularsWanted
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Gender = gender,
+                DateOfBirth = dateOfBirth,
+                PlaceOfBirth = placeOfBirth,
+                AllNames = allNames,
+                PhysicalDescription = physicalDescription
+            };
+
+            foreach (var nationalityId in nationalitiesIds)
+            {
+                var countriesNationalities = new CountriesNationalitiesWanted
+                {
+                    CountryId = nationalityId,
+                    IdentityParticularsWantedId = wantedPerson.Id
+                };
+
+                wantedPerson.Nationalities.Add(countriesNationalities);
+            }
+
+            foreach (var languageId in languagesIds)
+            {
+                var languageMissing = new LanguagesWanted
+                {
+                    LanguageId = languageId,
+                    IdentityParticularsWantedId = wantedPerson.Id
+                };
+
+                wantedPerson.SpokenLanguages.Add(languageMissing);
+            }
+
+            this.db.IdentityParticularsWanted.Add(wantedPerson);
+            this.db.SaveChanges();
+        }
+
+        public IEnumerable<CountryListingServiceModel> GetCountriesList()
+            => this.db.Countries
+                .OrderBy(c => c.Name)
+                .ProjectTo<CountryListingServiceModel>()
+                .ToList();
+
+        public IEnumerable<LanguageListingServiceModel> GetLanguagesList()
+            => this.db.Languages
+                .OrderBy(l => l.Name)
+                .ProjectTo<LanguageListingServiceModel>()
+                .ToList();
 
         private void AddLanguagesAndCountriesCollections(IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds, IdentityParticularsMissing existingPerson)
         {

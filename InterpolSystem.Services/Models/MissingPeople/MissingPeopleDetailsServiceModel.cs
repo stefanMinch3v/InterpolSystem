@@ -1,6 +1,7 @@
 ﻿namespace InterpolSystem.Services.Models.MissingPeople
 {
     using AutoMapper;
+    using BountyAdmin.Models;
     using Common.Mapping;
     using Data.Models;
     using Data.Models.Enums;

@@ -27,9 +27,5 @@
             int age,
             int page = 1,
             int pageSize = 10);
-
-        IEnumerable<LanguageListingServiceModel> GetLanguagesList();
-
-        IEnumerable<CountryListingServiceModel> GetCountriesList();
     }
 }

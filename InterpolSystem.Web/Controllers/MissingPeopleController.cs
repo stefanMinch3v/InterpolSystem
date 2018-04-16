@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.MissingPeople;
     using Services;
+    using Services.BountyAdmin;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -13,10 +14,14 @@
     public class MissingPeopleController : Controller
     {
         private readonly IMissingPeopleService peopleService;
+        private readonly IBountyAdminService bountyAdminService;
 
-        public MissingPeopleController(IMissingPeopleService peopleService)
+        public MissingPeopleController(
+            IMissingPeopleService peopleService,
+            IBountyAdminService bountyAdminService)
         {
             this.peopleService = peopleService;
+            this.bountyAdminService = bountyAdminService;
         }
 
         public IActionResult Index(int page = 1)
@@ -62,7 +67,7 @@
             });
 
         private List<SelectListItem> GetCountries()
-            => this.peopleService.GetCountriesList()
+            => this.bountyAdminService.GetCountriesList()
                 .Select(r => new SelectListItem
                 {
                     Text = r.Name,
