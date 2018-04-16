@@ -126,7 +126,6 @@
             return RedirectToAction(nameof(Index));
         }
 
-        // add javascript on click to ask for confirmation yes/no.
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {

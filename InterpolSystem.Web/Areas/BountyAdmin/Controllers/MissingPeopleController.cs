@@ -5,6 +5,7 @@
     using Models.MissingPeople;
     using Services;
     using Services.BountyAdmin;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Web.Infrastructure.Extensions;
@@ -58,7 +59,9 @@
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-            this.bountyAdminService.CreateMissingPerson(
+            try
+            {
+                this.bountyAdminService.CreateMissingPerson(
                 model.FirstName,
                 model.LastName,
                 model.Gender,
@@ -75,6 +78,11 @@
                 model.SelectedLanguages,
                 model.AllNames,
                 model.ScarsOrDistinguishingMarks);
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
 
             TempData.AddSuccessMessage("Person successfully added to the system.");
 
@@ -148,7 +156,9 @@
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-            this.bountyAdminService.EditMissingPerson(
+            try
+            {
+                this.bountyAdminService.EditMissingPerson(
                 id,
                 model.FirstName,
                 model.LastName,
@@ -166,6 +176,11 @@
                 model.SelectedLanguages,
                 model.AllNames,
                 model.ScarsOrDistinguishingMarks);
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
 

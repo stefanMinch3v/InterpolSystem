@@ -10,6 +10,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using static ServiceConstants;
+
     public class BountyAdminService : IBountyAdminService
     {
         private readonly InterpolDbContext db;
@@ -37,8 +39,7 @@
             string allNames = null, 
             string scarsOrDistinguishingMarks = null)
         {
-            // it has to be done with throwing exceptions but in our case for simplicity we just "return".
-            ValidateData(firstName, lastName, gender, dateOfBirth, placeOfBirth, dateOfDisappearance, placeOfDisappearance, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+            this.ValidateMissingPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, dateOfDisappearance, placeOfDisappearance, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
 
             var physicalDescription = new PhysicalDescription
             {
@@ -70,27 +71,6 @@
             this.db.SaveChanges();
         }
 
-        private static void ValidateData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, DateTime dateOfDisappearance, string placeOfDisappearance, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
-        {
-            if (string.IsNullOrEmpty(firstName)
-                            || string.IsNullOrEmpty(lastName)
-                            || string.IsNullOrEmpty(placeOfBirth)
-                            || string.IsNullOrEmpty(placeOfDisappearance)
-                            || string.IsNullOrEmpty(pictureUrl)
-                            || dateOfBirth == null
-                            || dateOfDisappearance == null
-                            || height < 0
-                            || weight < 0
-                            || gender < 0
-                            || hairColor < 0
-                            || eyesColor < 0
-                            || nationalitiesIds == null
-                            || languagesIds == null)
-            {
-                throw new InvalidOperationException("Invalid data.");
-            }
-        }
-
         public void EditMissingPerson(
             int id,
             string firstName, 
@@ -110,11 +90,11 @@
             string allNames = null, 
             string scarsOrDistinguishingMarks = null)
         {
-            if (nationalitiesIds == null
-                || languagesIds == null
-                || id <= 0)
+            this.ValidateMissingPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, dateOfDisappearance, placeOfDisappearance, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+
+            if (id <= 0)
             {
-                return;
+                throw new InvalidOperationException(InvalidInsertedData);
             }
 
             var existingPerson = this.db.IdentityParticularsMissing
@@ -125,7 +105,7 @@
 
             if (existingPerson == null)
             {
-                return;
+                throw new InvalidOperationException(InvalidInsertedPerson);
             }
 
             existingPerson.FirstName = firstName;
@@ -262,6 +242,27 @@
                 };
 
                 existingPerson.SpokenLanguages.Add(languageMissing);
+            }
+        }
+
+        private void ValidateMissingPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, DateTime dateOfDisappearance, string placeOfDisappearance, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
+        {
+            if (string.IsNullOrEmpty(firstName)
+                || string.IsNullOrEmpty(lastName)
+                || string.IsNullOrEmpty(placeOfBirth)
+                || string.IsNullOrEmpty(placeOfDisappearance)
+                || string.IsNullOrEmpty(pictureUrl)
+                || dateOfBirth == null
+                || dateOfDisappearance == null
+                || height < 0
+                || weight < 0
+                || gender < 0
+                || hairColor < 0
+                || eyesColor < 0
+                || nationalitiesIds == null
+                || languagesIds == null)
+            {
+                throw new InvalidOperationException(InvalidInsertedData);
             }
         }
     }

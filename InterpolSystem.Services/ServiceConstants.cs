@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InterpolSystem.Services
+﻿namespace InterpolSystem.Services
 {
-    class ServiceConstants
+    public class ServiceConstants
     {
+        public const string InvalidInsertedData = "Invalid data.";
+        public const string InvalidInsertedPerson = "Invalid person.";
     }
 }
