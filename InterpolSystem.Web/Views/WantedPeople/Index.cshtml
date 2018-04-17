@@ -1,0 +1,12 @@
+﻿@model WantedPeoplePageListingModel
+
+@{
+    ViewData["Title"] = "Wanted People";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<br/>
+
+<div class="row col-md-12">
+    @await Html.PartialAsync("_WantedPeopleListingsPartial", Model)
+</div>

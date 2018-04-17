@@ -69,5 +69,8 @@
         IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 
         IEnumerable<CountryListingServiceModel> GetCountriesList();
+        void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
+
+        int GetLastPerson();
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Controllers
 {
     using Infrastructure.Extensions;
+    using InterpolSystem.Web.Areas.BountyAdmin.Models.MissingPeople;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.WantedPeople;
@@ -11,7 +12,7 @@
     public class WantedPeopleController : BaseBountyAdminController
     {
         private readonly IBountyAdminService peopleService;
-
+        private int wantedPersonId;
         public WantedPeopleController(IBountyAdminService peopleService)
         {
             this.peopleService = peopleService;
@@ -19,8 +20,25 @@
 
         public IActionResult Index()
         {
-            // TO DO
             return View();
+        }
+
+        public IActionResult AddCharge(int id)
+        => View(new ChargeViewModel
+        {
+            WantedPersonId = id,
+            Countries = this.GetCountries()
+        });
+
+        [HttpPost]
+        public IActionResult AddCharge(ChargeViewModel model)
+        {
+            this.peopleService.CreateCharge(model.WantedPersonId, model.Description, model.SelectedCountries);
+            model.Countries = this.GetCountries();
+            model.WantedPersonId = wantedPersonId;
+            TempData.AddSuccessMessage("Charge added, you can specify another one in form below.");
+            return View(model);
+
         }
 
         public IActionResult Create()
@@ -64,12 +82,13 @@
                 model.SelectedLanguages,
                 model.AllNames,
                 model.Description,
-                // model.
                 model.ScarsOrDistinguishingMarks);
 
-            TempData.AddSuccessMessage("Person successfully added to the system.");
+            wantedPersonId = this.peopleService.GetLastPerson();
 
-            return RedirectToAction(nameof(Index));
+            TempData.AddSuccessMessage("Person successfully added to the system, plase specify charges for person created");
+
+            return RedirectToAction(nameof(AddCharge), new { id = wantedPersonId });
         }
 
         private List<SelectListItem> GetLanguages()

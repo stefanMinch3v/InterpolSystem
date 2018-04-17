@@ -179,7 +179,8 @@
                 DateOfBirth = dateOfBirth,
                 PlaceOfBirth = placeOfBirth,
                 AllNames = allNames,
-                PhysicalDescription = physicalDescription
+                PhysicalDescription = physicalDescription,
+               
             };
 
             foreach (var nationalityId in nationalitiesIds)
@@ -207,7 +208,28 @@
             this.db.IdentityParticularsWanted.Add(wantedPerson);
             this.db.SaveChanges();
         }
+        public void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds)
 
+        {
+            var charge = new Charges
+            {
+                IdentityParticularsWantedId = wantedId,
+                Description = description               
+
+            };
+            foreach (var countryId in countriesIds)
+            {
+                var countries = new ChargesCountries
+                {
+                    CountryId = countryId,
+                    ChargesId = charge.Id
+                };
+
+                charge.CountryWantedAuthorities.Add(countries);
+            }
+            this.db.Charges.Add(charge);
+            this.db.SaveChanges();
+        }
         public IEnumerable<CountryListingServiceModel> GetCountriesList()
             => this.db.Countries
                 .OrderBy(c => c.Name)
@@ -245,6 +267,8 @@
             }
         }
 
+ 
+
         private void ValidateMissingPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, DateTime dateOfDisappearance, string placeOfDisappearance, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
         {
             if (string.IsNullOrEmpty(firstName)
@@ -264,6 +288,11 @@
             {
                 throw new InvalidOperationException(InvalidInsertedData);
             }
+        }
+
+        public int GetLastPerson()
+        {
+            return Int32.Parse(this.db.IdentityParticularsWanted.OrderByDescending(m => m.Id).Select(w => w.Id).First().ToString());
         }
     }
 }
