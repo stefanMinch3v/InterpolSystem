@@ -8,7 +8,7 @@
 
 @if (this.User.IsInRole(WebConstants.WantedMissingPeopleRole) || this.User.IsInRole(WebConstants.AdministratorRole))
 {
-    <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="AddCharge" asp-route-id="@Model.Id" class="btn btn-warning">Add charge</a>
 }
 
 <h2>@ViewData["Title"]</h2>

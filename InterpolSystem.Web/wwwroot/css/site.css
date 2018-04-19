@@ -35,7 +35,7 @@
     height: 3em;
 }
 
-.missing-people-listings .img-responsive {
+.missing-people-listings .img-responsive, .wanted-people-listings .img-responsive {
     height: 200px !important;
     width: 200px !important;
 }

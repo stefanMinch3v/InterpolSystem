@@ -31,17 +31,19 @@
                     crossorigin="anonymous"></script>
             <script type="text/javascript">
                 $(document).ready(function () {
-                   
+                    if ($(".alert-success")[0]) {
                         $(".description").val("");
                         console.log("funguje");
-                    
-                })
+
+                    }})
             </script>
         </div>
     </div>
 </form>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
+@{ var wantedPersonId = Model.WantedPersonId; }
+<div>
+    <a asp-action="Details" asp-route-id ="@wantedPersonId">View details</a>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -12,18 +12,18 @@
         private const string InvalidDateInThePast = "01/01/1800";
 
         [Required]
-        [MaxLength(IdentityMissingNamesMaxLength)]
-        [MinLength(IdentityMissingNamesMinLength)]
+        [MaxLength(IdentityWantedNamesMaxLength)]
+        [MinLength(IdentityWantedNamesMinLength)]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(IdentityMissingNamesMaxLength)]
-        [MinLength(IdentityMissingNamesMinLength)]
+        [MaxLength(IdentityWantedNamesMaxLength)]
+        [MinLength(IdentityWantedNamesMinLength)]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [MaxLength(IdentityMissingNamesMaxLength)]
+        [MaxLength(IdentityWantedNamesMaxLength)]
         [Display(Name = "All names")]
         public string AllNames { get; set; }
 
@@ -34,8 +34,8 @@
         public DateTime DateOfBirth { get; set; }
 
         [Required]
-        [MaxLength(IdentityMissingPlaceOfBirthMaxLength)]
-        [MinLength(IdentityMissingPlaceOfBirthMinLength)]
+        [MaxLength(IdentityWantedPlaceOfBirthMaxLength)]
+        [MinLength(IdentityWantedPlaceOfBirthMinLength)]
         [Display(Name = "Place of birth")]
         public string PlaceOfBirth { get; set; }
 
@@ -52,9 +52,6 @@
 
         [Display(Name = "Color of eyes")]
         public Color EyeColor { get; set; }
-
-        [Display(Name = "Description")]
-        public string Description { get; set; }
 
         [Required]
         [MaxLength(PhysicalDescriptionPcitureMaxLength)]

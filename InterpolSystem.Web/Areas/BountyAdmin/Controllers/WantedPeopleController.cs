@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.WantedPeople;
     using Services.BountyAdmin;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -33,13 +34,25 @@
         [HttpPost]
         public IActionResult AddCharge(ChargeViewModel model)
         {
-            this.peopleService.CreateCharge(model.WantedPersonId, model.Description, model.SelectedCountries);
-            model.Countries = this.GetCountries();
-            model.WantedPersonId = wantedPersonId;
-            TempData.AddSuccessMessage("Charge added, you can specify another one in form below.");
-            return View(model);
+            var selectedCountries = model.SelectedCountries;
+            if (selectedCountries == null)
+            {
+                model.Countries = this.GetCountries();
+                model.WantedPersonId = wantedPersonId;
+                TempData.AddErrorMessage("Please choose country for particular charge");
+               return View(model);
+            }
+           else
+           {
+                this.peopleService.CreateCharge(model.WantedPersonId, model.Description, model.SelectedCountries);
 
+                model.Countries = this.GetCountries();
+                model.WantedPersonId = wantedPersonId;
+                TempData.AddSuccessMessage("Charge added, you can specify another one in form below.");
+                return View(model);
+           }
         }
+        
 
         public IActionResult Create()
          => View(new WantedPeopleCreateFormViewModel
@@ -48,6 +61,10 @@
              Countries = this.GetCountries()
          });
 
+        public RedirectToActionResult Details()
+        {
+            return RedirectToAction("Details", "WantedPeople", new { area = "" });
+        }
         [HttpPost]
         public IActionResult Create(WantedPeopleCreateFormViewModel model)
         {
@@ -81,7 +98,6 @@
                 model.SelectedCountries,
                 model.SelectedLanguages,
                 model.AllNames,
-                model.Description,
                 model.ScarsOrDistinguishingMarks);
 
             wantedPersonId = this.peopleService.GetLastPerson();
