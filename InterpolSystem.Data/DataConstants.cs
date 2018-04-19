@@ -35,6 +35,13 @@
         public const int UserNamesMaxLength = 50;
         public const int UserNamesMinLength = 2;
 
+        public const int ArticlesTitleMaxLength = 30;
+        public const int ArticlesTitleMinLength = 3;
+        public const int ArticlesContentMaxLength = 5000;
+        public const int ArticlesContentMinLength = 5;
+
         public const string DateFormatString = "{0:dd-MM-yyyy}";
+
+        public const string InvalidDateInThePast = "01/01/1800";
     }
 }

@@ -1,76 +1,67 @@
 ﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Controllers
 {
     using Infrastructure.Extensions;
-    using InterpolSystem.Services;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.WantedPeople;
+    using Services;
     using Services.BountyAdmin;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static WebConstants;
 
     public class WantedPeopleController : BaseBountyAdminController
     {
-        private readonly IBountyAdminService peopleService;
         private readonly IWantedPeopleService wantedPeopleService;
-        private int wantedPersonId;
-        public WantedPeopleController(IBountyAdminService peopleService, IWantedPeopleService wantedPeopleService)
+
+        public WantedPeopleController(
+            IBountyAdminService bountyAdminService, 
+            IWantedPeopleService wantedPeopleService)
+            : base(bountyAdminService)
         {
-            this.peopleService = peopleService;
             this.wantedPeopleService = wantedPeopleService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         public IActionResult AddCharge(int id)
-        => View(new ChargeViewModel
-        {
-            WantedPersonId = id,
-            Countries = this.GetCountries()
-        });
+            => View(new ChargeViewModel
+            {
+                WantedPersonId = id,
+                Countries = this.GetCountries()
+            });
 
         [HttpPost]
         public IActionResult AddCharge(ChargeViewModel model)
         {
             var selectedCountries = model.SelectedCountries;
+
             if (selectedCountries == null)
             {
                 model.Countries = this.GetCountries();
-                model.WantedPersonId = wantedPersonId;
-                TempData.AddErrorMessage("Please choose country for particular charge");
-               return View(model);
-            }
-           else
-           {
-                this.peopleService.CreateCharge(model.WantedPersonId, model.Description, model.SelectedCountries);
 
-                model.Countries = this.GetCountries();
-                model.WantedPersonId = wantedPersonId;
-                TempData.AddSuccessMessage("Charge added, you can specify another one in form below.");
+                TempData.AddErrorMessage("Please choose country for particular charge");
+
                 return View(model);
-           }
+            }
+
+            this.bountyAdminService.CreateCharge(model.WantedPersonId, model.Description, model.SelectedCountries);
+
+            model.Countries = this.GetCountries();
+
+            TempData.AddSuccessMessage("Charge added, you can specify another one in form below.");
+
+            return View(model);
         }
-        
 
         public IActionResult Create()
-         => View(new WantedPeopleCreateFormViewModel
-         {
-             Languages = this.GetLanguages(),
-             Countries = this.GetCountries()
-         });
+            => View(new WantedPeopleFormViewModel
+            {
+                Languages = this.GetLanguages(),
+                Countries = this.GetCountries()
+            });
 
-        public RedirectToActionResult Details()
-        {
-            return RedirectToAction("Details", "WantedPeople", new { area = "" });
-        }
         [HttpPost]
-        public IActionResult Create(WantedPeopleCreateFormViewModel model)
+        public IActionResult Create(WantedPeopleFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -80,15 +71,15 @@
                 return View(model);
             }
 
-            var existingLanguages = this.peopleService.AreLanguagesExisting(model.SelectedLanguages);
-            var existingCountries = this.peopleService.AreCountriesExisting(model.SelectedCountries);
+            var existingLanguages = this.bountyAdminService.AreLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.AreCountriesExisting(model.SelectedCountries);
 
             if (!existingLanguages || !existingCountries)
             {
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-            this.peopleService.CreateWantedPerson(
+            this.bountyAdminService.CreateWantedPerson(
                 model.FirstName,
                 model.LastName,
                 model.Gender,
@@ -104,12 +95,13 @@
                 model.AllNames,
                 model.ScarsOrDistinguishingMarks);
 
-            wantedPersonId = this.peopleService.GetLastPerson();
+            var wantedPersonId = this.bountyAdminService.GetLastWantedPerson();
 
             TempData.AddSuccessMessage("Person successfully added to the system, plase specify charges for person created");
 
             return RedirectToAction(nameof(AddCharge), new { id = wantedPersonId });
         }
+
         public IActionResult Edit(int id)
         {
             var existingPerson = this.wantedPeopleService.IsPersonExisting(id);
@@ -121,7 +113,7 @@
 
             var person = this.wantedPeopleService.GetPerson(id);
 
-            return View(new WantedPeopleCreateFormViewModel
+            return View(new WantedPeopleFormViewModel
             {
                 FirstName = person.FirstName,
                 LastName = person.LastName,
@@ -143,7 +135,7 @@
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, WantedPeopleCreateFormViewModel model)
+        public IActionResult Edit(int id, WantedPeopleFormViewModel model)
         {
             var exsitingPerson = this.wantedPeopleService.IsPersonExisting(id);
 
@@ -164,59 +156,38 @@
             {
                 model.Languages = this.GetLanguages();
                 model.Countries = this.GetCountries();
+
                 return View(model);
             }
 
-            var existingLanguages = this.peopleService.AreLanguagesExisting(model.SelectedLanguages);
-            var existingCountries = this.peopleService.AreCountriesExisting(model.SelectedCountries);
+            var existingLanguages = this.bountyAdminService.AreLanguagesExisting(model.SelectedLanguages);
+            var existingCountries = this.bountyAdminService.AreCountriesExisting(model.SelectedCountries);
 
             if (!existingLanguages || !existingCountries)
             {
                 return new BadRequestObjectResult("Unexisting language or country.");
             }
 
-           
-            
-                this.peopleService.EditWantedPerson(
-                id,
-                model.FirstName,
-                model.LastName,
-                model.Gender,
-                model.DateOfBirth,
-                model.PlaceOfBirth,
-                model.Height,
-                model.Weight,
-                model.HairColor,
-                model.EyeColor,
-                model.PictureUrl,
-                model.SelectedCountries,
-                model.SelectedLanguages,
-                model.AllNames,
-                model.ScarsOrDistinguishingMarks);
-            
-           
+            this.bountyAdminService.EditWantedPerson(
+            id,
+            model.FirstName,
+            model.LastName,
+            model.Gender,
+            model.DateOfBirth,
+            model.PlaceOfBirth,
+            model.Height,
+            model.Weight,
+            model.HairColor,
+            model.EyeColor,
+            model.PictureUrl,
+            model.SelectedCountries,
+            model.SelectedLanguages,
+            model.AllNames,
+            model.ScarsOrDistinguishingMarks);       
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
 
             return RedirectToAction(nameof(Web.Controllers.WantedPeopleController.Index), WantedPeopleControllerName);
         }
-
-        private List<SelectListItem> GetLanguages()
-            => this.peopleService.GetLanguagesList()
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Id.ToString()
-                })
-                .ToList();
-
-        private List<SelectListItem> GetCountries()
-            => this.peopleService.GetCountriesList()
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Id.ToString()
-                })
-                .ToList();
     }
 }

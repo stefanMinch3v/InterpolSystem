@@ -58,9 +58,9 @@
             IEnumerable<int> nationalitiesIds,
             IEnumerable<int> languagesIds,
             string description,
-            //IEnumerable<Charges> chargesList,
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
+
         void EditWantedPerson(
             int id,
             string firstName,
@@ -78,15 +78,16 @@
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
 
+        void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
+
         bool AreLanguagesExisting(IEnumerable<int> ids);
 
         bool AreCountriesExisting(IEnumerable<int> ids);
 
+        int GetLastWantedPerson();
+
         IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 
-        IEnumerable<CountryListingServiceModel> GetCountriesList();
-        void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
-
-        int GetLastPerson();
+        IEnumerable<CountryListingServiceModel> GetCountriesList(); 
     }
 }

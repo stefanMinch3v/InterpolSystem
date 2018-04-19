@@ -9,8 +9,6 @@
 
     public class MissingPeopleFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
     {
-        private const string InvalidDateInThePast = "01/01/1800";
-
         [Required]
         [MaxLength(IdentityMissingNamesMaxLength)]
         [MinLength(IdentityMissingNamesMinLength)]

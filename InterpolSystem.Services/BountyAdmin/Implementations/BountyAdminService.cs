@@ -138,12 +138,6 @@
             this.db.SaveChanges();
         }
 
-        public bool AreCountriesExisting(IEnumerable<int> ids)
-            => this.db.Countries.Any(c => !ids.Contains(c.Id));
-
-        public bool AreLanguagesExisting(IEnumerable<int> ids)
-            => this.db.Languages.Any(l => !ids.Contains(l.Id));
-
         public void CreateWantedPerson(
             string firstName, 
             string lastName,
@@ -210,28 +204,7 @@
             this.db.IdentityParticularsWanted.Add(wantedPerson);
             this.db.SaveChanges();
         }
-        public void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds)
 
-        {
-            var charge = new Charges
-            {
-                IdentityParticularsWantedId = wantedId,
-                Description = description               
-
-            };
-            foreach (var countryId in countriesIds)
-            {
-                var countries = new ChargesCountries
-                {
-                    CountryId = countryId,
-                    ChargesId = charge.Id
-                };
-
-                charge.CountryWantedAuthorities.Add(countries);
-            }
-            this.db.Charges.Add(charge);
-            this.db.SaveChanges();
-        }
         public void EditWantedPerson(
             int id,
             string firstName,
@@ -294,6 +267,41 @@
             this.db.IdentityParticularsWanted.Update(existingPerson);
             this.db.SaveChanges();
         }
+
+        public void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds)
+        {
+            var charge = new Charges
+            {
+                IdentityParticularsWantedId = wantedId,
+                Description = description
+            };
+
+            foreach (var countryId in countriesIds)
+            {
+                var countries = new ChargesCountries
+                {
+                    CountryId = countryId,
+                    ChargesId = charge.Id
+                };
+
+                charge.CountryWantedAuthorities.Add(countries);
+            }
+
+            this.db.Charges.Add(charge);
+            this.db.SaveChanges();
+        }
+
+        public bool AreCountriesExisting(IEnumerable<int> ids)
+            => this.db.Countries.Any(c => !ids.Contains(c.Id));
+
+        public bool AreLanguagesExisting(IEnumerable<int> ids)
+            => this.db.Languages.Any(l => !ids.Contains(l.Id));
+
+        public int GetLastWantedPerson()
+            => this.db.IdentityParticularsWanted
+                .OrderByDescending(m => m.Id)
+                .FirstOrDefault().Id;
+
         public IEnumerable<CountryListingServiceModel> GetCountriesList()
             => this.db.Countries
                 .OrderBy(c => c.Name)
@@ -356,8 +364,6 @@
             }
         }
 
-
-
         private void ValidateMissingPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, DateTime dateOfDisappearance, string placeOfDisappearance, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
         {
             if (string.IsNullOrEmpty(firstName)
@@ -378,6 +384,7 @@
                 throw new InvalidOperationException(InvalidInsertedData);
             }
         }
+
         private void ValidateWantedPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
         {
             if (string.IsNullOrEmpty(firstName)
@@ -395,11 +402,6 @@
             {
                 throw new InvalidOperationException(InvalidInsertedData);
             }
-        }
-
-        public int GetLastPerson()
-        {
-            return Int32.Parse(this.db.IdentityParticularsWanted.OrderByDescending(m => m.Id).Select(w => w.Id).First().ToString());
         }
     }
 }

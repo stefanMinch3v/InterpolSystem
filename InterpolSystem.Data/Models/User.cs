@@ -22,6 +22,8 @@
 
         public DateTime DateOfBirth { get; set; }
 
+        public List<Article> Articles { get; set; } = new List<Article>();
+
         [NotMapped]
         public List<string> RolesIds { get; set; } = new List<string>();
     }

@@ -1,12 +1,12 @@
-﻿@model InterpolSystem.Web.Areas.BountyAdmin.Models.WantedPeople.ChargeViewModel
+﻿@model ChargeViewModel
 
 @{
-    ViewData["Title"] = "CreateCharge";
+    ViewData["Title"] = "Add Charge";
 }
 
+<h2>@ViewData["Title"]</h2>
 <hr />
 <form asp-area="BountyAdmin" asp-controller="WantedPeople" method="post">
-
     <div class="row">
         <div class="col-md-4">
             <div style="display:none" class="form-group">
@@ -33,17 +33,16 @@
                 $(document).ready(function () {
                     if ($(".alert-success")[0]) {
                         $(".description").val("");
-                        console.log("funguje");
-
                     }})
             </script>
         </div>
     </div>
 </form>
-@{ var wantedPersonId = Model.WantedPersonId; }
+
 <div>
-    <a asp-action="Details" asp-route-id ="@wantedPersonId">View details</a>
+    <a asp-area="" asp-action="Details" asp-route-id ="@Model.WantedPersonId">View details</a>
 </div>
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

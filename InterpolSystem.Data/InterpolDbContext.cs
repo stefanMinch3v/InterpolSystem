@@ -35,6 +35,8 @@
 
         public DbSet<LanguagesWanted> LanguagesWanted { get; set; }
 
+        public DbSet<Article> Articles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // primary keys mapping tables
@@ -142,6 +144,13 @@
                 .HasMany(l => l.WantedPeopleLanguages)
                 .WithOne(wpl => wpl.Language)
                 .HasForeignKey(wpl => wpl.LanguageId);
+
+            // articles relations
+            builder
+                .Entity<Article>()
+                .HasOne(a => a.Author)
+                .WithMany(au => au.Articles)
+                .HasForeignKey(a => a.AuthorId);
 
             base.OnModelCreating(builder);
         }

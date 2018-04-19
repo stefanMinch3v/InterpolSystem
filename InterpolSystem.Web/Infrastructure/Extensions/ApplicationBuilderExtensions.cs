@@ -39,7 +39,8 @@
                     {
                         AdministratorRole,
                         TestRole,
-                        WantedMissingPeopleRole
+                        WantedMissingPeopleRole,
+                        BloggerRole
                     };
 
                     foreach (var role in roles)

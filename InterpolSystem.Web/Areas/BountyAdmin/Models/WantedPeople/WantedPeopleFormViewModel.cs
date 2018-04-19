@@ -7,10 +7,8 @@
 
     using static Data.DataConstants;
 
-    public class WantedPeopleCreateFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
+    public class WantedPeopleFormViewModel : LanguageAndCountryListingsViewModel, IValidatableObject
     {
-        private const string InvalidDateInThePast = "01/01/1800";
-
         [Required]
         [MaxLength(IdentityWantedNamesMaxLength)]
         [MinLength(IdentityWantedNamesMinLength)]
@@ -70,7 +68,6 @@
             {
                 yield return new ValidationResult("Date of birth should be after 1800.");
             }
-
         }
     }
 }

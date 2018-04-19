@@ -111,6 +111,11 @@
                     defaults: new { controller = "MissingPeople", action = "Index" });
 
                 routes.MapRoute(
+                    name: "blog",
+                    template: "blog/articles/{id}/{title}",
+                    defaults: new { area = "Blog", controller = "Articles", action = "Details" });
+
+                routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );

@@ -1,15 +1,9 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.WantedPeople;
     using Services;
     using Services.BountyAdmin;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static WebConstants;
 
     public class WantedPeopleController : Controller
     {
@@ -26,18 +20,10 @@
 
         public IActionResult Index()
             => View(new WantedPeoplePageListingModel
-                {
-                    WantedPeople = this.peopleService.All()
-                });
+            {
+                WantedPeople = this.peopleService.All()
+            });
 
-        private List<SelectListItem> GetCountries()
-           => this.bountyAdminService.GetCountriesList()
-               .Select(r => new SelectListItem
-               {
-                   Text = r.Name,
-                   Value = r.Id.ToString()
-               })
-               .ToList();
         public IActionResult Details(int id)
         {
             var existingPerson = this.peopleService.IsPersonExisting(id);

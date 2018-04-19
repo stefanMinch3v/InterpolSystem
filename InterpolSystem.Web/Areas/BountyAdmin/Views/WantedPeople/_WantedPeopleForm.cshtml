@@ -1,0 +1,86 @@
+﻿@model WantedPeopleFormViewModel
+
+<form asp-area="BountyAdmin" asp-controller="WantedPeople" method="post">
+    <hr />
+    <div class="col-md-4">
+        <h3 class="text-primary">Step 1</h3>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AllNames"></label>
+            <input asp-for="AllNames" class="form-control" />
+            <span asp-validation-for="AllNames" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PlaceOfBirth"></label>
+            <input asp-for="PlaceOfBirth" class="form-control" />
+            <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3 class="text-primary">Step 2</h3>
+        <div class="form-group">
+            <label asp-for="Countries"></label>
+            <select name="SelectedCountries" asp-items="Model.Countries" rows="10" id="fixedHeight" class="form-control" multiple></select>
+            <small class="text-danger">*Hold Ctrl to select multple countries</small>
+        </div>
+        <div class="form-group">
+            <label asp-for="Height"></label>
+            <input asp-for="Height" class="form-control" type="number" min="0" step="0.1" />
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Weight"></label>
+            <input asp-for="Weight" class="form-control" type="number" min="0" step="0.1" />
+            <span asp-validation-for="Weight" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="HairColor"></label>
+            <select asp-for="HairColor" asp-items="Html.GetEnumSelectList<Color>()" class="form-control"></select>
+            <span asp-validation-for="HairColor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EyeColor"></label>
+            <select asp-for="EyeColor" asp-items="Html.GetEnumSelectList<Color>()" class="form-control"></select>
+            <span asp-validation-for="EyeColor" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3 class="text-primary">Step 3</h3>
+        <div class="form-group">
+            <label asp-for="PictureUrl"></label>
+            <input asp-for="PictureUrl" class="form-control" />
+            <span asp-validation-for="PictureUrl" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ScarsOrDistinguishingMarks"></label>
+            <textarea asp-for="ScarsOrDistinguishingMarks" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="ScarsOrDistinguishingMarks" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Languages"></label>
+            <select name="SelectedLanguages" asp-items="Model.Languages" id="fixedHeight" class="form-control" multiple></select>
+            <small class="text-danger">*Hold Ctrl to select multple languages</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

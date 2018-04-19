@@ -1,4 +1,4 @@
-﻿@model WantedPeopleCreateFormViewModel
+﻿@model WantedPeopleFormViewModel
 
 @{
     ViewData["Title"] = "Edit person";
@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        @Html.Partial("Create", Model)
+        @await Html.PartialAsync("_WantedPeopleForm", Model)
     </div>
 </div>
 

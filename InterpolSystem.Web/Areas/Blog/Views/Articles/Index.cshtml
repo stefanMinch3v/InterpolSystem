@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ArticlesListingsServiceModel>
+
+@{
+    ViewData["Title"] = "News";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <ul class="list-group article-list">
+        @foreach (var article in Model)
+        {
+            <li class="list-group-item">
+                <a asp-action="Details" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()">
+                    @article.Title
+                </a>
+                <br />
+                <small>published by <b>@article.AuthorName</b> on @article.PublishDate.ToLocalTime()</small>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,12 +1,10 @@
 ﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.MissingPeople;
     using Services;
     using Services.BountyAdmin;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using Web.Infrastructure.Extensions;
 
@@ -14,14 +12,13 @@
 
     public class MissingPeopleController : BaseBountyAdminController
     {
-        private readonly IBountyAdminService bountyAdminService;
         private readonly IMissingPeopleService missingPeopleService;
 
         public MissingPeopleController(
             IBountyAdminService bountyAdminService, 
             IMissingPeopleService missingPeopleService)
+            : base(bountyAdminService)
         {
-            this.bountyAdminService = bountyAdminService;
             this.missingPeopleService = missingPeopleService;
         }
 
@@ -186,23 +183,5 @@
 
             return RedirectToAction(nameof(Web.Controllers.MissingPeopleController.Index), MissingPeopleControllerName);
         }
-
-        private List<SelectListItem> GetLanguages()
-            => this.bountyAdminService.GetLanguagesList()
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Id.ToString()
-                })
-                .ToList();
-
-        private List<SelectListItem> GetCountries()
-            => this.bountyAdminService.GetCountriesList()
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Id.ToString()
-                })
-                .ToList();
     }
 }
