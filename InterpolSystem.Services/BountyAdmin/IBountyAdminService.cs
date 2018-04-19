@@ -61,6 +61,22 @@
             //IEnumerable<Charges> chargesList,
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
+        void EditWantedPerson(
+            int id,
+            string firstName,
+            string lastName,
+            Gender gender,
+            DateTime dateOfBirth,
+            string placeOfBirth,
+            double height,
+            double weight,
+            Color hairColor,
+            Color eyesColor,
+            string pictureUrl,
+            IEnumerable<int> nationalitiesIds,
+            IEnumerable<int> languagesIds,
+            string allNames = null,
+            string scarsOrDistinguishingMarks = null);
 
         bool AreLanguagesExisting(IEnumerable<int> ids);
 

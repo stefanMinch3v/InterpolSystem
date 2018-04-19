@@ -36,8 +36,8 @@
             string pictureUrl,
             IEnumerable<int> nationalitiesIds,
             IEnumerable<int> languagesIds,
-            string allNames = null, 
-            string scarsOrDistinguishingMarks = null)
+            string allNames, 
+            string scarsOrDistinguishingMarks)
         {
             this.ValidateMissingPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, dateOfDisappearance, placeOfDisappearance, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
 
@@ -161,6 +161,8 @@
             string allNames = null, 
             string scarsOrDistinguishingMarks = null)
         {
+            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+
             var physicalDescription = new PhysicalDescription
             {
                 Height = height,
@@ -230,6 +232,68 @@
             this.db.Charges.Add(charge);
             this.db.SaveChanges();
         }
+        public void EditWantedPerson(
+            int id,
+            string firstName,
+            string lastName,
+            Gender gender,
+            DateTime dateOfBirth,
+            string placeOfBirth,
+            double height,
+            double weight,
+            Color hairColor,
+            Color eyesColor,
+            string pictureUrl,
+            IEnumerable<int> nationalitiesIds,
+            IEnumerable<int> languagesIds,
+            string allNames = null,
+            string scarsOrDistinguishingMarks = null)
+        {
+            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+
+            if (id <= 0)
+            {
+                throw new InvalidOperationException(InvalidInsertedData);
+            }
+
+            var existingPerson = this.db.IdentityParticularsWanted
+                .Include(p => p.PhysicalDescription)
+                .Include(p => p.Nationalities)
+                .Include(p => p.SpokenLanguages)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (existingPerson == null)
+            {
+                throw new InvalidOperationException(InvalidInsertedPerson);
+            }
+
+            existingPerson.FirstName = firstName;
+            existingPerson.LastName = lastName;
+            existingPerson.Gender = gender;
+            existingPerson.DateOfBirth = dateOfBirth;
+            existingPerson.PlaceOfBirth = placeOfBirth;
+            existingPerson.AllNames = allNames;
+            existingPerson.PhysicalDescription.ScarsOrDistinguishingMarks = scarsOrDistinguishingMarks;
+
+            existingPerson.PhysicalDescription.Height = height;
+            existingPerson.PhysicalDescription.Weight = weight;
+            existingPerson.PhysicalDescription.HairColor = hairColor;
+            existingPerson.PhysicalDescription.EyeColor = eyesColor;
+            existingPerson.PhysicalDescription.PictureUrl = pictureUrl;
+
+            // delete the current nationalities and languages and save changes in order to prevent exception
+            existingPerson.Nationalities.Clear();
+            existingPerson.SpokenLanguages.Clear();
+
+            this.db.IdentityParticularsWanted.Update(existingPerson);
+            this.db.SaveChanges();
+
+            // add the new nationalities and languages in the mapping table
+            AddLanguagesAndCountriesCollections(nationalitiesIds, languagesIds, existingPerson);
+
+            this.db.IdentityParticularsWanted.Update(existingPerson);
+            this.db.SaveChanges();
+        }
         public IEnumerable<CountryListingServiceModel> GetCountriesList()
             => this.db.Countries
                 .OrderBy(c => c.Name)
@@ -267,7 +331,32 @@
             }
         }
 
- 
+        private void AddLanguagesAndCountriesCollections(IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds, IdentityParticularsWanted existingPerson)
+        {
+            foreach (var nationalityId in nationalitiesIds)
+            {
+                var countriesNationalities = new CountriesNationalitiesWanted
+                {
+                    CountryId = nationalityId,
+                    IdentityParticularsWantedId = existingPerson.Id
+                };
+
+                existingPerson.Nationalities.Add(countriesNationalities);
+            }
+
+            foreach (var languageId in languagesIds)
+            {
+                var languageWanted = new LanguagesWanted
+                {
+                    LanguageId = languageId,
+                    IdentityParticularsWantedId = existingPerson.Id
+                };
+
+                existingPerson.SpokenLanguages.Add(languageWanted);
+            }
+        }
+
+
 
         private void ValidateMissingPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, DateTime dateOfDisappearance, string placeOfDisappearance, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
         {
@@ -278,6 +367,24 @@
                 || string.IsNullOrEmpty(pictureUrl)
                 || dateOfBirth == null
                 || dateOfDisappearance == null
+                || height < 0
+                || weight < 0
+                || gender < 0
+                || hairColor < 0
+                || eyesColor < 0
+                || nationalitiesIds == null
+                || languagesIds == null)
+            {
+                throw new InvalidOperationException(InvalidInsertedData);
+            }
+        }
+        private void ValidateWantedPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
+        {
+            if (string.IsNullOrEmpty(firstName)
+                || string.IsNullOrEmpty(lastName)
+                || string.IsNullOrEmpty(placeOfBirth)
+                || string.IsNullOrEmpty(pictureUrl)
+                || dateOfBirth == null
                 || height < 0
                 || weight < 0
                 || gender < 0

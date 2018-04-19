@@ -1,4 +1,4 @@
-﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Models.MissingPeople
+﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Models.WantedPeople
 {
 using InterpolSystem.Services.BountyAdmin.Models;
 using System;

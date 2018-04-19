@@ -9,6 +9,7 @@
 @if (this.User.IsInRole(WebConstants.WantedMissingPeopleRole) || this.User.IsInRole(WebConstants.AdministratorRole))
 {
     <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="AddCharge" asp-route-id="@Model.Id" class="btn btn-warning">Add charge</a>
+    <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit details</a>
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -26,7 +27,7 @@
 
                 @if (Model.AllNames != null)
                 {
-                     <p>Full name: <span class="text-custom">@Model.AllNames</span></p>
+                    <p>Full name: <span class="text-custom">@Model.AllNames</span></p>
                 }
 
                 <p>Sex: <span class="text-custom">@Model.Gender.ToString()</span></p>
@@ -44,15 +45,15 @@
                 <p>Weight: <span class="text-custom">@Model.PhysicalDescription.Weight kg</span></p>
 
                 @if (Model.PhysicalDescription.ScarsOrDistinguishingMarks != null)
-    {
-            <p>Scars or distinguishing marks: <span class="text-custom">@Model.PhysicalDescription.ScarsOrDistinguishingMarks</span></p>
-}
+                {
+                    <p>Scars or distinguishing marks: <span class="text-custom">@Model.PhysicalDescription.ScarsOrDistinguishingMarks</span></p>
+                }
 
                 <p>Languages spoken: <span class="text-custom">@(string.Join(", ", Model.SpokenLanguages.Select(l => l.Name)))</span></p>
-                
+
                 <p>Charges: <span class="text-custom">@(string.Join(", ", Model.Charges.Select(l => l.Description)))</span></p>
             </div>
-        </div>    
+        </div>
         <div class="panel-footer">
             <p class="text-danger text-capitalize">if you have any information please contact:</p>
             <p>Your national or local police</p>
