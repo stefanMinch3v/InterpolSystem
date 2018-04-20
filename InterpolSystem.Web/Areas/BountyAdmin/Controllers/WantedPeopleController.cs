@@ -76,7 +76,7 @@
 
             if (!existingLanguages || !existingCountries)
             {
-                return new BadRequestObjectResult("Unexisting language or country.");
+                return BadRequest("Unexisting language or country.");
             }
 
             this.bountyAdminService.CreateWantedPerson(
@@ -108,7 +108,7 @@
 
             if (!existingPerson)
             {
-                return new BadRequestObjectResult("Invalid person");
+                return BadRequest("Invalid person");
             }
 
             var person = this.wantedPeopleService.GetPerson(id);
@@ -141,7 +141,7 @@
 
             if (!exsitingPerson)
             {
-                return new BadRequestResult();
+                return BadRequest();
             }
 
             var selectedLanguages = model.SelectedLanguages;
@@ -165,7 +165,7 @@
 
             if (!existingLanguages || !existingCountries)
             {
-                return new BadRequestObjectResult("Unexisting language or country.");
+                return BadRequest("Unexisting language or country.");
             }
 
             this.bountyAdminService.EditWantedPerson(

@@ -119,7 +119,7 @@
 
             if (!result.Succeeded)
             {
-                return new BadRequestObjectResult("Failed to reset the password.");
+                return BadRequest("Failed to reset the password.");
             }
 
             this.TempData.AddSuccessMessage($"Successfully reset the password. The new password is: {newPassword}");

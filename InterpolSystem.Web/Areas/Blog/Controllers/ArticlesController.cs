@@ -59,7 +59,7 @@
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex.Message);
+                return BadRequest(ex.Message);
             }
 
             TempData.AddSuccessMessage("Successfully published.");

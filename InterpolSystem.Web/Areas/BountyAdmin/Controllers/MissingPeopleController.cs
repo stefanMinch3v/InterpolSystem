@@ -53,7 +53,7 @@
 
             if (!existingLanguages || !existingCountries)
             {
-                return new BadRequestObjectResult("Unexisting language or country.");
+                return BadRequest("Unexisting language or country.");
             }
 
             try
@@ -78,7 +78,7 @@
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex.Message);
+                return BadRequest(ex.Message);
             }
 
             TempData.AddSuccessMessage("Person successfully added to the system.");
@@ -92,7 +92,7 @@
 
             if (!existingPerson)
             {
-                return new BadRequestObjectResult("Invalid person");
+                return BadRequest("Invalid person");
             }
 
             var person = this.missingPeopleService.GetPerson(id);
@@ -127,7 +127,7 @@
 
             if (!exsitingPerson)
             {
-                return new BadRequestResult();
+                return BadRequest();
             }
 
             var selectedLanguages = model.SelectedLanguages;
@@ -150,7 +150,7 @@
 
             if (!existingLanguages || !existingCountries)
             {
-                return new BadRequestObjectResult("Unexisting language or country.");
+                return BadRequest("Unexisting language or country.");
             }
 
             try
@@ -176,7 +176,7 @@
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex.Message);
+                return BadRequest(ex.Message);
             }
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
