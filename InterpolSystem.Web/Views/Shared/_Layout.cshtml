@@ -32,46 +32,47 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (this.User.IsInRole(WebConstants.AdministratorRole))
-                    {
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Manage Users
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" id="main-nav-bar">
-                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">All Users</a></li>
-                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Create">Create User</a></li>
-                            </ul>
-                        </li>
-                    }
+    {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Manage Users
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="main-nav-bar">
+                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">All Users</a></li>
+                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Create">Create User</a></li>
+                    </ul>
+                </li>
+}
                     @if (this.User.IsInRole(WebConstants.AdministratorRole) || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
-                    {
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Manage Missing People
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" id="main-nav-bar">
-                                <li><a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Create">Add Missing Person</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Manage Wanted People
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" id="main-nav-bar">
-                                <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Create">Add Wanted Person</a></li>
-                            </ul>
-                        </li>
-                    }
-                    @if (this.User.IsInRole(WebConstants.AdministratorRole) || this.User.IsInRole(WebConstants.BloggerRole))
-                    {
-                        <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
-                    }
+    {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Manage  People
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="main-nav-bar">
+                        <li><a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Create">Add Missing Person</a></li>
+                        <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Create">Add Wanted Person</a></li>
 
-                    <li><a asp-controller="MissingPeople" asp-action="Index">Missing people</a></li>
-                    <li><a asp-controller="WantedPeople" asp-action="Index">Wanted people</a></li>
+                    </ul>
+                </li>
+
+}
+                    @if (this.User.IsInRole(WebConstants.AdministratorRole) || this.User.IsInRole(WebConstants.BloggerRole))
+    {
+                <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
+}               <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Missing
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="main-nav-bar">
+                        <li><a asp-controller="MissingPeople" asp-action="Index">Missing people</a></li>
+                        <li><a asp-controller="WantedPeople" asp-action="Index">Wanted people</a></li>
+
+                    </ul>
+                </li> 
                     <li><a asp-area="Blog" asp-controller="Articles" asp-action="Index">News</a></li>
 
                 </ul>
