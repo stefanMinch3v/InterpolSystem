@@ -40,5 +40,7 @@
         public List<LanguagesWanted> SpokenLanguages { get; set; } = new List<LanguagesWanted>();
 
         public List<CountriesNationalitiesWanted> Nationalities { get; set; } = new List<CountriesNationalitiesWanted>();
+
+        public List<SubmitForm> SubmitedForms { get; set; } = new List<SubmitForm>();
     }
 }

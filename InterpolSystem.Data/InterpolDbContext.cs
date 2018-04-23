@@ -37,6 +37,8 @@
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<SubmitForm> SubmitForms { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // primary keys mapping tables
@@ -115,6 +117,13 @@
                 .WithOne(sl => sl.IdentityParticularsMissing)
                 .HasForeignKey(sl => sl.IdentityParticularsMissingId);
 
+            builder
+                .Entity<IdentityParticularsMissing>()
+                .HasMany(ipw => ipw.SubmitedForms)
+                .WithOne(sf => sf.MissingPerson)
+                .HasForeignKey(sf => sf.IdentityParticularsMissingId)
+                .IsRequired(false);
+
             // wanted people relations
             builder
                 .Entity<IdentityParticularsWanted>()
@@ -131,6 +140,13 @@
                 .HasMany(ipw => ipw.SpokenLanguages)
                 .WithOne(sl => sl.IdentityParticularsWanted)
                 .HasForeignKey(sl => sl.IdentityParticularsWantedId);
+
+            builder
+                .Entity<IdentityParticularsWanted>()
+                .HasMany(ipw => ipw.SubmitedForms)
+                .WithOne(sf => sf.WantedPerson)
+                .HasForeignKey(sf => sf.IdentityParticularsWantedId)
+                .IsRequired(false);
 
             // languages relations
             builder

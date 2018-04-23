@@ -43,5 +43,13 @@
         public const string DateFormatString = "{0:dd-MM-yyyy}";
 
         public const string InvalidDateInThePast = "01/01/1800";
+
+        public const int MessageMaxLenght = 500;
+        public const int MessageMinLenght = 5;
+
+        public const int SubjectMaxLength = 30;
+        public const int SubjectMinLength = 5;
+
+        public const int ImageMaxSize = 2 * 1024 * 1024; // 2mb
     }
 }

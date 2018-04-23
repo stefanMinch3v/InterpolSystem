@@ -45,5 +45,7 @@
         public List<LanguagesMissing> SpokenLanguages { get; set; } = new List<LanguagesMissing>();
 
         public List<CountriesNationalitiesMissing> Nationalities { get; set; } = new List<CountriesNationalitiesMissing>();
+
+        public List<SubmitForm> SubmitedForms { get; set; } = new List<SubmitForm>();
     }
 }
