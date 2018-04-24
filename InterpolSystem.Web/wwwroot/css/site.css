@@ -36,10 +36,12 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
-    font-weight: 300 ;
-    -webkit-font-smoothing: antialiased!important;
-    letter-spacing:1.2px; 
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased !important;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
 }
+
 #bootstrap-override .main-logo{
     background-color:white;
     height:50px;
@@ -59,10 +61,6 @@ body {
 #bootstrap-override a:hover{
     background-color:dodgerblue;
     
-}
-
-#bootstrap-override {
-    text-transform: uppercase;
 }
 
 .main-logo {
