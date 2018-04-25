@@ -20,18 +20,18 @@
         {
             this.db = db;
         }
+
         public IEnumerable<WantedPeopleListingServiceModel> All()
             => this.db.IdentityParticularsWanted
-                            .OrderByDescending(m => m.Id)
-                            .ProjectTo<WantedPeopleListingServiceModel>()
-                            .ToList();
+                    .OrderByDescending(m => m.Id)
+                    .ProjectTo<WantedPeopleListingServiceModel>()
+                    .ToList();
 
         public WantedPeopleDetailsServiceModel GetPerson(int id)
             => this.db.IdentityParticularsWanted
                 .Where(m => m.Id == id)
                 .ProjectTo<WantedPeopleDetailsServiceModel>()
                 .FirstOrDefault();
-
 
         public bool IsPersonExisting(int id)
             => this.db.IdentityParticularsWanted.Any(m => m.Id == id);

@@ -1,5 +1,7 @@
 ﻿namespace InterpolSystem.Data.Models
 {
+    using Enums;
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants;
@@ -34,5 +36,9 @@
 
         [MaxLength(ImageMaxSize)]
         public byte[] PersonImage { get; set; }
+
+        public DateTime SubmissionDate { get; set; }
+
+        public FormOptions Status { get; set; }
     }
 }
