@@ -403,5 +403,28 @@
                 throw new InvalidOperationException(InvalidInsertedData);
             }
         }
+        public IEnumerable<SubmitForm> GetAllSubmitForm()
+            => this.db.SubmitForms
+                    .OrderByDescending(m => m.Id) 
+                    .ToList();
+
+        public void AcceptForm(int formId)
+        {
+            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
+            existingForm.Status = FormOptions.Accepted;
+
+            this.db.SubmitForms.Update(existingForm);
+            this.db.SaveChanges();
+        }
+
+        public void DeclineForm(int formId)
+        {
+            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
+            existingForm.Status = FormOptions.Declined;
+
+            this.db.SubmitForms.Update(existingForm);
+            this.db.SaveChanges();
+        }
     }
+
 }

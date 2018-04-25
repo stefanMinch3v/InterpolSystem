@@ -54,6 +54,7 @@
                     Message = message,
                     SenderEmail = senderEmail,
                     PersonImage = ms.ToArray(),
+                    SubmissionDate = DateTime.Now
                     
                 };
             

@@ -32,7 +32,7 @@
         [Required]
         [MaxLength(MessageMaxLenght)]
         [MinLength(MessageMinLenght)]
-        public string Message { set; get; }
+        public string Message { get; set; }
 
         [MaxLength(ImageMaxSize)]
         public byte[] PersonImage { get; set; }

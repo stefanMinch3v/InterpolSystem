@@ -29,8 +29,28 @@
             </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <textarea asp-for="Message" rows="10" class="form-control"></textarea>
+                <textarea asp-for="Message" rows="10" class="form-control message" onpaste="return false" ></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
+                <div class="charCount">0/500</div>
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                        crossorigin="anonymous"></script>
+                <script type="text/javascript">
+                    $(function () {
+                        let msg = $('.message');
+                        var len;
+                        msg.keypress(function (e) {
+                            var max = 500;
+                            len = $(this).val().length;
+                            $('.charCount').html(len + "/500");
+                            if (len >= 500) {
+                                e.preventDefault();
+
+                            }
+                            
+                        });
+                    });
+                </script>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -38,11 +58,8 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="col-md-10">
-
-                    <label asp-for="Image" class="control-label"></label>
-                    <input asp-for="Image" class="form-control" />
-                </div>
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control btn btn-default" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

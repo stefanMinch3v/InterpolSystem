@@ -2,6 +2,7 @@
 {
     using BountyAdmin.Models;
     using Data.Models.Enums;
+    using InterpolSystem.Data.Models;
     using System;
     using System.Collections.Generic;
 
@@ -87,6 +88,12 @@
 
         IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 
-        IEnumerable<CountryListingServiceModel> GetCountriesList(); 
+        IEnumerable<CountryListingServiceModel> GetCountriesList();
+
+        IEnumerable<SubmitForm> GetAllSubmitForm();
+
+        void AcceptForm(int formId);
+
+        void DeclineForm(int formId);
     }
 }

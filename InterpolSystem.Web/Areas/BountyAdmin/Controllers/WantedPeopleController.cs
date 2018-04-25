@@ -6,7 +6,7 @@
     using Services;
     using Services.BountyAdmin;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using static WebConstants;
 
     public class WantedPeopleController : BaseBountyAdminController
@@ -14,7 +14,7 @@
         private readonly IWantedPeopleService wantedPeopleService;
 
         public WantedPeopleController(
-            IBountyAdminService bountyAdminService, 
+            IBountyAdminService bountyAdminService,
             IWantedPeopleService wantedPeopleService)
             : base(bountyAdminService)
         {
@@ -183,11 +183,40 @@
             model.SelectedCountries,
             model.SelectedLanguages,
             model.AllNames,
-            model.ScarsOrDistinguishingMarks);       
+            model.ScarsOrDistinguishingMarks);
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
 
             return RedirectToAction(nameof(Web.Controllers.WantedPeopleController.Index), WantedPeopleControllerName);
+        }
+
+        public IActionResult ListAllForms()
+         => View(new SubmitFormWantedViewModel
+         {
+             SubmitForms = this.bountyAdminService.GetAllSubmitForm()
+            
+         });
+
+        //public IActionResult ListAllForms(int id)
+        //    => View(new SubmitFormWantedViewModel
+        //    {
+        //        Id = id
+        //     });
+
+        [HttpPost]
+        public IActionResult AcceptForm(int id)
+        {
+            bountyAdminService.AcceptForm(id);
+
+            return RedirectToAction(nameof(ListAllForms));
+        }
+
+        [HttpPost]
+        public IActionResult DeclineForm(int id)
+        {
+            bountyAdminService.DeclineForm(id);
+
+            return RedirectToAction(nameof(ListAllForms));
         }
     }
 }

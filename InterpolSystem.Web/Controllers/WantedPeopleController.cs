@@ -37,8 +37,8 @@
             peopleService.SubmitForm(
                 model.Id,
                 model.PoliceDepartment,
-                model.Message,
                 model.Subject,
+                model.Message,
                 model.Email,
                 model.Image);
 
