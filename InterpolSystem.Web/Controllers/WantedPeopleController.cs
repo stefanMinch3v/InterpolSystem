@@ -1,5 +1,6 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
+    using InterpolSystem.Web.Models.Shared;
     using Microsoft.AspNetCore.Mvc;
     using Models.WantedPeople;
     using Services;
@@ -23,7 +24,28 @@
             {
                 WantedPeople = this.peopleService.All()
             });
+        
+        public IActionResult SubmitForm(int id)
+            => View(new SubmitFormViewModel
+               {
+                Id = id
+               });
 
+        [HttpPost]
+        public IActionResult SubmitForm(SubmitFormViewModel model)
+        {
+            peopleService.SubmitForm(
+                model.Id,
+                model.PoliceDepartment,
+                model.Message,
+                model.Subject,
+                model.Email,
+                model.Image);
+
+            return View(model);
+                
+        }
+        
         public IActionResult Details(int id)
         {
             var existingPerson = this.peopleService.IsPersonExisting(id);

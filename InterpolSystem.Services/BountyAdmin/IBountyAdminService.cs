@@ -79,7 +79,6 @@
             string scarsOrDistinguishingMarks = null);
 
         void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
-
         bool AreLanguagesExisting(IEnumerable<int> ids);
 
         bool AreCountriesExisting(IEnumerable<int> ids);
