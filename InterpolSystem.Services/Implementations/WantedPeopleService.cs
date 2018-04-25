@@ -1,11 +1,10 @@
 ﻿namespace InterpolSystem.Services.Implementations
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using AutoMapper.QueryableExtensions;
     using Data;
     using InterpolSystem.Services.Models.WantedPeople;
-    using Services.Models.MissingPeople;
+    using System.Collections.Generic;
+    using System.Linq;
 
     class WantedPeopleService : IWantedPeopleService
     {
@@ -15,11 +14,12 @@
         {
             this.db = db;
         }
+
         public IEnumerable<WantedPeopleListingServiceModel> All()
             => this.db.IdentityParticularsWanted
-                            .OrderByDescending(m => m.Id)
-                            .ProjectTo<WantedPeopleListingServiceModel>()
-                            .ToList();
+                    .OrderByDescending(m => m.Id)
+                    .ProjectTo<WantedPeopleListingServiceModel>()
+                    .ToList();
 
         public WantedPeopleDetailsServiceModel GetPerson(int id)
             => this.db.IdentityParticularsWanted
@@ -27,11 +27,7 @@
                 .ProjectTo<WantedPeopleDetailsServiceModel>()
                 .FirstOrDefault();
 
-
         public bool IsPersonExisting(int id)
             => this.db.IdentityParticularsWanted.Any(m => m.Id == id);
-
-
-
     }
 }
