@@ -197,12 +197,6 @@
             
          });
 
-        //public IActionResult ListAllForms(int id)
-        //    => View(new SubmitFormWantedViewModel
-        //    {
-        //        Id = id
-        //     });
-
         [HttpPost]
         public IActionResult AcceptForm(int id)
         {

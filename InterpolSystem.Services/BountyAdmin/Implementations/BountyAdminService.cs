@@ -405,7 +405,8 @@
         }
         public IEnumerable<SubmitForm> GetAllSubmitForm()
             => this.db.SubmitForms
-                    .OrderByDescending(m => m.Id) 
+                    .OrderByDescending(m => m.Id)
+                    .Where(m => m.Status == 0) 
                     .ToList();
 
         public void AcceptForm(int formId)
