@@ -51,5 +51,7 @@
         public const int SubjectMinLength = 5;
 
         public const int ImageMaxSize = 2 * 1024 * 1024; // 2mb
+
+        public const int LoggerValuesMaxLength = 100;
     }
 }

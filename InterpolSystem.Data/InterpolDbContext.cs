@@ -39,6 +39,8 @@
 
         public DbSet<SubmitForm> SubmitForms { get; set; }
 
+        public DbSet<LogEmployee> LogEmployees { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // primary keys mapping tables

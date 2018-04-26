@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Infrastructure.Extensions;
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -37,6 +38,7 @@
                 Roles = this.GetRoles()
             });
 
+        [LogEmployees]
         public IActionResult Create()
             => View(new CreateUserFormViewModel
             {
@@ -85,6 +87,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public async Task<IActionResult> ChangePassword(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -127,6 +130,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public async Task<IActionResult> Delete(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -160,6 +164,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public async Task<IActionResult> AddToRole(AddRemoveUserToRoleViewModel model)
         {
             var existingRole = await this.roleManager.RoleExistsAsync(model.Role);
@@ -190,6 +195,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public async Task<IActionResult> RemoveFromRole(AddRemoveUserToRoleViewModel model)
         {
             var existingRole = await this.roleManager.RoleExistsAsync(model.Role);
