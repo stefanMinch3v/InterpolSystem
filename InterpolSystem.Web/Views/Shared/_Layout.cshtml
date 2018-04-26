@@ -48,6 +48,7 @@
                         </li>
                     }
                     @if (this.User.IsInRole(WebConstants.AdministratorRole) || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
+<<<<<<< HEAD
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -57,6 +58,19 @@
                             <ul class="dropdown-menu" id="main-nav-bar">
                                 <li><a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Create">Add Missing Person</a></li>
                                 <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Create">Add Wanted Person</a></li>
+=======
+    {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Manage  People
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="main-nav-bar">
+
+                        <li><a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Create">Add Missing Person</a></li>
+                        <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Create">Add Wanted Person</a></li>
+                        <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="ListAllForms">Check wanted's forms</a></li>
+>>>>>>> 7442acacfe0ce953268f9aadb83622feb1a66b56
 
                             </ul>
                         </li>

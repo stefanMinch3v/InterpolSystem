@@ -2,6 +2,7 @@
 {
     using BountyAdmin.Models;
     using Data.Models.Enums;
+    using InterpolSystem.Data.Models;
     using System;
     using System.Collections.Generic;
 
@@ -79,7 +80,6 @@
             string scarsOrDistinguishingMarks = null);
 
         void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
-
         bool AreLanguagesExisting(IEnumerable<int> ids);
 
         bool AreCountriesExisting(IEnumerable<int> ids);
@@ -88,6 +88,12 @@
 
         IEnumerable<LanguageListingServiceModel> GetLanguagesList();
 
-        IEnumerable<CountryListingServiceModel> GetCountriesList(); 
+        IEnumerable<CountryListingServiceModel> GetCountriesList();
+
+        IEnumerable<SubmitForm> GetAllSubmitForm();
+
+        void AcceptForm(int formId);
+
+        void DeclineForm(int formId);
     }
 }

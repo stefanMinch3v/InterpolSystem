@@ -1,0 +1,83 @@
+﻿@model InterpolSystem.Web.Models.Shared.SubmitFormViewModel
+
+@{
+    ViewData["Title"] = "SubmitForm";
+}
+
+
+<h2>Report wanted person finding</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SubmitForm" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group" style="display:none">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PoliceDepartment" class="control-label">Police department which criminal was escorted to</label>
+                <input asp-for="PoliceDepartment" class="form-control" />
+                <span asp-validation-for="PoliceDepartment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <textarea asp-for="Message" rows="10" class="form-control message" onpaste="return false"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+                <div class="charCount">0/500</div>
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                        crossorigin="anonymous"></script>
+                <script type="text/javascript">
+                    $(function () {
+                        let msg = $('.message');
+                        var len;
+                        msg.keydown(function (e) {
+                            var max = 500;
+                            len = $(this).val().length;
+                            $('.charCount').html(len + "/500");
+                            if (len === 500) {
+                                if (e.key == "Backspace") {
+
+                                }
+                                else {
+                                    e.preventDefault();
+                                }
+
+                            }
+
+                        });
+                    });
+                </script>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control btn btn-default" accept="image/*" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+

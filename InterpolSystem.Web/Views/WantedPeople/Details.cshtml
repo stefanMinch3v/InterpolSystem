@@ -4,11 +4,14 @@
     ViewData["Title"] = $"{Model.FirstName} {Model.LastName}";
 }
 
-<a asp-controller="WantedPeople" asp-action="Index" class="btn btn-primary">Back to all</a>
+<a asp-controller="WantedPeople" asp-action="Index" class="btn btn-primary">Back to all wanted criminals</a>
 
 @if (this.User.IsInRole(WebConstants.WantedMissingPeopleRole) || this.User.IsInRole(WebConstants.AdministratorRole))
 {
+    <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="ListAllForms" class="btn btn-primary ">Back to submit forms</a>
+
     <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="AddCharge" asp-route-id="@Model.Id" class="btn btn-warning">Add charge</a>
+
     <a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit details</a>
 }
 
@@ -57,7 +60,7 @@
         <div class="panel-footer">
             <p class="text-danger text-capitalize">if you have any information please contact:</p>
             <p>Your national or local police</p>
-            <p><a href="#" class="text-primary">General Secretariat of INTERPOL</a></p>
+            <a asp-area="" asp-controller="WantedPeople" asp-action="SubmitForm" asp-route-id="@Model.Id" class="btn btn-warning">General secretariat of INTERPOL</a>
         </div>
     </div>
 </div>
