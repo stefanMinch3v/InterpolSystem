@@ -1,5 +1,6 @@
 ﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Controllers
 {
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Mvc;
     using Models.MissingPeople;
     using Services;
@@ -30,6 +31,7 @@
          });
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult Create(MissingPeopleFormViewModel model)
         {
             var selectedLanguages = model.SelectedLanguages;
@@ -121,6 +123,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult Edit(int id, MissingPeopleFormViewModel model)
         {
             var exsitingPerson = this.missingPeopleService.IsPersonExisting(id);

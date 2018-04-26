@@ -38,7 +38,6 @@
                 Roles = this.GetRoles()
             });
 
-        [LogEmployees]
         public IActionResult Create()
             => View(new CreateUserFormViewModel
             {
@@ -46,6 +45,7 @@
             });
 
         [HttpPost]
+        [LogEmployees]
         public async Task<IActionResult> Create(CreateUserFormViewModel model)
         {
             if (!ModelState.IsValid)

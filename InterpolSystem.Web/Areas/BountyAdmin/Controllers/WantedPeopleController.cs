@@ -1,12 +1,13 @@
 ﻿namespace InterpolSystem.Web.Areas.BountyAdmin.Controllers
 {
     using Infrastructure.Extensions;
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Mvc;
     using Models.WantedPeople;
     using Services;
     using Services.BountyAdmin;
     using System.Linq;
-    using System.Threading.Tasks;
+
     using static WebConstants;
 
     public class WantedPeopleController : BaseBountyAdminController
@@ -31,6 +32,7 @@
             });
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult AddCharge(ChargeViewModel model)
         {
             var selectedCountries = model.SelectedCountries;
@@ -61,6 +63,7 @@
             });
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult Create(WantedPeopleFormViewModel model)
         {
             if (!ModelState.IsValid)
@@ -135,6 +138,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult Edit(int id, WantedPeopleFormViewModel model)
         {
             var exsitingPerson = this.wantedPeopleService.IsPersonExisting(id);
@@ -198,6 +202,7 @@
          });
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult AcceptForm(int id)
         {
             bountyAdminService.AcceptForm(id);
@@ -206,6 +211,7 @@
         }
 
         [HttpPost]
+        [LogEmployees]
         public IActionResult DeclineForm(int id)
         {
             bountyAdminService.DeclineForm(id);
