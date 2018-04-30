@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Interpol Official Website</title>
-
+    
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -47,11 +47,11 @@
                             </ul>
                         </li>
                     }
-                    @if (this.User.IsInRole(WebConstants.AdministratorRole) 
-                        || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
+                    @if (this.User.IsInRole(WebConstants.AdministratorRole)
+                       || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
                     {
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a id ="managePeopleA"class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Manage  People
                                 <span class="caret"></span>
                             </a>
@@ -59,14 +59,14 @@
 
                                 <li><a asp-area="BountyAdmin" asp-controller="MissingPeople" asp-action="Create">Add Missing Person</a></li>
                                 <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="Create">Add Wanted Person</a></li>
-                                <li><a asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="ListAllForms">Check wanted's forms</a></li>
+                                <li><a id="SubmitFormWantedA" asp-area="BountyAdmin" asp-controller="WantedPeople" asp-action="ListAllForms">Check wanted's forms</a></li>
 
                             </ul>
                         </li>
 
                     }
-                    @if (this.User.IsInRole(WebConstants.AdministratorRole) 
-                        || this.User.IsInRole(WebConstants.BloggerRole))
+                    @if (this.User.IsInRole(WebConstants.AdministratorRole)
+                       || this.User.IsInRole(WebConstants.BloggerRole))
                     {
                         <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
                     }
@@ -131,5 +131,41 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    @{
+        var result = ViewData[WebConstants.ValidForm];
+
+
+        if (result != null)
+        {
+            <script>
+                let li = $("#SubmitFormWantedA");
+                let span = $(`<span>&nbsp${@result}&nbsp</span >`)
+                    .css({
+                        'background-color': 'red',
+                        'border-radius': '50%',
+                        'text-align': 'right',
+                        'margin-left': '2px',
+                        'margin-right': '2px'
+                    })
+                    .appendTo(li);
+
+                let ul = $("#managePeopleA");
+                let span2 = $(`<span>&nbsp${@result} </span >`)
+                    .css({
+                        'background-color': 'red',
+                        'border-radius': '50%',
+                        'text-align': 'right',
+                        'margin-left': '2px',
+                        'margin-right': '2px'
+                    })   
+                    .prependTo(ul);
+
+
+            </script>
+        }
+    }
 </body>
 </html>

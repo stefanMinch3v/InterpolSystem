@@ -19,6 +19,7 @@
         public const string MissingPeopleControllerName = "MissingPeople";
         public const string WantedPeopleControllerName = "WantedPeople";
 
+        public const string ValidForm = "ValidSubmitForm";
 
         public const int PageSize = 6;
     }

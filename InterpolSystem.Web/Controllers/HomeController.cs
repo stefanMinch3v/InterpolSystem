@@ -1,11 +1,13 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
+    using Infrastructure.Filters;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using System.Diagnostics;
 
     public class HomeController : Controller
     {
+        [SubmitForm]
         public IActionResult Index()
         {
             return View();
