@@ -6,6 +6,7 @@
     using Models.WantedPeople;
     using Services;
     using Services.BountyAdmin;
+    using System;
     using System.Linq;
 
     using static WebConstants;
@@ -21,8 +22,6 @@
         {
             this.wantedPeopleService = wantedPeopleService;
         }
-
-        public IActionResult Index() => View();
 
         public IActionResult AddCharge(int id)
             => View(new ChargeViewModel
@@ -194,18 +193,26 @@
             return RedirectToAction(nameof(Web.Controllers.WantedPeopleController.Index), WantedPeopleControllerName);
         }
 
+        [SubmitForm]
         public IActionResult ListAllForms()
-         => View(new SubmitFormWantedViewModel
-         {
-             SubmitForms = this.bountyAdminService.GetAllSubmitForm()
-            
-         });
+            => View(nameof(ListAllForms), this.GetFilteredForms(true));
+
+        [SubmitForm]
+        public IActionResult ListAllValidatedForms()
+            => View(nameof(ListAllForms), this.GetFilteredForms(false));
 
         [HttpPost]
         [LogEmployees]
         public IActionResult AcceptForm(int id)
         {
-            bountyAdminService.AcceptForm(id);
+            try
+            {
+                this.bountyAdminService.AcceptForm(id);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }            
 
             return RedirectToAction(nameof(ListAllForms));
         }
@@ -214,9 +221,29 @@
         [LogEmployees]
         public IActionResult DeclineForm(int id)
         {
-            bountyAdminService.DeclineForm(id);
+            try
+            {
+                this.bountyAdminService.DeclineForm(id);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }         
 
             return RedirectToAction(nameof(ListAllForms));
+        }
+
+        private WantedFilteredFormViewModel GetFilteredForms(bool approvedOnly)
+        {
+            var formsType = approvedOnly ? 0 : -1;
+
+            var forms = this.bountyAdminService.GetAllSubmitForms(formsType);
+
+            return new WantedFilteredFormViewModel
+            {
+                Forms = forms,
+                Type = formsType
+            };
         }
     }
 }

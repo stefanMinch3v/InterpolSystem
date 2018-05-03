@@ -1,68 +1,82 @@
-﻿@model InterpolSystem.Web.Areas.BountyAdmin.Models.WantedPeople.SubmitFormWantedViewModel
+﻿@model WantedFilteredFormViewModel
 
 @{
     ViewData["Title"] = "Submitted Forms";
 }
 
-<h2>Wanted submit forms</h2>
+<h2>@ViewData["Title"]</h2>
+<p class="col-md-12"><a asp-action="ListAllValidatedForms" class="btn btn-warning pull-right">Show Accepted/Declined</a></p>
+<p class="col-md-12"><a asp-action="ListAllForms" class="btn btn-warning pull-right">Show unseen</a></p>
 
 <table class="table">
     <thead>
-        <tr>
-                <th>
-                    Message
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Police department
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Date
-                </th>
-            <th></th>
+        <tr id="approvedDecline">
+            <th>
+                Message
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Police department
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Operations
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.SubmitForms) {
-        <tr>
-            
-            <td style="width:200px">
-                <b>@item.Subject</b><br>
-                   @item.Message
-            </td>
-            <td>
-                <!--https://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model*-->
-                @{ var base64 = Convert.ToBase64String(item.PersonImage);}
-                @{ var imgSrc = String.Format("data:image/gif;base64,{0}", base64); }
-                <img style="height:200px; width:auto"src="@imgSrc" />
-                
-            </td>
-            <td>
-                @item.PoliceDepartment
-            </td>
-            <td>
-                @item.SenderEmail
-            </td>
-            <td>
-                @item.SubmissionDate
-            </td>
-            <td style="width:150px">
-                <a asp-area="" style="margin-bottom:4px" asp-controller="WantedPeople" asp-action="Details" asp-route-id="@item.IdentityParticularsWantedId" class="btn btn-primary">See criminal details</a>
-                <form asp-controller="WantedPeople" method="post">
-                   
-                        <input type="hidden" name="id" value="@item.Id" />
-                        <input asp-action="AcceptForm" class="btn  btn-success" type="submit" value="Accept" onclick="return confirm('Are you sure you want to accept this form?')" />
-                        <input asp-action="DeclineForm" style="float:right" class="btn  btn-danger" type="submit" value="Reject" onclick="return confirm('Are you sure you want to reject this form?')" />
-                   
-                </form>
-
-            </td>
-        </tr>
-}
+        @foreach (var form in Model.Forms)
+        {
+            <tr id="approvedDeclineMessage">
+                <td style="width:200px">
+                    <b>@form.Subject</b><br>
+                    @form.Message
+                </td>
+                <td>
+                    <!--https://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model*-->
+                    @{ var base64 = Convert.ToBase64String(form.PersonImage);}
+                    @{ var imgSrc = String.Format("data:image/gif;base64,{0}", base64); }
+                    <img style="height:200px; width:auto" src="@imgSrc" />
+                </td>
+                <td>
+                    @form.PoliceDepartment
+                </td>
+                <td>
+                    @form.SenderEmail
+                </td>
+                <td>
+                    @form.SubmissionDate
+                </td>
+                @if (Model.Type != 0)
+                {
+                    <td class="text-uppercase">@form.Status.ToString()</td>
+                }
+                <td style="width:150px">
+                    <a asp-area="" style="margin-bottom:4px" asp-controller="WantedPeople" asp-action="Details" asp-route-id="@form.Id" class="btn btn-primary">See criminal details</a>
+                    <form asp-controller="WantedPeople" method="post">
+                        <input type="hidden" name="id" value="@form.Id" />
+                        <input asp-action="AcceptForm" class="btn btn-success operationRemove" type="submit" value="Accept" onclick="return confirm('Are you sure you want to accept this form?')" />
+                        <input asp-action="DeclineForm" style="float:right" class="btn btn-danger operationRemove" type="submit" value="Reject" onclick="return confirm('Are you sure you want to reject this form?')" />
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (Model.Type != 0)
+{
+    <script>
+        let th = $('<th>Status</th>');
+
+        $('#approvedDecline > th:last').before(th);
+        $('.operationRemove').remove();
+    </script>
+}

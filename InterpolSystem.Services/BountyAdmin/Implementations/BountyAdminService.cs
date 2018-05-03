@@ -314,6 +314,52 @@
                 .ProjectTo<LanguageListingServiceModel>()
                 .ToList();
 
+        public IEnumerable<SubmitFormWantedServiceModel> GetAllSubmitForms(int commandOrder)
+        {
+            if (commandOrder == 0)
+            {
+                return this.db.SubmitForms
+                        .OrderByDescending(m => m.Id)
+                        .Where(m => m.Status == 0)
+                        .ProjectTo<SubmitFormWantedServiceModel>()
+                        .ToList();
+            }
+
+            return this.db.SubmitForms
+                        .OrderByDescending(m => m.Id)
+                        .ProjectTo<SubmitFormWantedServiceModel>()
+                        .Where(m => m.Status != 0)
+                        .ToList();
+        }
+
+        public void AcceptForm(int formId)
+        {
+            if (formId <= 0)
+            {
+                throw new InvalidOperationException(InvalidFormInfo);
+            }
+
+            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
+            existingForm.Status = FormOptions.Accepted;
+
+            this.db.SubmitForms.Update(existingForm);
+            this.db.SaveChanges();
+        }
+
+        public void DeclineForm(int formId)
+        {
+            if (formId <= 0)
+            {
+                throw new InvalidOperationException(InvalidFormInfo);
+            }
+
+            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
+            existingForm.Status = FormOptions.Declined;
+
+            this.db.SubmitForms.Update(existingForm);
+            this.db.SaveChanges();
+        }
+
         private void AddLanguagesAndCountriesCollections(IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds, IdentityParticularsMissing existingPerson)
         {
             foreach (var nationalityId in nationalitiesIds)
@@ -402,29 +448,6 @@
             {
                 throw new InvalidOperationException(InvalidInsertedData);
             }
-        }
-        public IEnumerable<SubmitForm> GetAllSubmitForm()
-            => this.db.SubmitForms
-                    .OrderByDescending(m => m.Id)
-                    .Where(m => m.Status == 0) 
-                    .ToList();
-
-        public void AcceptForm(int formId)
-        {
-            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
-            existingForm.Status = FormOptions.Accepted;
-
-            this.db.SubmitForms.Update(existingForm);
-            this.db.SaveChanges();
-        }
-
-        public void DeclineForm(int formId)
-        {
-            var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
-            existingForm.Status = FormOptions.Declined;
-
-            this.db.SubmitForms.Update(existingForm);
-            this.db.SaveChanges();
         }
     }
 

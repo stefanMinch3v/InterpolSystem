@@ -1,8 +1,8 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin
 {
     using BountyAdmin.Models;
+    using Data.Models;
     using Data.Models.Enums;
-    using InterpolSystem.Data.Models;
     using System;
     using System.Collections.Generic;
 
@@ -80,6 +80,7 @@
             string scarsOrDistinguishingMarks = null);
 
         void CreateCharge(int wantedId, string description, IEnumerable<int> countriesIds);
+
         bool AreLanguagesExisting(IEnumerable<int> ids);
 
         bool AreCountriesExisting(IEnumerable<int> ids);
@@ -90,7 +91,7 @@
 
         IEnumerable<CountryListingServiceModel> GetCountriesList();
 
-        IEnumerable<SubmitForm> GetAllSubmitForm();
+        IEnumerable<SubmitFormWantedServiceModel> GetAllSubmitForms(int commandOrderId);
 
         void AcceptForm(int formId);
 
