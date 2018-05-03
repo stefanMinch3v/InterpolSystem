@@ -9,6 +9,8 @@
     {
         public int Id { get; set; }
 
+        public int? IdentityParticularsWantedId { get; set; }
+
         public string PoliceDepartment { get; set; }
 
         public string SenderEmail { get; set; }

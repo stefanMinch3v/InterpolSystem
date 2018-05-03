@@ -59,7 +59,7 @@
                     <td class="text-uppercase">@form.Status.ToString()</td>
                 }
                 <td style="width:150px">
-                    <a asp-area="" style="margin-bottom:4px" asp-controller="WantedPeople" asp-action="Details" asp-route-id="@form.Id" class="btn btn-primary">See criminal details</a>
+                    <a asp-area="" style="margin-bottom:4px" asp-controller="WantedPeople" asp-action="Details" asp-route-id="@form.IdentityParticularsWantedId" class="btn btn-primary">See criminal details</a>
                     <form asp-controller="WantedPeople" method="post">
                         <input type="hidden" name="id" value="@form.Id" />
                         <input asp-action="AcceptForm" class="btn btn-success operationRemove" type="submit" value="Accept" onclick="return confirm('Are you sure you want to accept this form?')" />
