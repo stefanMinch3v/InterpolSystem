@@ -1,27 +1,24 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Models.MissingPeople;
+    using Models.Shared;
     using Services;
     using Services.BountyAdmin;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static WebConstants;
 
-    public class MissingPeopleController : Controller
+    public class MissingPeopleController : BasePeopleController
     {
         private readonly IMissingPeopleService peopleService;
-        private readonly IBountyAdminService bountyAdminService;
 
         public MissingPeopleController(
             IMissingPeopleService peopleService,
             IBountyAdminService bountyAdminService)
+            : base(bountyAdminService)
         {
             this.peopleService = peopleService;
-            this.bountyAdminService = bountyAdminService;
         }
 
         public IActionResult Index(int page = 1)
@@ -65,14 +62,5 @@
                 SearchCriteriaTotalPages = this.peopleService.SearchPeopleCriteriaCounter,
                 TotalPages = (int)Math.Ceiling(this.peopleService.SearchPeopleCriteriaCounter / (double)PageSize)
             });
-
-        private List<SelectListItem> GetCountries()
-            => this.bountyAdminService.GetCountriesList()
-                .Select(r => new SelectListItem
-                {
-                    Text = r.Name,
-                    Value = r.Id.ToString()
-                })
-                .ToList();
     }
 }

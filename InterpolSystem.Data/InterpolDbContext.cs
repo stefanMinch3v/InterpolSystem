@@ -9,6 +9,7 @@
         public InterpolDbContext(DbContextOptions<InterpolDbContext> options)
             : base(options)
         {
+            this.Database.SetCommandTimeout(60); // ucn server kraka is not one of the fastest ones so we get timeout exception for very simple queries and the temporary solution could be to increase the waiting time.
         }
 
         public DbSet<Charges> Charges { get; set; }
@@ -169,6 +170,14 @@
                 .HasOne(a => a.Author)
                 .WithMany(au => au.Articles)
                 .HasForeignKey(a => a.AuthorId);
+
+            // submit form relations to be changed to many to many
+            builder
+                .Entity<SubmitForm>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.SubmitForms)
+                .HasForeignKey(f => f.UserId)
+                .IsRequired(false);
 
             base.OnModelCreating(builder);
         }

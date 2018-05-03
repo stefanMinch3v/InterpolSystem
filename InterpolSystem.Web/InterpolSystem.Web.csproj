@@ -36,4 +36,8 @@
     <ProjectReference Include="..\InterpolSystem.Services\InterpolSystem.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\BountyHunter\Models\" />
+  </ItemGroup>
+
 </Project>

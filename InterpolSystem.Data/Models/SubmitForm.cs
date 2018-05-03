@@ -6,9 +6,14 @@
 
     using static DataConstants;
 
+    // to be refactored to separate tables many to many, below is not a good idea but it works so far.
     public class SubmitForm
     {
         public int Id { get; set; }
+
+        public string UserId { get; set; }
+
+        public User User { get; set; }
 
         public int? IdentityParticularsMissingId { get; set; }
 

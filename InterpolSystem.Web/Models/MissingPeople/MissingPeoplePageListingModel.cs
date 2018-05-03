@@ -1,6 +1,7 @@
 ﻿namespace InterpolSystem.Web.Models.MissingPeople
 {
     using Services.Models.MissingPeople;
+    using Shared;
     using System.Collections.Generic;
 
     public class MissingPeoplePageListingModel : SearchFormViewModel

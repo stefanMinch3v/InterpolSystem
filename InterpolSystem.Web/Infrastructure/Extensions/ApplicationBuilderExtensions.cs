@@ -40,7 +40,8 @@
                         AdministratorRole,
                         TestRole,
                         WantedMissingPeopleRole,
-                        BloggerRole
+                        BloggerRole,
+                        BountyHunterRole
                     };
 
                     foreach (var role in roles)

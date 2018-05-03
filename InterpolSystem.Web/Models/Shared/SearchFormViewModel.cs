@@ -1,4 +1,4 @@
-﻿namespace InterpolSystem.Web.Models.MissingPeople
+﻿namespace InterpolSystem.Web.Models.Shared
 {
     using Data.Models.Enums;
     using Microsoft.AspNetCore.Mvc.Rendering;

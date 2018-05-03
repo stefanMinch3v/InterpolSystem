@@ -24,6 +24,9 @@
 
         public List<Article> Articles { get; set; } = new List<Article>();
 
+        // to be changed to many to many
+        public List<SubmitForm> SubmitForms { get; set; } = new List<SubmitForm>();
+
         [NotMapped]
         public List<string> RolesIds { get; set; } = new List<string>();
     }

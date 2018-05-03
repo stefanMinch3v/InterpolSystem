@@ -72,6 +72,10 @@
                     {
                         <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
                     }
+                    @if (this.User.IsInRole(WebConstants.BountyHunterRole))
+                    {
+                        <li><a asp-area="BountyHunter" asp-controller="BountyHunter" asp-action="GetSubmittedForms">My-Forms</a></li>
+                    }
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Missing

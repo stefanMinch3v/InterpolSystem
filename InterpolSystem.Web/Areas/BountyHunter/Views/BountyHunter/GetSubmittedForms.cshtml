@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HunterSubmittedFormsServiceModel>
+
+@{
+    ViewData["Title"] = "Submitted forms";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Date of submission</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Police Department</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var form in Model)
+        {
+            <tr>
+                <td>@form.SubmissionDate.ToLocalTime()</td>
+                <td>@form.Subject</td>
+                <td>@form.Message</td>
+                <td>@form.PoliceDepartment</td>
+                <td>
+                    @if (form.Status == FormOptions.Accepted)
+                    {
+                        <span>Congrats! Take your certificate from </span>
+                        <a asp-action="DownloadCertificate" asp-route-id="@form.IdentityParticularsWantedId">here</a>
+                    }
+                    else if (form.Status == FormOptions.Declined)
+                    {
+                        <p>Your submission was declined.</p>
+                    }
+                    else
+                    {
+                        <p>Still waiting to be approved.</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

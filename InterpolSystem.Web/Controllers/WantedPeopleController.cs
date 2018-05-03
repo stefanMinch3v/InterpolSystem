@@ -1,40 +1,61 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
-    using InterpolSystem.Web.Infrastructure.Extensions;
-    using InterpolSystem.Web.Models.Shared;
+    using Data.Models;
+    using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Models.Shared;
     using Models.WantedPeople;
     using Services;
     using Services.BountyAdmin;
+    using System;
+    using System.Threading.Tasks;
 
-    public class WantedPeopleController : Controller
+    using static WebConstants;
+
+    public class WantedPeopleController : BasePeopleController
     {
         private readonly IWantedPeopleService peopleService;
-        private readonly IBountyAdminService bountyAdminService;
+        private readonly UserManager<User> userManager;
 
         public WantedPeopleController(
           IWantedPeopleService peopleService,
+          UserManager<User> userManager,
           IBountyAdminService bountyAdminService)
+            : base(bountyAdminService)
         {
             this.peopleService = peopleService;
-            this.bountyAdminService = bountyAdminService;
+            this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
             => View(new WantedPeoplePageListingModel
             {
-                WantedPeople = this.peopleService.All()
+                WantedPeople = this.peopleService.All(page, PageSize),
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(this.peopleService.Total() / (double)PageSize),
+                Countries = this.GetCountries()
             });
-        
+
+        [Authorize]
+        [Authorize(Roles = BountyHunterRole)]
         public IActionResult SubmitForm(int id)
-            => View(new SubmitFormViewModel
-               {
-                Id = id
-               });
+            => View(new SubmitFormViewModel { Id = id });
 
         [HttpPost]
-        public IActionResult SubmitForm(SubmitFormViewModel model)
+        [Authorize]
+        [Authorize(Roles = BountyHunterRole)]
+        public async Task<IActionResult> SubmitForm(SubmitFormViewModel model)
         {
+            var currentUser = await this.userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                this.TempData.AddErrorMessage("Invalid user authentication.");
+                return RedirectToAction(nameof(SubmitForm));
+            }
+
             string ext = System.IO.Path.GetExtension(model.Image.FileName).ToLower();
             var lenght = model.Image.Length;
             if (!(ext == ".jpg" || ext == ".png" || ext == ".jpeg"))
@@ -51,10 +72,11 @@
             }
             peopleService.SubmitForm(
                 model.Id,
+                currentUser.Id,
                 model.PoliceDepartment,
                 model.Subject,
                 model.Message,
-                model.Email,
+                currentUser.Email,
                 model.Image);
             TempData.AddSuccessMessage("Form was sent to secretariat, you will be notified soon about the outcome");
 
@@ -75,5 +97,24 @@
 
             return View(person);
         }
+
+        public IActionResult Search(SearchFormViewModel model, int page = 1)
+           => View(new WantedPeoplePageListingModel
+           {
+               CurrentPage = page,
+               WantedPeople = this.peopleService.SearchByComponents(
+                   model.EnableCountrySearch,
+                   model.SelectedCountryId ?? 0,
+                   model.EnableGenderSearch,
+                   model.SelectedGender,
+                   model.SearchByFirstName,
+                   model.SearchByLastName,
+                   model.SearchByDistinguishMarks,
+                   model.SearchByAge ?? 0,
+                   page,
+                   PageSize),
+               SearchCriteriaTotalPages = this.peopleService.SearchPeopleCriteriaCounter,
+               TotalPages = (int)Math.Ceiling(this.peopleService.SearchPeopleCriteriaCounter / (double)PageSize)      
+           });
     }
 } 
