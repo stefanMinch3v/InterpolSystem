@@ -8,7 +8,7 @@
         public const string InvalidFormInfo = "Invalid submitted form.";
 
         public const string PdfCertificateFormat = @"
-<h1 style = ""text-align:center""><u>Certificate proving carch of criminal</u></h1>
+<h1 style = ""text-align:center""><u>Certificate proving catch of criminal</u></h1>
 <br />
 <h2 style = ""text-align:center"">To {0}</h2>
 <br />
