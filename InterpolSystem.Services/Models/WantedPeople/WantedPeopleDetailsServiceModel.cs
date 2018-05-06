@@ -25,6 +25,8 @@
 
         public string PlaceOfBirth { get; set; }
 
+        public decimal Reward { get; set; }
+
         public PhysicalDescription PhysicalDescription { get; set; }
 
         public IEnumerable<LanguageListingServiceModel> SpokenLanguages { get; set; }

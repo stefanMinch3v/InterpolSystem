@@ -37,6 +37,10 @@
         [Display(Name = "Place of birth")]
         public string PlaceOfBirth { get; set; }
 
+        [Required]
+        [Range(0, double.MaxValue)]
+        public decimal Reward { get; set; }
+
         [Range(0, double.MaxValue)]
         [Display(Name = "Height (in meters)")]
         public double Height { get; set; }

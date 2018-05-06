@@ -81,25 +81,33 @@
                 return BadRequest("Unexisting language or country.");
             }
 
-            this.bountyAdminService.CreateWantedPerson(
-                model.FirstName,
-                model.LastName,
-                model.Gender,
-                model.DateOfBirth,
-                model.PlaceOfBirth,
-                model.Height,
-                model.Weight,
-                model.HairColor,
-                model.EyeColor,
-                model.PictureUrl,
-                model.SelectedCountries,
-                model.SelectedLanguages,
-                model.AllNames,
-                model.ScarsOrDistinguishingMarks);
+            try
+            {
+                this.bountyAdminService.CreateWantedPerson(
+                    model.FirstName,
+                    model.LastName,
+                    model.Gender,
+                    model.DateOfBirth,
+                    model.PlaceOfBirth,
+                    model.Reward,
+                    model.Height,
+                    model.Weight,
+                    model.HairColor,
+                    model.EyeColor,
+                    model.PictureUrl,
+                    model.SelectedCountries,
+                    model.SelectedLanguages,
+                    model.AllNames,
+                    model.ScarsOrDistinguishingMarks);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             var wantedPersonId = this.bountyAdminService.GetLastWantedPerson();
 
-            TempData.AddSuccessMessage("Person successfully added to the system, plase specify charges for person created");
+            TempData.AddSuccessMessage("Person successfully added to the system, please specify charges for person created");
 
             return RedirectToAction(nameof(AddCharge), new { id = wantedPersonId });
         }
@@ -121,6 +129,7 @@
                 LastName = person.LastName,
                 AllNames = person.AllNames,
                 DateOfBirth = person.DateOfBirth,
+                Reward = person.Reward,
                 EyeColor = person.PhysicalDescription.EyeColor,
                 Gender = person.Gender,
                 HairColor = person.PhysicalDescription.HairColor,
@@ -171,22 +180,30 @@
                 return BadRequest("Unexisting language or country.");
             }
 
-            this.bountyAdminService.EditWantedPerson(
-            id,
-            model.FirstName,
-            model.LastName,
-            model.Gender,
-            model.DateOfBirth,
-            model.PlaceOfBirth,
-            model.Height,
-            model.Weight,
-            model.HairColor,
-            model.EyeColor,
-            model.PictureUrl,
-            model.SelectedCountries,
-            model.SelectedLanguages,
-            model.AllNames,
-            model.ScarsOrDistinguishingMarks);
+            try
+            {
+                this.bountyAdminService.EditWantedPerson(
+                    id,
+                    model.FirstName,
+                    model.LastName,
+                    model.Gender,
+                    model.DateOfBirth,
+                    model.PlaceOfBirth,
+                    model.Reward,
+                    model.Height,
+                    model.Weight,
+                    model.HairColor,
+                    model.EyeColor,
+                    model.PictureUrl,
+                    model.SelectedCountries,
+                    model.SelectedLanguages,
+                    model.AllNames,
+                    model.ScarsOrDistinguishingMarks);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
 

@@ -1,5 +1,24 @@
 ﻿@model WantedPeopleFormViewModel
 
+@{
+    // for edit display the previously chosen, for create doesnt show anything
+    var chosenText = "Previous chosen: ";
+    var oldLanguages = string.Empty;
+    var oldCountries = string.Empty;
+
+    if (Model.SelectedLanguages != null)
+    {
+        oldLanguages += chosenText;
+        oldLanguages += string.Join(", ", Model.Languages.Where(l => Model.SelectedLanguages.Contains(int.Parse(l.Value))).Select(l => l.Text));
+    }
+
+    if (Model.SelectedCountries != null)
+    {
+        oldCountries += chosenText;
+        oldCountries += string.Join(", ", Model.Countries.Where(c => Model.SelectedCountries.Contains(int.Parse(c.Value))).Select(c => c.Text));
+    }
+}
+
 <form asp-area="BountyAdmin" asp-controller="WantedPeople" method="post">
     <hr />
     <div class="col-md-4">
@@ -35,11 +54,17 @@
             <input asp-for="PlaceOfBirth" class="form-control" />
             <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="Reward"></label>
+            <input asp-for="Reward" class="form-control" />
+            <span asp-validation-for="Reward" class="text-danger"></span>
+        </div>
     </div>
     <div class="col-md-4">
         <h3 class="text-primary">Step 2</h3>
         <div class="form-group">
             <label asp-for="Countries"></label>
+            <h5 class="text-primary">@oldCountries</h5>
             <select name="SelectedCountries" asp-items="Model.Countries" rows="10" id="fixedHeight" class="form-control" multiple></select>
             <small class="text-danger">*Hold Ctrl to select multple countries</small>
         </div>
@@ -78,6 +103,7 @@
         </div>
         <div class="form-group">
             <label asp-for="Languages"></label>
+            <h5 class="text-primary">@oldLanguages</h5>
             <select name="SelectedLanguages" asp-items="Model.Languages" id="fixedHeight" class="form-control" multiple></select>
             <small class="text-danger">*Hold Ctrl to select multple languages</small>
         </div>

@@ -144,6 +144,7 @@
             Gender gender, 
             DateTime dateOfBirth, 
             string placeOfBirth, 
+            decimal reward,
             double height, 
             double weight, 
             Color hairColor, 
@@ -155,7 +156,7 @@
             string allNames = null, 
             string scarsOrDistinguishingMarks = null)
         {
-            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds, reward);
 
             var physicalDescription = new PhysicalDescription
             {
@@ -176,7 +177,7 @@
                 PlaceOfBirth = placeOfBirth,
                 AllNames = allNames,
                 PhysicalDescription = physicalDescription,
-               
+                Reward = reward
             };
 
             foreach (var nationalityId in nationalitiesIds)
@@ -212,6 +213,7 @@
             Gender gender,
             DateTime dateOfBirth,
             string placeOfBirth,
+            decimal reward,
             double height,
             double weight,
             Color hairColor,
@@ -222,7 +224,7 @@
             string allNames = null,
             string scarsOrDistinguishingMarks = null)
         {
-            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds);
+            this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds, reward);
 
             if (id <= 0)
             {
@@ -246,6 +248,7 @@
             existingPerson.DateOfBirth = dateOfBirth;
             existingPerson.PlaceOfBirth = placeOfBirth;
             existingPerson.AllNames = allNames;
+            existingPerson.Reward = reward;
             existingPerson.PhysicalDescription.ScarsOrDistinguishingMarks = scarsOrDistinguishingMarks;
 
             existingPerson.PhysicalDescription.Height = height;
@@ -431,7 +434,7 @@
             }
         }
 
-        private void ValidateWantedPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds)
+        private void ValidateWantedPeopleData(string firstName, string lastName, Gender gender, DateTime dateOfBirth, string placeOfBirth, double height, double weight, Color hairColor, Color eyesColor, string pictureUrl, IEnumerable<int> nationalitiesIds, IEnumerable<int> languagesIds, decimal reward)
         {
             if (string.IsNullOrEmpty(firstName)
                 || string.IsNullOrEmpty(lastName)
@@ -444,7 +447,8 @@
                 || hairColor < 0
                 || eyesColor < 0
                 || nationalitiesIds == null
-                || languagesIds == null)
+                || languagesIds == null
+                || reward < 0)
             {
                 throw new InvalidOperationException(InvalidInsertedData);
             }
