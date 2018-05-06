@@ -1,7 +1,6 @@
-﻿namespace InterpolSystem.Web.Infrastructure.Mapping
+﻿namespace InterpolSystem.Common.Mapping
 {
     using AutoMapper;
-    using Common.Mapping;
     using System;
     using System.Linq;
 
