@@ -32,13 +32,11 @@
         public IEnumerable<CountryListingServiceModel> Nationalities { get; set; }
 
         public IEnumerable<ChargesListingServiceModel> Charges { get; set; }
+
         public void ConfigureMapping(Profile mapper)
             => mapper
                 .CreateMap<IdentityParticularsWanted, WantedPeopleDetailsServiceModel>()
                 .ForMember(m => m.SpokenLanguages, cfg => cfg.MapFrom(s => s.SpokenLanguages.Select(l => l.Language)))
                 .ForMember(m => m.Nationalities, cfg => cfg.MapFrom(s => s.Nationalities.Select(n => n.Country)));
-                //.ForMember(m => m.Charges, cfg => cfg.MapFrom(s => s.Charges.Select(n => n.Description)))
-               // .ForMember(m => m.Charges, cfg => cfg.MapFrom(s => s.Charges.Select(n => n.CountryWantedAuthorities)));
-
     }
 }

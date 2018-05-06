@@ -51,10 +51,8 @@
                 {
                     <p>Scars or distinguishing marks: <span class="text-custom">@Model.PhysicalDescription.ScarsOrDistinguishingMarks</span></p>
                 }
-
                 <p>Languages spoken: <span class="text-custom">@(string.Join(", ", Model.SpokenLanguages.Select(l => l.Name)))</span></p>
-
-                <p>Charges: <span class="text-custom">@(string.Join(", ", Model.Charges.Select(l => l.Description)))</span></p>
+                <p>Charges: <span class="text-custom">@(string.Join(", ", Model.Charges.Select(l => l)))</span></p>
             </div>
         </div>
         <div class="panel-footer">
