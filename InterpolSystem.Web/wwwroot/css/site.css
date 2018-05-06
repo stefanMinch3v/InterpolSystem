@@ -105,6 +105,20 @@ body {
     height: 15em;
 }
 
+.zoom {
+    padding: 1px;
+    background-color: green;
+    transition: transform .1s;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(2.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    cursor: zoom-in;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
