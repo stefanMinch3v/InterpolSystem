@@ -33,6 +33,10 @@
         [MinLength(IdentityWantedPlaceOfBirthMinLength)]
         public string PlaceOfBirth { get; set; }
 
+        [Required]
+        [Range(0, double.MaxValue)]
+        public decimal Reward { get; set; }
+
         public PhysicalDescription PhysicalDescription { get; set; }
 
         public List<Charges> Charges { get; set; } = new List<Charges>();

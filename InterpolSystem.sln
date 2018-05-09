@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Test", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Common", "InterpolSystem.Common\InterpolSystem.Common.csproj", "{F529B9D7-3C0F-48AB-8FB3-D591A509BB76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Api", "InterpolSystem.Api\InterpolSystem.Api.csproj", "{D143C779-3A17-4761-A4DC-5F6D86680DCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F529B9D7-3C0F-48AB-8FB3-D591A509BB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F529B9D7-3C0F-48AB-8FB3-D591A509BB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F529B9D7-3C0F-48AB-8FB3-D591A509BB76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

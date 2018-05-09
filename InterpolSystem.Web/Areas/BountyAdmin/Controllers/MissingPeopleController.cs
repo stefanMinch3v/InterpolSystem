@@ -78,7 +78,7 @@
                 model.AllNames,
                 model.ScarsOrDistinguishingMarks);
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -177,7 +177,7 @@
                 model.AllNames,
                 model.ScarsOrDistinguishingMarks);
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }

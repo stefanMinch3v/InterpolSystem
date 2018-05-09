@@ -9,7 +9,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    class MissingPeopleService : IMissingPeopleService
+    public class MissingPeopleService : IMissingPeopleService
     {
         private readonly InterpolDbContext db;
 

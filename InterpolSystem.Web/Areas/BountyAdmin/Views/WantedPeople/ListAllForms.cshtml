@@ -43,7 +43,7 @@
                     <!--https://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model*-->
                     @{ var base64 = Convert.ToBase64String(form.PersonImage);}
                     @{ var imgSrc = String.Format("data:image/gif;base64,{0}", base64); }
-                    <img style="height:200px; width:auto" src="@imgSrc" />
+                    <img class="zoom" style="height:200px; width:auto" src="@imgSrc" />
                 </td>
                 <td>
                     @form.PoliceDepartment
@@ -67,7 +67,7 @@
                     </form>
                 </td>
             </tr>
-        }
+                        }
     </tbody>
 </table>
 

@@ -1,7 +1,6 @@
 ﻿namespace InterpolSystem.Services.BountyAdmin
 {
     using BountyAdmin.Models;
-    using Data.Models;
     using Data.Models.Enums;
     using System;
     using System.Collections.Generic;
@@ -51,6 +50,7 @@
             Gender gender,
             DateTime dateOfBirth,
             string placeOfBirth,
+            decimal reward,
             double height,
             double weight,
             Color hairColor,
@@ -68,6 +68,7 @@
             Gender gender,
             DateTime dateOfBirth,
             string placeOfBirth,
+            decimal reward,
             double height,
             double weight,
             Color hairColor,

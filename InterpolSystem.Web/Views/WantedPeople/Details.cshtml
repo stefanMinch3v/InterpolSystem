@@ -20,6 +20,13 @@
 <div class="row">
     <div class="col-md-4">
         <img src="@Model.PhysicalDescription.PictureUrl" class="img-responsive center-block" alt="@Model.LastName picture" />
+        
+        <div class="panel panel-success panel-heading">
+            <p class="panel-title panel-heading text-center text-uppercase">Reward prize</p>
+            <div class="panel-body">
+                <p class="text-center">$@Model.Reward</p>
+            </div>
+        </div>
     </div>
     <div class="col-md-8">
         <div class="panel panel-default panel-heading">
@@ -51,9 +58,7 @@
                 {
                     <p>Scars or distinguishing marks: <span class="text-custom">@Model.PhysicalDescription.ScarsOrDistinguishingMarks</span></p>
                 }
-
                 <p>Languages spoken: <span class="text-custom">@(string.Join(", ", Model.SpokenLanguages.Select(l => l.Name)))</span></p>
-
                 <p>Charges: <span class="text-custom">@(string.Join(", ", Model.Charges.Select(l => l.Description)))</span></p>
             </div>
         </div>

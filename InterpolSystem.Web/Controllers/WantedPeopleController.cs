@@ -44,13 +44,11 @@
                 
             });
 
-        [Authorize]
         [Authorize(Roles = BountyHunterRole)]
         public IActionResult SubmitForm(int id)
             => View(new SubmitFormViewModel { Id = id });
 
         [HttpPost]
-        [Authorize]
         [Authorize(Roles = BountyHunterRole)]
         public async Task<IActionResult> SubmitForm(SubmitFormViewModel model)
         {

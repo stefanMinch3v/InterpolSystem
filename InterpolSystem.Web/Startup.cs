@@ -1,6 +1,7 @@
 ﻿namespace InterpolSystem.Web
 {
     using AutoMapper;
+    using Common.Mapping;
     using Data;
     using Data.Models;
     using Infrastructure.Extensions;
@@ -63,7 +64,7 @@
 
             services.AddDomainServices(); // auto adds services
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(AutoMapperProfile)); // automapper assembly
 
             services.AddRouting(routing => routing.LowercaseUrls = true); // user friendly urls
 
