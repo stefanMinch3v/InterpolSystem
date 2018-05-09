@@ -24,6 +24,7 @@
             IArticleService articleService,
             UserManager<User> userManager,
             IHtmlService htmlService)
+            
         {
             this.articleService = articleService;
             this.userManager = userManager;

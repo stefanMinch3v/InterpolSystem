@@ -58,9 +58,8 @@
             string pictureUrl,
             IEnumerable<int> nationalitiesIds,
             IEnumerable<int> languagesIds,
-            string description,
-            string allNames = null,
-            string scarsOrDistinguishingMarks = null);
+            string allNames,
+            string scarsOrDistinguishingMarks);
 
         void EditWantedPerson(
             int id,

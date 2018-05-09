@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Infrastructure.Extensions;
+    using InterpolSystem.Services.Blog;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -18,15 +19,18 @@
     {
         private readonly IWantedPeopleService peopleService;
         private readonly UserManager<User> userManager;
+        private readonly IArticleService articleService;
 
         public WantedPeopleController(
+          IArticleService articleService,
           IWantedPeopleService peopleService,
           UserManager<User> userManager,
           IBountyAdminService bountyAdminService)
-            : base(bountyAdminService)
+            : base(bountyAdminService)          
         {
             this.peopleService = peopleService;
             this.userManager = userManager;
+            this.articleService = articleService;
         }
 
         public IActionResult Index(int page = 1)
@@ -35,7 +39,9 @@
                 WantedPeople = this.peopleService.All(page, PageSize),
                 CurrentPage = page,
                 TotalPages = (int)Math.Ceiling(this.peopleService.Total() / (double)PageSize),
-                Countries = this.GetCountries()
+                Countries = this.GetCountries(),
+                Articles = articleService.All()
+                
             });
 
         [Authorize]

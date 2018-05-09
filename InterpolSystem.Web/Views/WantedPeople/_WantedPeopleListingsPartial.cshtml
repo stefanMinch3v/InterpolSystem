@@ -1,5 +1,5 @@
 ﻿@model WantedPeoplePageListingModel
-
+@using InterpolSystem.Web.Infrastructure.Extensions
 @{
     var previousDisabled = Model.CurrentPage == 1 ? "disabled" : string.Empty;
     var nextDisabled = Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty;
@@ -32,8 +32,21 @@
         }
     </div>
     <div class="col-md-3">
-        <p>Nav menu for news/add also border*</p>
-    </div>
+    
+        <ul class="list-group article-list">
+            @foreach (var article in Model.Articles)
+            {
+              
+            <li class="list-group-item">
+                <a asp-route="blog" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()">
+                    @article.Title
+                </a>
+                <br />
+                <small>published by <b>@article.AuthorName</b> on @article.PublishDate.ToLocalTime()</small>
+            </li>
+             }
+        </ul>
+</div>
 </div>
 <ul class="pagination pagination-lg">
     <li class="@previousDisabled">
