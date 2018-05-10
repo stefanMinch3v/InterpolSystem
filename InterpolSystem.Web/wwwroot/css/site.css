@@ -126,3 +126,6 @@ body {
         display: none;
     }
 }
+.body-missing, .body-wanted{
+    margin-right:30px;
+}

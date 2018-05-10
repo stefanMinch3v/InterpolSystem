@@ -152,8 +152,8 @@
             string pictureUrl,
             IEnumerable<int> nationalitiesIds, 
             IEnumerable<int> languagesIds, 
-            string allNames, 
-            string scarsOrDistinguishingMarks)
+            string allNames = null, 
+            string scarsOrDistinguishingMarks =null)
         {
             this.ValidateWantedPeopleData(firstName, lastName, gender, dateOfBirth, placeOfBirth, height, weight, hairColor, eyesColor, pictureUrl, nationalitiesIds, languagesIds, reward);
 

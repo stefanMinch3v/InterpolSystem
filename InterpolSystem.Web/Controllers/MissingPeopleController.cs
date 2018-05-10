@@ -1,5 +1,6 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
+    using InterpolSystem.Services.Blog;
     using Microsoft.AspNetCore.Mvc;
     using Models.MissingPeople;
     using Models.Shared;
@@ -11,14 +12,18 @@
 
     public class MissingPeopleController : BasePeopleController
     {
+        private readonly IArticleService articleService;
         private readonly IMissingPeopleService peopleService;
 
         public MissingPeopleController(
+            IArticleService articleService,
             IMissingPeopleService peopleService,
             IBountyAdminService bountyAdminService)
             : base(bountyAdminService)
         {
             this.peopleService = peopleService;
+            this.articleService = articleService;
+
         }
 
         public IActionResult Index(int page = 1)
@@ -27,7 +32,9 @@
                 MissingPeople = this.peopleService.All(page, PageSize),
                 CurrentPage = page,
                 TotalPages = (int)Math.Ceiling(this.peopleService.Total() / (double)PageSize),
-                Countries = this.GetCountries()
+                Countries = this.GetCountries(),
+                Articles = articleService.All()
+
             });
 
         public IActionResult Details(int id)
