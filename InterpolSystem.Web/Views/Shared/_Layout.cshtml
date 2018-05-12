@@ -19,6 +19,18 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            let element = $('<p class="glyphicon glyphicon-hand-down"></p>');
+
+            $("input, textarea").on('focus', function () {
+                element.insertBefore($(this));
+            });
+            $("input, textarea").on('blur', function () {
+                element.remove();
+            });
+        });
+    </script>
 </head>
 <body id="bootstrap-override">
     <nav class="navbar navbar-inverse navbar-fixed-top" id="main-nav-bar">
