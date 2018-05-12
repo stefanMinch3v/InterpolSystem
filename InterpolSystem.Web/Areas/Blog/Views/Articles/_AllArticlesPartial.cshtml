@@ -4,7 +4,7 @@
     @foreach (var article in Model)
     {
         <li class="list-group-item">
-            <a asp-area="Blog" asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()" class="glyphicon glyphicon-hand-right">
+            <a asp-area="Blog" asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()" class="glyphicon glyphicon-hand-right text-uppercase">
                 @article.Title
             </a>
             <br />
@@ -12,3 +12,22 @@
         </li>
     }
 </ul>
+
+<script>
+    let aElement = $('.list-group-item>a');
+    aElement.css('text-decoration', 'none');
+
+    aElement.on('mouseover', function () {
+        $(this).fadeOut(300);
+        $(this).fadeIn(600);
+        $(this).addClass('text-danger');
+        $(this).removeClass('glyphicon glyphicon-hand-right');
+        $(this).css('font-size', '170%');
+    });
+
+    aElement.on('mouseout', function () {
+        $(this).addClass('glyphicon glyphicon-hand-right');
+        $(this).removeClass('text-danger');
+        $(this).css('font-size', '100%');
+    });
+</script>
