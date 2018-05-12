@@ -119,13 +119,14 @@ body {
     cursor: zoom-in;
 }
 
+.custom-menu {
+    border: 1px solid #286090;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
     .carousel-caption {
         display: none;
     }
-}
-.body-missing, .body-wanted{
-    margin-right:30px;
 }

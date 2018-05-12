@@ -10,5 +10,7 @@
         IEnumerable<ArticlesListingsServiceModel> All();
 
         ArticlesDetailsServiceModel ById(int id);
+
+        IEnumerable<ArticlesListingsServiceModel> LastSixArticles();
     }
 }

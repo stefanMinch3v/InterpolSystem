@@ -40,7 +40,7 @@
                 CurrentPage = page,
                 TotalPages = (int)Math.Ceiling(this.peopleService.Total() / (double)PageSize),
                 Countries = this.GetCountries(),
-                Articles = articleService.All()
+                Articles = articleService.LastSixArticles()
                 
             });
 

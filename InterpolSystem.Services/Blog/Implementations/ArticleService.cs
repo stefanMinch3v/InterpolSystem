@@ -42,6 +42,7 @@
 
         public IEnumerable<ArticlesListingsServiceModel> All()
             => this.db.Articles
+                .OrderByDescending(a => a.Id)
                 .ProjectTo<ArticlesListingsServiceModel>()
                 .ToList();
 
@@ -50,5 +51,12 @@
                 .Where(a => a.Id == id)
                 .ProjectTo<ArticlesDetailsServiceModel>()
                 .FirstOrDefault();
+
+        public IEnumerable<ArticlesListingsServiceModel> LastSixArticles()
+            => this.db.Articles
+                .OrderByDescending(a => a.Id)
+                .Take(6)
+                .ProjectTo<ArticlesListingsServiceModel>()
+                .ToList();
     }
 }

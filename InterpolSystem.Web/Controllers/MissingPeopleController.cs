@@ -1,10 +1,10 @@
 ﻿namespace InterpolSystem.Web.Controllers
 {
-    using InterpolSystem.Services.Blog;
     using Microsoft.AspNetCore.Mvc;
     using Models.MissingPeople;
     using Models.Shared;
     using Services;
+    using Services.Blog;
     using Services.BountyAdmin;
     using System;
 
@@ -23,7 +23,6 @@
         {
             this.peopleService = peopleService;
             this.articleService = articleService;
-
         }
 
         public IActionResult Index(int page = 1)
@@ -33,8 +32,7 @@
                 CurrentPage = page,
                 TotalPages = (int)Math.Ceiling(this.peopleService.Total() / (double)PageSize),
                 Countries = this.GetCountries(),
-                Articles = articleService.All()
-
+                Articles = articleService.LastSixArticles()
             });
 
         public IActionResult Details(int id)
