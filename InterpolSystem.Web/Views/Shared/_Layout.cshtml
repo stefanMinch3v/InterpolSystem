@@ -29,6 +29,11 @@
             $("input, textarea").on('blur', function () {
                 element.remove();
             });
+            $('.navbar .dropdown').hover(function () {
+                $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(400);
+            }, function () {
+                $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(400)
+            });
         });
     </script>
 </head>
@@ -178,7 +183,7 @@
                         'margin-right': '2px'
                     })   
                     .prependTo(ul);
-            </script>
+              </script>
         }
     }
 </body>
