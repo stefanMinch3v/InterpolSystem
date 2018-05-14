@@ -12,22 +12,3 @@
         </li>
     }
 </ul>
-
-<script>
-    let aElement = $('.list-group-item>a');
-    aElement.css('text-decoration', 'none');
-
-    aElement.on('mouseover', function () {
-        $(this).fadeOut(300);
-        $(this).fadeIn(600);
-        $(this).addClass('text-danger');
-        $(this).removeClass('glyphicon glyphicon-hand-right');
-        $(this).css('font-size', '170%');
-    });
-
-    aElement.on('mouseout', function () {
-        $(this).addClass('glyphicon glyphicon-hand-right');
-        $(this).removeClass('text-danger');
-        $(this).css('font-size', '100%');
-    });
-</script>

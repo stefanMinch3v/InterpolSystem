@@ -118,7 +118,8 @@
                    page,
                    PageSize),
                SearchCriteriaTotalPages = this.peopleService.SearchPeopleCriteriaCounter,
-               TotalPages = (int)Math.Ceiling(this.peopleService.SearchPeopleCriteriaCounter / (double)PageSize)      
+               TotalPages = (int)Math.Ceiling(this.peopleService.SearchPeopleCriteriaCounter / (double)PageSize),
+               Articles = articleService.LastSixArticles()
            });
     }
 } 

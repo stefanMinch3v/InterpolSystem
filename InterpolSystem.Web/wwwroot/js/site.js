@@ -9,12 +9,14 @@ $(document).ready(function () {
     $("input, textarea").on('blur', function () {
         element.remove();
     });
+
     //animation for navbar
     $('.navbar .dropdown').hover(function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(400);
     }, function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideToggle(400)
         });
+
     //notification about submit forms
     result = $('.result').text();
     $('.result').css('display', 'none');
@@ -41,4 +43,22 @@ $(document).ready(function () {
             })
             .prependTo(ul);
     }
+
+    // right nav bar - articles
+    let aElement = $('.list-group-item>a');
+    aElement.css('text-decoration', 'none');
+
+    aElement.on('mouseover', function () {
+        $(this).fadeOut(300);
+        $(this).fadeIn(600);
+        $(this).addClass('text-danger');
+        $(this).removeClass('glyphicon glyphicon-hand-right');
+        $(this).css('font-size', '170%');
+    });
+
+    aElement.on('mouseout', function () {
+        $(this).addClass('glyphicon glyphicon-hand-right');
+        $(this).removeClass('text-danger');
+        $(this).css('font-size', '100%');
+    });
 });
