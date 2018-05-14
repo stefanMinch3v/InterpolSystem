@@ -20,7 +20,7 @@ $(document).ready(function () {
     //notification about submit forms
     result = $('.result').text();
     $('.result').css('display', 'none');
-    if (result != null) {
+    if (result !=="") {
         let li = $("#SubmitFormWantedA");
         let span = $(`<span>&nbsp${result}&nbsp</span >`)
             .css({
