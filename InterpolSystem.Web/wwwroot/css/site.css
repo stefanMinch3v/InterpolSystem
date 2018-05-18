@@ -31,7 +31,10 @@ body {
 #main-nav-bar {
     background-color: #000;
 }
+#bootstrap-override{
+    font-family: 'Roboto', sans-serif;
 
+}
 #bootstrap-override .navbar a {
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -40,7 +43,7 @@ body {
     -webkit-font-smoothing: antialiased !important;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-}
+    }
 
 #bootstrap-override .main-logo{
     background-color:white;
@@ -122,11 +125,40 @@ body {
 .custom-menu {
     border: 1px solid #286090;
 }
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+#main-headings h2, 
+#main-headings h3, 
+#main-headings h4,
+#main-headings h5, 
+#main-headings h6 {
+    text-align: center;
+    text-transform: uppercase;
+    color:cornflowerblue;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased !important;
 }
+#main-headings p{
+    text-align:center;
+}
+#background {
+    background-image: url("../images/interpolbackground.jpg");
+    background-attachment: fixed;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1; /* To make sur it's below the rest */
+    filter: blur(3px) grayscale(50%);
+    height: 1080px;
+    background-size: cover;
+    -webkit-transform: translateZ(0);
+}
+iframe {
+    display: block;
+    margin: 0 auto;
+}
+.emergincrime-polish{
+    margin-bottom:4px;
+}
+
