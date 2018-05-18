@@ -220,6 +220,7 @@
 
         [HttpPost]
         [LogEmployees]
+        // TO DO change the is caught to true
         public IActionResult AcceptForm(int id)
         {
             try

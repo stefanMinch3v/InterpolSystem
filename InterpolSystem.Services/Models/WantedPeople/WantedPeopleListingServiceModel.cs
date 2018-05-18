@@ -20,6 +20,8 @@
 
         public string PictureUrl { get; set; }
 
+        public bool IsCaught { get; set; }
+
         public void ConfigureMapping(Profile mapper)
             => mapper
                 .CreateMap<IdentityParticularsWanted, WantedPeopleListingServiceModel>()

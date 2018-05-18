@@ -4,12 +4,14 @@ namespace InterpolSystem.Data.Migrations
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
     using System;
 
     [DbContext(typeof(InterpolDbContext))]
-    partial class InterpolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180518215721_CaughtFieldToWantedPerson")]
+    partial class CaughtFieldToWantedPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

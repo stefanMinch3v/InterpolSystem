@@ -27,6 +27,8 @@
 
         public decimal Reward { get; set; }
 
+        public bool IsCaught { get; set; }
+
         public PhysicalDescription PhysicalDescription { get; set; }
 
         public IEnumerable<LanguageListingServiceModel> SpokenLanguages { get; set; }

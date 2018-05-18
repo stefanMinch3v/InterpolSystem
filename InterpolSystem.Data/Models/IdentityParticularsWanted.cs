@@ -37,6 +37,8 @@
         [Range(0, double.MaxValue)]
         public decimal Reward { get; set; }
 
+        public bool IsCaught { get; set; }
+
         public PhysicalDescription PhysicalDescription { get; set; }
 
         public List<Charges> Charges { get; set; } = new List<Charges>();

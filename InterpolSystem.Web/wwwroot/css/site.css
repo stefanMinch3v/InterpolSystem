@@ -1,4 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -122,9 +123,6 @@ body {
     cursor: zoom-in;
 }
 
-.custom-menu {
-    border: 1px solid #286090;
-}
 #main-headings h2, 
 #main-headings h3, 
 #main-headings h4,
@@ -132,33 +130,49 @@ body {
 #main-headings h6 {
     text-align: center;
     text-transform: uppercase;
-    color:cornflowerblue;
+    color: cornflowerblue;
     font-weight: 300;
     -webkit-font-smoothing: antialiased !important;
 }
+
 #main-headings p{
     text-align:center;
+    font-size: 1.5em;
 }
+
 #background {
-    background-image: url("../images/interpolbackground.jpg");
+    background-image: url("../images/background-logo.jpg");
     background-attachment: fixed;
-    opacity: 0.2;
+    opacity: 0.3;
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     z-index: -1; /* To make sur it's below the rest */
-    filter: blur(3px) grayscale(50%);
-    height: 1080px;
+    height: 150%;
     background-size: cover;
     -webkit-transform: translateZ(0);
 }
+
 iframe {
     display: block;
     margin: 0 auto;
 }
+
 .emergincrime-polish{
     margin-bottom:4px;
 }
 
+.item {
+    max-height: 550px;
+    overflow: hidden;
+}
+
+.img-carousel {
+    width: 1200px;
+}
+
+.img-caught {
+    display: none;
+}

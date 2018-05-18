@@ -51,10 +51,10 @@
                         </li>
                     }
                     @if (this.User.IsInRole(WebConstants.AdministratorRole)
-                       || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
+                      || this.User.IsInRole(WebConstants.WantedMissingPeopleRole))
                     {
                         <li class="dropdown">
-                            <a id ="managePeopleA"class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a id="managePeopleA" class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Manage  People
                                 <span class="caret"></span>
                             </a>
@@ -69,7 +69,7 @@
 
                     }
                     @if (this.User.IsInRole(WebConstants.AdministratorRole)
-                       || this.User.IsInRole(WebConstants.BloggerRole))
+                      || this.User.IsInRole(WebConstants.BloggerRole))
                     {
                         <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
                     }
@@ -115,7 +115,7 @@
             <p>&copy; INTERPOL 2018. All rights reserved</p>
         </footer>
     </div>
-
+    <div id="background"></div>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
