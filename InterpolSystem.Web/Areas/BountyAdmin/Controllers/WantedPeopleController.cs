@@ -220,12 +220,11 @@
 
         [HttpPost]
         [LogEmployees]
-        // TO DO change the is caught to true
-        public IActionResult AcceptForm(int id)
+        public IActionResult AcceptForm(int formId, int wantedId)
         {
             try
             {
-                this.bountyAdminService.AcceptForm(id);
+                this.bountyAdminService.AcceptForm(formId, wantedId);
             }
             catch (InvalidOperationException ex)
             {

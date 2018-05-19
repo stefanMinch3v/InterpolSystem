@@ -173,6 +173,6 @@ iframe {
     width: 1200px;
 }
 
-.img-caught {
-    display: none;
+.reward-strike {
+    text-decoration: line-through;
 }

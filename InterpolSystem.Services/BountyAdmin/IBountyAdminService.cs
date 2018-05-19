@@ -93,7 +93,7 @@
 
         IEnumerable<SubmitFormWantedServiceModel> GetAllSubmitForms(int commandOrderId);
 
-        void AcceptForm(int formId);
+        void AcceptForm(int formId, int wantedId);
 
         void DeclineForm(int formId);
     }

@@ -334,17 +334,26 @@
                         .ToList();
         }
 
-        public void AcceptForm(int formId)
+        public void AcceptForm(int formId, int wantedId)
         {
-            if (formId <= 0)
+            if (formId <= 0 || wantedId <= 0)
             {
                 throw new InvalidOperationException(InvalidFormInfo);
             }
 
             var existingForm = this.db.SubmitForms.FirstOrDefault(p => p.Id == formId);
+            var existingPerson = this.db.IdentityParticularsWanted.FirstOrDefault(p => p.Id == wantedId);
+
+            if (existingForm == null || existingPerson == null)
+            {
+                throw new InvalidOperationException(InvalidFormInfo);
+            }
+
             existingForm.Status = FormOptions.Accepted;
+            existingPerson.IsCaught = true;
 
             this.db.SubmitForms.Update(existingForm);
+            this.db.IdentityParticularsWanted.Update(existingPerson);
             this.db.SaveChanges();
         }
 

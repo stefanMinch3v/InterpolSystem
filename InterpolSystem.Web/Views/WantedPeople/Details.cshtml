@@ -19,12 +19,13 @@
 
 <div class="row">
     <div class="col-md-4">
+        <h2 class="text-danger">This person is already caught!</h2>
         <img src="@Model.PhysicalDescription.PictureUrl" class="img-responsive center-block" alt="@Model.LastName picture" />
         
         <div class="panel panel-success panel-heading">
-            <p class="panel-title panel-heading text-center text-uppercase">Reward prize</p>
+            <p class="panel-title panel-heading text-center text-uppercase isCaught">Reward prize</p>
             <div class="panel-body">
-                <p class="text-center">$@Model.Reward</p>
+                <p class="text-center isCaught">$@Model.Reward</p>    
             </div>
         </div>
     </div>
@@ -65,8 +66,14 @@
         <div class="panel-footer">
             <p class="text-danger text-capitalize">if you have any information please contact:</p>
             <p>Your national or local police</p>
-            <a asp-area="" asp-controller="WantedPeople" asp-action="SubmitForm" asp-route-id="@Model.Id" class="btn btn-warning">General secretariat of INTERPOL</a>
+            <a asp-area="" asp-controller="WantedPeople" asp-action="SubmitForm" asp-route-id="@Model.Id" class="btn btn-warning deleteCaught">General secretariat of INTERPOL</a>
         </div>
     </div>
 </div>
-
+@if (Model.IsCaught)
+{
+    <script>
+        $('.isCaught').addClass('reward-strike');
+        $('.deleteCaught').remove();
+    </script>
+}
