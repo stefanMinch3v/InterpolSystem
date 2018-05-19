@@ -19,9 +19,11 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2 class="text-danger">This person is already caught!</h2>
-        <img src="@Model.PhysicalDescription.PictureUrl" class="img-responsive center-block" alt="@Model.LastName picture" />
-        
+        @if (Model.IsCaught)
+        {
+            <h2 class="text-danger">This person is already caught!</h2>
+        }
+        <img src="@Model.PhysicalDescription.PictureUrl" class="img-responsive center-block" alt="@Model.LastName picture" />     
         <div class="panel panel-success panel-heading">
             <p class="panel-title panel-heading text-center text-uppercase isCaught">Reward prize</p>
             <div class="panel-body">
