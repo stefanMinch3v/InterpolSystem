@@ -29,8 +29,12 @@ body {
     margin: 15px;
 }
 
-#main-nav-bar {
-    background-color: #000;
+#bootstrap-override #main-nav-bar ul, #bootstrap-override .navbar-collapse {
+    background-color: black;
+}
+#bootstrap-override .navbar-inverse {
+    background-color: black;
+    background-image:none;
 }
 #bootstrap-override{
     font-family: 'Roboto', sans-serif;
@@ -150,8 +154,8 @@ body {
     right: 0;
     left: 0;
     z-index: -1; /* To make sur it's below the rest */
-    height: 150%;
-    background-size: cover;
+    height: 200%;
+    background-size:cover;
     -webkit-transform: translateZ(0);
 }
 
@@ -165,7 +169,7 @@ iframe {
 }
 
 .item {
-    max-height: 550px;
+    max-height:550px ;
     overflow: hidden;
 }
 
@@ -175,4 +179,17 @@ iframe {
 
 .reward-strike {
     text-decoration: line-through;
+}
+@media screen and (max-width: 1199px) and (min-width:991px) {
+    .body-content{
+        padding-top:50px;
+    }
+    }
+@media screen and (max-width: 990px) and (min-width:768px) {
+    .body-content {
+        padding-top: 150px;
+    }
+    .article-menu{
+        display:none;
+    }
 }

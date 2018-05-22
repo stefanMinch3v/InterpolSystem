@@ -38,11 +38,11 @@
             </div>
         }
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 article-menu">
         <a asp-area="Blog" asp-controller="Articles" asp-action="Index">
             <p class="text-center text-uppercase text-danger">Last News:</p>
         </a>
-        <div class="row custom-menu">
+        <div class="row custom-menu ">
             @await Html.PartialAsync("~/Areas/Blog/Views/Articles/_AllArticlesPartial.cshtml", Model.Articles)
         </div>
     </div>
