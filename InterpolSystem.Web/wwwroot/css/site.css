@@ -150,7 +150,7 @@ body {
     right: 0;
     left: 0;
     z-index: -1; /* To make sur it's below the rest */
-    height: 150%;
+    height: 170%;
     background-size: cover;
     -webkit-transform: translateZ(0);
 }
@@ -167,6 +167,10 @@ iframe {
 .item {
     max-height: 550px;
     overflow: hidden;
+}
+
+.item p {
+    background-color: black;
 }
 
 .img-carousel {

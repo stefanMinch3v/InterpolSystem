@@ -13,7 +13,7 @@
     using static WebConstants;
 
     [Area(BlogArea)]
-    [Authorize(Roles = BloggerRole + ", " + AdministratorRole)]
+    [Authorize(Roles = BloggerRole)]
     public class ArticlesController : Controller
     {
         private readonly IArticleService articleService;

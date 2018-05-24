@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Interpol Official Website</title>
+    <title>@ViewData["Title"] - UnderLaw Official Website</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <img src="~/images/interpol-logo.png" class="main-logo" />
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Interpol</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">UnderLaw</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -68,8 +68,7 @@
                         </li>
 
                     }
-                    @if (this.User.IsInRole(WebConstants.AdministratorRole)
-                      || this.User.IsInRole(WebConstants.BloggerRole))
+                    @if (this.User.IsInRole(WebConstants.BloggerRole))
                     {
                         <li><a asp-area="Blog" asp-controller="Articles" asp-action="Create">Publish News</a></li>
                     }
@@ -112,7 +111,7 @@
         @RenderBody()
         <hr />
         <footer class="text-center col-md-12">
-            <p>&copy; INTERPOL 2018. All rights reserved</p>
+            <p>&copy; UnderLaw 2018. All rights reserved</p>
         </footer>
     </div>
     <div id="background"></div>
