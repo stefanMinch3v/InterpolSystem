@@ -32,7 +32,7 @@
                 .ToList();
 
         public WantedPeopleDetailsServiceModel GetPerson(int id)
-            => this.db.IdentityParticularsWanted
+         =>     this.db.IdentityParticularsWanted
                 .Where(m => m.Id == id)
                 .ProjectTo<WantedPeopleDetailsServiceModel>()
                 .FirstOrDefault();
