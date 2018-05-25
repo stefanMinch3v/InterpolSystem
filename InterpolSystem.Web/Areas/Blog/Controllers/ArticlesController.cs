@@ -58,6 +58,10 @@
             {
                 this.articleService.Create(model.Title, sanitizedContent, userId);
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);

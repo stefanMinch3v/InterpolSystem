@@ -104,6 +104,10 @@
             {
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             var wantedPersonId = this.bountyAdminService.GetLastWantedPerson();
 
@@ -204,6 +208,10 @@
             {
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             TempData.AddSuccessMessage($"Person {model.FirstName} {model.LastName} successfully changed");
 
@@ -229,7 +237,11 @@
             catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
-            }            
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(ListAllForms));
         }
@@ -245,7 +257,11 @@
             catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
-            }         
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return RedirectToAction(nameof(ListAllForms));
         }

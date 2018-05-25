@@ -82,6 +82,10 @@
             {
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             TempData.AddSuccessMessage("Person successfully added to the system.");
 
@@ -178,6 +182,10 @@
                 model.ScarsOrDistinguishingMarks);
             }
             catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
