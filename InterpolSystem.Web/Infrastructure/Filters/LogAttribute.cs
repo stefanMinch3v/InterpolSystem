@@ -11,7 +11,7 @@
 
     public class LogEmployeesAttribute : ActionFilterAttribute
     {
-        private const string Path = @"D:\Programming\UCN\Fourth semester\ProjectGit\InterpolSystem\InterpolSystem.Web\logs.txt";
+        private const string Path = "logs.txt";
 
         private DateTime SpecificDate { get; set; } = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 03, 0, 0, 0);
 
@@ -40,7 +40,7 @@
                     saveInformation += $"{exceptionType}-{exceptionMessage}";
                 }
 
-                using (var writer = new StreamWriter("logs.txt", true))
+                using (var writer = new StreamWriter(Path, true))
                 {
                     await writer.WriteLineAsync(saveInformation);
                 }
