@@ -1,5 +1,7 @@
 ﻿namespace InterpolSystem.Data
 {
+    using EntitiesConfigurations;
+    using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
@@ -9,7 +11,7 @@
         public InterpolDbContext(DbContextOptions<InterpolDbContext> options)
             : base(options)
         {
-            //this.Database.SetCommandTimeout(60); // ucn server kraka is not one of the fastest ones so we get timeout exception for very simple queries and the temporary solution could be to increase the waiting time.
+            // this.Database.SetCommandTimeout(60); // ucn server kraka is not one of the fastest ones so we get timeout exception for very simple queries and the temporary solution could be to increase the waiting time. Bottleneck when use in memory database for testing throws exception cuz of the timeout ....
         }
 
         public DbSet<Charges> Charges { get; set; }
@@ -44,142 +46,38 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            // reflection for adding all the configurations below but its commented in order to track all the relations.
+            // builder.ApplyAllConfigurationsFromCurrentAssembly();
+
             // primary keys mapping tables
-            builder
-                .Entity<ChargesCountries>()
-                .HasKey(key => new { key.ChargesId, key.CountryId });
-
-            builder
-                .Entity<CountriesNationalitiesMissing>()
-                .HasKey(key => new { key.CountryId, key.IdentityParticularsMissingId });
-
-            builder
-                .Entity<CountriesNationalitiesWanted>()
-                .HasKey(key => new { key.CountryId, key.IdentityParticularsWantedId });
-
-            builder
-                .Entity<LanguagesMissing>()
-                .HasKey(key => new { key.LanguageId, key.IdentityParticularsMissingId });
-
-            builder
-                .Entity<LanguagesWanted>()
-                .HasKey(key => new { key.LanguageId, key.IdentityParticularsWantedId });
+            builder.ApplyConfiguration(new ChargesCountriesConfiguration());
+            builder.ApplyConfiguration(new CountriesNationalitiesMissingConfiguration());
+            builder.ApplyConfiguration(new CountriesNationalitiesWantedConfiguration());
+            builder.ApplyConfiguration(new LanguagesMissingConfiguration());
+            builder.ApplyConfiguration(new LanguagesWantedConfiguration());
 
             // charges relations
-            builder
-                .Entity<Charges>()
-                .HasMany(ch => ch.CountryWantedAuthorities)
-                .WithOne(cwa => cwa.Charges)
-                .HasForeignKey(cwa => cwa.ChargesId);
-
-            builder
-                .Entity<Charges>()
-                .HasOne(ch => ch.IdentityParticularsWanted)
-                .WithMany(ipw => ipw.Charges)
-                .HasForeignKey(ch => ch.IdentityParticularsWantedId);
+            builder.ApplyConfiguration(new ChargesConfiguration());
 
             // countries relations
-            builder
-                .Entity<Country>()
-                .HasOne(c => c.Countinent)
-                .WithMany(cs => cs.Countries)
-                .HasForeignKey(c => c.CountinentId);
-
-            builder
-                .Entity<Country>()
-                .HasMany(c => c.ChargesCountries)
-                .WithOne(cc => cc.Country)
-                .HasForeignKey(cc => cc.CountryId);
-
-            builder
-               .Entity<Country>()
-               .HasMany(c => c.NationalitiesMissingPeople)
-               .WithOne(nmp => nmp.Country)
-               .HasForeignKey(nmp => nmp.CountryId);
-
-            builder
-               .Entity<Country>()
-               .HasMany(c => c.NationalitiesWantedPeople)
-               .WithOne(nwp => nwp.Country)
-               .HasForeignKey(nwp => nwp.CountryId);
+            builder.ApplyConfiguration(new CountryConfiguration());
 
             // missing people relations
-            builder
-                .Entity<IdentityParticularsMissing>()
-                .HasOne(ipm => ipm.PhysicalDescription);
-
-            builder
-                .Entity<IdentityParticularsMissing>()
-                .HasMany(ipm => ipm.Nationalities)
-                .WithOne(n => n.IdentityParticularsMissing)
-                .HasForeignKey(n => n.IdentityParticularsMissingId);
-
-            builder
-                .Entity<IdentityParticularsMissing>()
-                .HasMany(ipm => ipm.SpokenLanguages)
-                .WithOne(sl => sl.IdentityParticularsMissing)
-                .HasForeignKey(sl => sl.IdentityParticularsMissingId);
-
-            builder
-                .Entity<IdentityParticularsMissing>()
-                .HasMany(ipw => ipw.SubmitedForms)
-                .WithOne(sf => sf.MissingPerson)
-                .HasForeignKey(sf => sf.IdentityParticularsMissingId)
-                .IsRequired(false);
+            builder.ApplyConfiguration(new IdentityParticularsMissingConfiguration());
 
             // wanted people relations
-            builder
-                .Entity<IdentityParticularsWanted>()
-                .HasOne(ipw => ipw.PhysicalDescription);
-
-            builder
-                .Entity<IdentityParticularsWanted>()
-                .HasMany(ipw => ipw.Nationalities)
-                .WithOne(n => n.IdentityParticularsWanted)
-                .HasForeignKey(n => n.IdentityParticularsWantedId);
-
-            builder
-                .Entity<IdentityParticularsWanted>()
-                .HasMany(ipw => ipw.SpokenLanguages)
-                .WithOne(sl => sl.IdentityParticularsWanted)
-                .HasForeignKey(sl => sl.IdentityParticularsWantedId);
-
-            builder
-                .Entity<IdentityParticularsWanted>()
-                .HasMany(ipw => ipw.SubmitedForms)
-                .WithOne(sf => sf.WantedPerson)
-                .HasForeignKey(sf => sf.IdentityParticularsWantedId)
-                .IsRequired(false);
+            builder.ApplyConfiguration(new IdentityParticularsWantedConfiguration());
 
             // languages relations
-            builder
-                .Entity<Language>()
-                .HasMany(l => l.MissingPeopleLanguages)
-                .WithOne(mpl => mpl.Language)
-                .HasForeignKey(mpl => mpl.LanguageId);
-
-            builder
-                .Entity<Language>()
-                .HasMany(l => l.WantedPeopleLanguages)
-                .WithOne(wpl => wpl.Language)
-                .HasForeignKey(wpl => wpl.LanguageId);
+            builder.ApplyConfiguration(new LanguageConfiguration());
 
             // articles relations
-            builder
-                .Entity<Article>()
-                .HasOne(a => a.Author)
-                .WithMany(au => au.Articles)
-                .HasForeignKey(a => a.AuthorId);
+            builder.ApplyConfiguration(new ArticleConfiguration());
 
             // submit form relations to be changed to many to many
-            builder
-                .Entity<SubmitForm>()
-                .HasOne(f => f.User)
-                .WithMany(u => u.SubmitForms)
-                .HasForeignKey(f => f.UserId)
-                .IsRequired(false);
-
-            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new SubmitFormConfiguration());
         }
     }
 }
