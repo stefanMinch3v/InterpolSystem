@@ -40,49 +40,49 @@
                 switch (model.Name)
                 {
                     case "Article":
-                        var configInstance = (IEntityTypeConfiguration<Article>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance);
+                        var configInstanceArticle = (IEntityTypeConfiguration<Article>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceArticle);
                         break;
                     case "Charges":
-                        var configInstance1 = (IEntityTypeConfiguration<Charges>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance1);
+                        var configInstanceCharges = (IEntityTypeConfiguration<Charges>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceCharges);
                         break;
                     case "ChargesCountries":
-                        var configInstance2 = (IEntityTypeConfiguration<ChargesCountries>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance2);
+                        var configInstanceChargesCountries = (IEntityTypeConfiguration<ChargesCountries>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceChargesCountries);
                         break;
                     case "CountriesNationalitiesMissing":
-                        var configInstance3 = (IEntityTypeConfiguration<CountriesNationalitiesMissing>)
+                        var configInstanceCountriesNationalitiesMissing = (IEntityTypeConfiguration<CountriesNationalitiesMissing>)
                             Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance3);
+                        modelBuilder.ApplyConfiguration(configInstanceCountriesNationalitiesMissing);
                         break;
                     case "CountriesNationalitiesWanted":
-                        var configInstance4 = (IEntityTypeConfiguration<CountriesNationalitiesWanted>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance4);
+                        var configInstanceCountriesNationalitiesWanted = (IEntityTypeConfiguration<CountriesNationalitiesWanted>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceCountriesNationalitiesWanted);
                         break;
                     case "IdentityParticularsMissing":
-                        var configInstance5 = (IEntityTypeConfiguration<IdentityParticularsMissing>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance5);
+                        var configInstanceIdentityParticularsMissing = (IEntityTypeConfiguration<IdentityParticularsMissing>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceIdentityParticularsMissing);
                         break;
                     case "IdentityParticularsWanted":
-                        var configInstance6 = (IEntityTypeConfiguration<IdentityParticularsWanted>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance6);
+                        var configInstanceIdentityParticularsWanted = (IEntityTypeConfiguration<IdentityParticularsWanted>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceIdentityParticularsWanted);
                         break;
                     case "Language":
-                        var configInstance7 = (IEntityTypeConfiguration<Language>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance7);
+                        var configInstanceLanguage = (IEntityTypeConfiguration<Language>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceLanguage);
                         break;
                     case "LanguagesMissing":
-                        var configInstance8 = (IEntityTypeConfiguration<LanguagesMissing>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance8);
+                        var configInstanceLanguagesMissing = (IEntityTypeConfiguration<LanguagesMissing>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceLanguagesMissing);
                         break;
                     case "LanguagesWanted":
-                        var configInstance9 = (IEntityTypeConfiguration<LanguagesWanted>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance9);
+                        var configInstanceLanguagesWanted = (IEntityTypeConfiguration<LanguagesWanted>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceLanguagesWanted);
                         break;
                     case "SubmitForm":
-                        var configInstance10 = (IEntityTypeConfiguration<SubmitForm>)Activator.CreateInstance(config);
-                        modelBuilder.ApplyConfiguration(configInstance10);
+                        var configInstanceSubmitForm = (IEntityTypeConfiguration<SubmitForm>)Activator.CreateInstance(config);
+                        modelBuilder.ApplyConfiguration(configInstanceSubmitForm);
                         break;
                     default:
                         break;
