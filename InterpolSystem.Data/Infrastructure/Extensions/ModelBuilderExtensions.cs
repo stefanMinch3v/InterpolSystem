@@ -39,48 +39,48 @@
 
                 switch (model.Name)
                 {
-                    case "Article":
+                    case nameof(Article):
                         var configInstanceArticle = (IEntityTypeConfiguration<Article>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceArticle);
                         break;
-                    case "Charges":
+                    case nameof(Charges):
                         var configInstanceCharges = (IEntityTypeConfiguration<Charges>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceCharges);
                         break;
-                    case "ChargesCountries":
+                    case nameof(ChargesCountries):
                         var configInstanceChargesCountries = (IEntityTypeConfiguration<ChargesCountries>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceChargesCountries);
                         break;
-                    case "CountriesNationalitiesMissing":
+                    case nameof(CountriesNationalitiesMissing):
                         var configInstanceCountriesNationalitiesMissing = (IEntityTypeConfiguration<CountriesNationalitiesMissing>)
                             Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceCountriesNationalitiesMissing);
                         break;
-                    case "CountriesNationalitiesWanted":
+                    case nameof(CountriesNationalitiesWanted):
                         var configInstanceCountriesNationalitiesWanted = (IEntityTypeConfiguration<CountriesNationalitiesWanted>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceCountriesNationalitiesWanted);
                         break;
-                    case "IdentityParticularsMissing":
+                    case nameof(IdentityParticularsMissing):
                         var configInstanceIdentityParticularsMissing = (IEntityTypeConfiguration<IdentityParticularsMissing>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceIdentityParticularsMissing);
                         break;
-                    case "IdentityParticularsWanted":
+                    case nameof(IdentityParticularsWanted):
                         var configInstanceIdentityParticularsWanted = (IEntityTypeConfiguration<IdentityParticularsWanted>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceIdentityParticularsWanted);
                         break;
-                    case "Language":
+                    case nameof(Language):
                         var configInstanceLanguage = (IEntityTypeConfiguration<Language>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceLanguage);
                         break;
-                    case "LanguagesMissing":
+                    case nameof(LanguagesMissing):
                         var configInstanceLanguagesMissing = (IEntityTypeConfiguration<LanguagesMissing>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceLanguagesMissing);
                         break;
-                    case "LanguagesWanted":
+                    case nameof(LanguagesWanted):
                         var configInstanceLanguagesWanted = (IEntityTypeConfiguration<LanguagesWanted>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceLanguagesWanted);
                         break;
-                    case "SubmitForm":
+                    case nameof(SubmitForm):
                         var configInstanceSubmitForm = (IEntityTypeConfiguration<SubmitForm>)Activator.CreateInstance(config);
                         modelBuilder.ApplyConfiguration(configInstanceSubmitForm);
                         break;
