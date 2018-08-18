@@ -3,7 +3,7 @@
     using FluentAssertions;
     using InterpolSystem.Data.Models;
     using InterpolSystem.Services.Blog;
-    using InterpolSystem.Services.Html.Implementations;
+    using InterpolSystem.Services.Html;
     using InterpolSystem.Test.Mocks;
     using InterpolSystem.Web.Areas.Blog.Controllers;
     using InterpolSystem.Web.Areas.Blog.Models.Articles;
@@ -94,7 +94,7 @@
         {
             // Arrange
             var articleService = new Mock<IArticleService>().Object;
-            var htmlService = new HtmlService();
+            var htmlService = new Mock<IHtmlService>().Object;
             var userManager = this.GetUserManagerMock().Object;
             string successMsg = null;
 
