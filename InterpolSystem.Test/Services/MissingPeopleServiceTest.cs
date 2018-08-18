@@ -1,12 +1,10 @@
 ﻿namespace InterpolSystem.Test.Services
 {
     using FluentAssertions;
-    using InterpolSystem.Data;
     using InterpolSystem.Data.Models;
     using InterpolSystem.Data.Models.Enums;
     using InterpolSystem.Services.Implementations;
     using InterpolSystem.Services.Models.MissingPeople;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -17,14 +15,14 @@
 
         public MissingPeopleServiceTest()
         {
-            Tests.Initialize();
+            Tests.InitializeAutoMapper();
         }
 
         [Fact]
         public void ShouldReturnCorrectResultWithCorrectModel()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var missingPeopleData = this.GetMissingPeopleData();
 
@@ -52,7 +50,7 @@
         public void ShouldReturnCorrectPersonDetails()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var missingPeopleData = this.GetMissingPeopleData();
 
@@ -78,7 +76,7 @@
         public void ShouldReturnTrueIfPersonExists()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var missingPeopleData = this.GetMissingPeopleData();
 
@@ -100,7 +98,7 @@
         public void ShouldGetTheCorrectResultForSearchingCriteria()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var missingPeopleData = this.GetMissingPeopleData();
 
@@ -124,7 +122,7 @@
         public void ShouldReturnTwoAsMethodCountIsInvoked()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var missingPeopleData = this.GetMissingPeopleData();
 
@@ -163,15 +161,6 @@
             };
 
             return new List<IdentityParticularsMissing> { firstMissingPerson, secondMissingPerson };
-        }
-
-        private InterpolDbContext GetDatabase()
-        {
-            var dbOptions = new DbContextOptionsBuilder<InterpolDbContext>()
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options; // create everytime unique name otherwise all methods will share the same database between them
-
-            return new InterpolDbContext(dbOptions);
         }
     }
 }

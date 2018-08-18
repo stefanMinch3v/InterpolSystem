@@ -1,12 +1,10 @@
 ﻿namespace InterpolSystem.Test.Services
 {
     using FluentAssertions;
-    using InterpolSystem.Data;
     using InterpolSystem.Data.Models;
     using InterpolSystem.Data.Models.Enums;
     using InterpolSystem.Services.Implementations;
     using InterpolSystem.Services.Models.WantedPeople;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -16,14 +14,14 @@
     {
         public WantedPeopleServiceTest()
         {
-            Tests.Initialize();
+            Tests.InitializeAutoMapper();
         }
 
         [Fact]
         public void ShouldReturnCorrectResultWithCorrectModel()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var wantedPeopleData = this.GetWantedPeopleData();
 
@@ -51,7 +49,7 @@
         public void ShouldReturnCorrectPersonDetails()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var wantedPeopleData = this.GetWantedPeopleData();
 
@@ -77,7 +75,7 @@
         public void ShouldReturnTrueIfPersonExists()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var wantedPeopleData = this.GetWantedPeopleData();
 
@@ -99,7 +97,7 @@
         public void ShouldGetTheCorrectResultForSearchingCriteria()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var wantedPeopleData = this.GetWantedPeopleData();
 
@@ -123,7 +121,7 @@
         public void ShouldReturnTwoAsMethodCountIsInvoked()
         {
             // Arrange
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var wantedPeopleData = this.GetWantedPeopleData();
 
@@ -163,15 +161,6 @@
             };
 
             return new List<IdentityParticularsWanted> { firstWantedPerson, secondWantedPerson };
-        }
-
-        private InterpolDbContext GetDatabase()
-        {
-            var dbOptions = new DbContextOptionsBuilder<InterpolDbContext>()
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options; // create everytime unique name otherwise all methods will share the same database between them
-
-            return new InterpolDbContext(dbOptions);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace InterpolSystem.Test.Web.Areas.Admin.Controllers
 {
     using FluentAssertions;
-    using InterpolSystem.Data;
     using InterpolSystem.Services.Admin.Implementations;
     using InterpolSystem.Test.Mocks;
     using InterpolSystem.Web;
@@ -10,9 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using Moq;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Xunit;
@@ -69,7 +66,7 @@
         public void UsersControllerShouldReturnUserListingViewModel()
         {
             // Arrange
-            var adminUserService = new AdminUserService(this.GetDatabase());
+            var adminUserService = new AdminUserService(Tests.GetDatabase());
             var roleManager = this.GetRoleManagerMock();
             var controller = new UsersController(adminUserService, roleManager.Object, null);
 
@@ -105,14 +102,5 @@
                 new IdentityRole { Name = FakeRole }
             }
             .AsQueryable();
-
-        private InterpolDbContext GetDatabase()
-        {
-            var dbOptions = new DbContextOptionsBuilder<InterpolDbContext>()
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .Options; // create everytime unique name cuz if the name is equal to all methods it will share the database between them
-
-            return new InterpolDbContext(dbOptions);
-        }
     }
 }
