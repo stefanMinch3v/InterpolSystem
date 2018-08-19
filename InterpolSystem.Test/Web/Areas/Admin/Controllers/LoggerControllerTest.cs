@@ -1,11 +1,13 @@
 ﻿namespace InterpolSystem.Test.Web.Areas.Admin.Controllers
 {
     using FluentAssertions;
+    using InterpolSystem.Services.Admin;
     using InterpolSystem.Services.Admin.Implementations;
     using InterpolSystem.Web.Areas.Admin.Controllers;
     using InterpolSystem.Web.Areas.Admin.Models.Logger;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Moq;
     using System.Linq;
     using Xunit;
 
@@ -66,7 +68,7 @@
         public void ShouldReturnTheCorrectViewModel()
         {
             // Arrange
-            var loggerService = new LoggerService(Tests.GetDatabase());
+            var loggerService = new Mock<ILoggerService>().Object;
             var controller = new LoggerController(loggerService);
 
             // Act
