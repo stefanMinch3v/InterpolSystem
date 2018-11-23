@@ -6,9 +6,9 @@ AppVeyor - Tests status:
 
 #Random pics:
 ![Home](https://i.imgur.com/ZZNLwVn.png)
-![Create users](https://imgur.com/iO6ZKVM)
-![WantedPeople](https://imgur.com/1aU4Yoa)
-![SubmitedForms](https://imgur.com/kJOqRO1)
-![SubmitedForms2](https://imgur.com/ZOozPOQ)
-![SearchWantedPeople](https://imgur.com/kBiNGCz)
-![PublicArticle](https://imgur.com/ex6m2Zy)
+![RandomPic1](https://i.imgur.com/ex6m2Zy.png)
+![RandomPic2](https://i.imgur.com/kBiNGCz.png)
+![RandomPic3](https://i.imgur.com/ZOozPOQ.png)
+![RandomPic4](https://i.imgur.com/kJOqRO1.png)
+![RandomPic5](https://i.imgur.com/1aU4Yoa.png)
+![RandomPic6](https://i.imgur.com/iO6ZKVM.png)
