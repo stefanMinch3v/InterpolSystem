@@ -12,3 +12,5 @@ AppVeyor - Tests status:
 ![SubmitedForms2](https://imgur.com/ZOozPOQ)
 ![SearchWantedPeople](https://imgur.com/kBiNGCz)
 ![PublicArticle](https://imgur.com/ex6m2Zy)
+
+[Imgur](https://i.imgur.com/yyLzcMA.jpg)
