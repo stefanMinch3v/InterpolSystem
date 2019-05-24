@@ -63,6 +63,8 @@
                 model.SelectedCountries,
                 model.SelectedLanguages,
                 model.AllNames,
+                model.Description,
+               // model.
                 model.ScarsOrDistinguishingMarks);
 
             TempData.AddSuccessMessage("Person successfully added to the system.");

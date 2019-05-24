@@ -20,20 +20,23 @@
         }
 
         public void Create(
-            string firstName, 
-            string lastName, 
-            Gender gender, 
+            string firstName,
+            string lastName,
+            Gender gender,
             DateTime dateOfBirth,
-            string placeOfBirth, 
-            double height, 
-            double weight, 
+            string placeOfBirth,
+            double height,
+            double weight,
             Color hairColor,
             Color eyesColor,
             string pictureUrl,
             IEnumerable<int> nationalitiesIds,
             IEnumerable<int> languagesIds,
-            string allNames = null, 
-            string scarsOrDistinguishingMarks = null)
+            string description,
+            //IEnumerable<Charges> chargesList,
+            string allNames = null,
+            string scarsOrDistinguishingMarks = null
+            )
         {
             var physicalDescription = new PhysicalDescription
             {
@@ -45,7 +48,7 @@
                 ScarsOrDistinguishingMarks = scarsOrDistinguishingMarks
             };
 
-            var missingPerson = new IdentityParticularsMissing
+            var wantedPerson = new IdentityParticularsWanted
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -55,30 +58,55 @@
                 AllNames = allNames,
                 PhysicalDescription = physicalDescription
             };
+            //foreach (var countryId in countriesIds)
+            //{
+            //    var countryWantedAuthorities = new ChargesCountries
+            //    {
+            //        CountryId = countryId,
+
+            //    };
+            
+            //foreach(var charge in chargesList)
+            //{ 
+            //    var charges = new Charges
+            //    {
+            //        Description = description,
+            //        IdentityParticularsWantedId = wantedPerson.Id
+                
+            //    };
+
+            //    var chargeCountries = new ChargesCountries
+            //    {
+            //        ChargesId = charges.Id,
+            //        CountryId = 1
+            //    };
+
+            //    wantedPerson.Charges.Add(charges);
+            //}
 
             foreach (var nationalityId in nationalitiesIds)
             {
-                var countriesNationalities = new CountriesNationalitiesMissing
+                var countriesNationalities = new CountriesNationalitiesWanted
                 {
                     CountryId = nationalityId,
-                    IdentityParticularsMissingId = missingPerson.Id
+                    IdentityParticularsWantedId = wantedPerson.Id
                 };
 
-                missingPerson.Nationalities.Add(countriesNationalities);
+                wantedPerson.Nationalities.Add(countriesNationalities);
             }
 
             foreach (var languageId in languagesIds)
             {
-                var languageMissing = new LanguagesMissing
+                var languageMissing = new LanguagesWanted
                 {
                     LanguageId = languageId,
-                    IdentityParticularsMissingId = missingPerson.Id
+                    IdentityParticularsWantedId = wantedPerson.Id
                 };
 
-                missingPerson.SpokenLanguages.Add(languageMissing);
+                wantedPerson.SpokenLanguages.Add(languageMissing);
             }
 
-            this.db.IdentityParticularsMissing.Add(missingPerson);
+            this.db.IdentityParticularsWanted.Add(wantedPerson);
             this.db.SaveChanges();
         }
 

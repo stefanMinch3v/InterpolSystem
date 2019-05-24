@@ -54,6 +54,9 @@
         [Display(Name = "Color of eyes")]
         public Color EyeColor { get; set; }
 
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
         [Required]
         [MaxLength(PhysicalDescriptionPcitureMaxLength)]
         [MinLength(PhysicalDescriptionPcitureMinLength)]

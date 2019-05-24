@@ -51,7 +51,7 @@
 
             this.bountyAdminService.Create(
                 model.FirstName,
-                model.LastName,
+                null,
                 model.Gender,
                 model.DateOfBirth,
                 model.PlaceOfBirth,

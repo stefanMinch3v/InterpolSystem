@@ -1,6 +1,7 @@
 ﻿namespace InterpolSystem.Services.WantedAdmin
 {
     using Data.Models.Enums;
+    using InterpolSystem.Data.Models;
     using InterpolSystem.Services.WantedAdmin.Models;
     using System;
     using System.Collections.Generic;
@@ -20,6 +21,8 @@
             string pictureUrl,
             IEnumerable<int> nationalitiesIds,
             IEnumerable<int> languagesIds,
+            string description,
+            //IEnumerable<Charges> chargesList,
             string allNames = null,
             string scarsOrDistinguishingMarks = null);
 

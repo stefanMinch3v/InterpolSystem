@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-area="Wanteddmin" asp-controller="WantedPeople" asp-action="Create" method="post">
+        <form asp-area="WantedAdmin" asp-controller="WantedPeople" asp-action="Create" method="post">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -41,7 +41,12 @@
                 <input asp-for="PlaceOfBirth" class="form-control" />
                 <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
             </div>
-        
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Countries"></label>
                 <select name="SelectedCountries" asp-items="Model.Countries" rows="10" id="fixedHeight" class="form-control" multiple></select>
@@ -49,12 +54,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Height"></label>
-                <input asp-for="Height" class="form-control" type="number" min="0" step="0.1"/>
+                <input asp-for="Height" class="form-control" type="number" min="0" step="0.1" />
                 <span asp-validation-for="Height" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Weight"></label>
-                <input asp-for="Weight" class="form-control" type="number" min="0" step="0.1"/>
+                <input asp-for="Weight" class="form-control" type="number" min="0" step="0.1" />
                 <span asp-validation-for="Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
