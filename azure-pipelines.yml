@@ -1,6 +1,5 @@
 trigger:
-  branches: 
-    azure-pipelines
+- azure-pipelines
 
 pool:
   vmImage: ubuntu-default
