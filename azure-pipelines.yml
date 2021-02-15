@@ -2,7 +2,7 @@ trigger:
 - azure-pipelines
 
 pool:
-  vmImage: ubuntu
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
