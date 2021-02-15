@@ -1,8 +1,8 @@
 # InterpolSystem
 Fourth semester project based on ASP.NET Core 2.0, EF Core, MSSQL, JQuery and Bootstrap
 
-AppVeyor - Tests status:
-[![Build status](https://ci.appveyor.com/api/projects/status/1ao864nuqxa0kjmx?svg=true)](https://ci.appveyor.com/project/stefanMinch3v/interpolsystem)
+Azure pipelines:
+[![Build Status](https://dev.azure.com/sminchev/AzurePipelinesInterpol/_apis/build/status/stefanMinch3v.InterpolSystem?branchName=azure-pipelines)](https://dev.azure.com/sminchev/AzurePipelinesInterpol/_build/latest?definitionId=1&branchName=azure-pipelines)
 
 #Random pics:
 ![Home](https://i.imgur.com/ZZNLwVn.png)
