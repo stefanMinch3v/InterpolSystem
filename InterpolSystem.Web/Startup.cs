@@ -16,32 +16,9 @@
 
     public class Startup
     {
-        // user secrets
         public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder();
-
-            builder.AddUserSecrets<Startup>();
-
-            Configuration = builder.Build();
-
-            foreach (var item in configuration.AsEnumerable())
-            {
-                Configuration[item.Key] = item.Value;
-            }
-        }
-
-        // user secrets
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder();
-
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
-            Configuration = builder.Build();
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -50,7 +27,7 @@
         {
             services
                 .AddDbContext<InterpolDbContext>(options => options
-                    .UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])); // app secret
+                    .UseSqlServer(this.Configuration["ConnectionStrings:DefaultConnection"])); // app secret
 
             services.AddIdentity<User, IdentityRole>(options =>
             {
