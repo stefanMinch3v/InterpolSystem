@@ -2,7 +2,7 @@ trigger:
 - azure-pipelines
 
 pool:
-  vmImage: ubuntu-default
+  vmImage: ubuntu
 
 variables:
   buildConfiguration: 'Release'
