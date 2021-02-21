@@ -2,11 +2,13 @@
 {
     using Data;
     using Data.Models;
+    using InterpolSystem.Languages;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using static WebConstants;
@@ -23,6 +25,43 @@
                     .GetService<InterpolDbContext>()
                     .Database
                     .Migrate();
+
+                var dbContext = serviceScope
+                    .ServiceProvider
+                    .GetService<InterpolDbContext>();
+
+                if (!dbContext.Countinents.Any())
+                {
+                    var languageService = serviceScope
+                        .ServiceProvider
+                        .GetService<ILanguageService>();
+
+                    var continets = languageService.GetContinents()
+                        .Select(c => new Countinent
+                        {
+                            Name = c.Name,
+                            Code = c.Code
+                        });
+
+                    var languages = languageService.GetLanguages()
+                        .Select(c => new Language
+                        {
+                            Name = c.Name
+                        });
+
+                    var countries = languageService.GetCountries()
+                        .Select(c => new Country
+                        {
+                            Name = c.Name,
+                            Code = c.Code,
+                            Countinent = continets.First(con => con.Code == languageService.GetContinentCode(c.Code))
+                        });
+
+                    dbContext.Countinents.AddRange(continets);
+                    dbContext.Countries.AddRange(countries);
+                    dbContext.Languages.AddRange(languages);
+                    dbContext.SaveChanges();
+                }
 
                 var userManager = serviceScope
                     .ServiceProvider
