@@ -5,7 +5,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOuput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     <Description>Test azure pipelines packages</Description>
-    <PackageReleaseNotes>1.0.0: initial version</PackageReleaseNotes>
+    <PackageReleaseNotes>1.1.0 Added GetContinent by country code
+1.0.0: initial version</PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">

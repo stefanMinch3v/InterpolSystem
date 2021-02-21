@@ -1,9 +1,10 @@
 ﻿using InterpolSystem.Languages.Models;
+using System;
 using System.Collections.Generic;
 
 namespace InterpolSystem.Languages
 {
-    internal class LanguageService : ILanguageService
+    public class LanguageService : ILanguageService
     {
         #region fake countries
         private static readonly List<Country> countries = new List<Country>
@@ -457,6 +458,285 @@ namespace InterpolSystem.Languages
         };
         #endregion
 
+        #region fake connections: continent to country
+        private static readonly HashSet<string> Africa = new HashSet<string>
+        {
+            "DZ",
+            "AO",
+            "BJ",
+            "BW",
+            "BF",
+            "BI",
+            "CM",
+            "CV",
+            "CF",
+            "TD",
+            "KM",
+            "CD",
+            "CG",
+            "CI",
+            "DJ",
+            "EG",
+            "GQ",
+            "ER",
+            "ET",
+            "GA",
+            "GM",
+            "GH",
+            "GN",
+            "GW",
+            "KE",
+            "LS",
+            "LR",
+            "LY",
+            "MG",
+            "MW",
+            "ML",
+            "MR",
+            "MU",
+            "YT",
+            "MA",
+            "MZ",
+            "NA",
+            "NE",
+            "NG",
+            "RE",
+            "RW",
+            "SH",
+            "ST",
+            "SN",
+            "SC",
+            "SL",
+            "SO",
+            "ZA",
+            "SS",
+            "SD",
+            "SZ",
+            "TZ",
+            "TG",
+            "TN",
+            "UG",
+            "EH",
+            "ZM",
+            "ZW"
+        };
+
+        private static readonly HashSet<string> Asia = new HashSet<string>
+        {
+            "AF",
+            "AM",
+            "AZ",
+            "BH",
+            "BD",
+            "BT",
+            "IO",
+            "BN",
+            "KH",
+            "CN",
+            "CX",
+            "CC",
+            "CY",
+            "GE",
+            "HK",
+            "IN",
+            "ID",
+            "IR",
+            "IQ",
+            "IL",
+            "JP",
+            "JO",
+            "KZ",
+            "KP",
+            "KR",
+            "KW",
+            "KG",
+            "LA",
+            "LB",
+            "MO",
+            "MY",
+            "MV",
+            "MN",
+            "MM",
+            "NP",
+            "OM",
+            "PK",
+            "PS",
+            "PH",
+            "QA",
+            "SA",
+            "SG",
+            "LK",
+            "SY",
+            "TW",
+            "TJ",
+            "TH",
+            "TL",
+            "TR",
+            "TM",
+            "AE",
+            "UZ",
+            "VN",
+            "YE"
+        };
+
+        private static readonly HashSet<string> Europe = new HashSet<string>
+        {
+            "AX",
+            "AL",
+            "AD",
+            "AT",
+            "BY",
+            "BE",
+            "BA",
+            "BG",
+            "HR",
+            "CZ",
+            "DK",
+            "EE",
+            "FO",
+            "FI",
+            "FR",
+            "DE",
+            "GI",
+            "GR",
+            "GG",
+            "VA",
+            "HU",
+            "IS",
+            "IE",
+            "IM",
+            "IT",
+            "JE",
+            "LV",
+            "LI",
+            "LT",
+            "LU",
+            "MK",
+            "MT",
+            "MD",
+            "MC",
+            "ME",
+            "NL",
+            "NO",
+            "PL",
+            "PT",
+            "RO",
+            "RU",
+            "SM",
+            "RS",
+            "SK",
+            "SI",
+            "ES",
+            "SJ",
+            "SE",
+            "CH",
+            "UA",
+            "GB",
+        };
+
+        private static readonly HashSet<string> NorthAmerica = new HashSet<string>
+        {
+            "AI",
+            "AG",
+            "AW",
+            "BS",
+            "BB",
+            "BZ",
+            "BM",
+            "BQ",
+            "VG",
+            "CA",
+            "KY",
+            "CR",
+            "CU",
+            "CW",
+            "DM",
+            "DO",
+            "SV",
+            "GL",
+            "GD",
+            "GP",
+            "GT",
+            "HT",
+            "HN",
+            "JM",
+            "MQ",
+            "MX",
+            "MS",
+            "NI",
+            "PA",
+            "PR",
+            "BL",
+            "KN",
+            "LC",
+            "MF",
+            "PM",
+            "VC",
+            "SX",
+            "TT",
+            "TC",
+            "US",
+            "VI",
+        };
+
+        private static readonly HashSet<string> SouthAmerica = new HashSet<string>
+        {
+            "AR",
+            "BO",
+            "BR",
+            "CL",
+            "CO",
+            "EC",
+            "FK",
+            "GF",
+            "GY",
+            "PY",
+            "PE",
+            "SR",
+            "UY",
+            "VE",
+        };
+
+        private static readonly HashSet<string> Oceania = new HashSet<string>
+        {
+            "AS",
+            "AU",
+            "CK",
+            "FJ",
+            "PF",
+            "GU",
+            "KI",
+            "MH",
+            "FM",
+            "NR",
+            "NC",
+            "NZ",
+            "NU",
+            "NF",
+            "MP",
+            "PW",
+            "PG",
+            "PN",
+            "WS",
+            "SB",
+            "TK",
+            "TO",
+            "TV",
+            "UM",
+            "VU",
+            "WF",
+        };
+
+        private static readonly HashSet<string> Antarctica = new HashSet<string>
+        {
+            "AQ",
+            "BV",
+            "TF",
+            "HM",
+            "GS"
+        };
+        #endregion
+
         public IReadOnlyCollection<Continent> GetContinents()
             => continents;
 
@@ -465,5 +745,35 @@ namespace InterpolSystem.Languages
 
         public IReadOnlyCollection<Language> GetLanguages()
             => languages;
+
+        public string GetContinentCode(string countryCode)
+        {
+            if (Africa.Contains(countryCode))
+            {
+                return "AF";
+            }
+            else if (Asia.Contains(countryCode))
+            {
+                return "AS";
+            }
+            else if (Europe.Contains(countryCode))
+            {
+                return "EU";
+            }
+            else if (NorthAmerica.Contains(countryCode))
+            {
+                return "NA";
+            }
+            else if (SouthAmerica.Contains(countryCode))
+            {
+                return "SA";
+            }
+            else if (Antarctica.Contains(countryCode))
+            {
+                return "AN";
+            }
+
+            throw new InvalidCastException("Invalid country code provided!");
+        }
     }
 }

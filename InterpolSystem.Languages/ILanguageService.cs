@@ -13,5 +13,7 @@ namespace InterpolSystem.Languages
         IReadOnlyCollection<Continent> GetContinents();
 
         IReadOnlyCollection<Language> GetLanguages();
+
+        string GetContinentCode(string countryCode);
     }
 }
