@@ -390,7 +390,7 @@ namespace InterpolSystem.Languages
             new Language { Name = "South Ndebele"},
             new Language { Name = "Occitan"},
             new Language { Name = "Ojibwe, Ojibwa"},
-            new Language { Name = "Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic"},
+            new Language { Name = "Old Church Slavonic, Old Bulgarian, Old Slavonic"},
             new Language { Name = "Oromo"},
             new Language { Name = "Oriya"},
             new Language { Name = "Ossetian, Ossetic"},
@@ -585,12 +585,14 @@ namespace InterpolSystem.Languages
             "AL",
             "AD",
             "AT",
+            "AN",
             "BY",
             "BE",
             "BA",
             "BG",
             "HR",
             "CZ",
+            "CS",
             "DK",
             "EE",
             "FO",
@@ -771,6 +773,10 @@ namespace InterpolSystem.Languages
             else if (Antarctica.Contains(countryCode))
             {
                 return "AN";
+            }
+            else if (Oceania.Contains(countryCode))
+            {
+                return "OC";
             }
 
             throw new InvalidCastException("Invalid country code provided!");
