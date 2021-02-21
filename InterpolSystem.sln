@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2015
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Web", "InterpolSystem.Web\InterpolSystem.Web.csproj", "{02B92826-7BC8-4BAD-B481-43482C896A78}"
 EndProject
@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Test", "Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Common", "InterpolSystem.Common\InterpolSystem.Common.csproj", "{F529B9D7-3C0F-48AB-8FB3-D591A509BB76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Api", "InterpolSystem.Api\InterpolSystem.Api.csproj", "{D143C779-3A17-4761-A4DC-5F6D86680DCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolSystem.Api", "InterpolSystem.Api\InterpolSystem.Api.csproj", "{D143C779-3A17-4761-A4DC-5F6D86680DCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-package", "nuget-package", "{C5200AEC-3E8C-4E80-AAC6-08A1D97F38E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolSystem.Languages", "InterpolSystem.Languages\InterpolSystem.Languages.csproj", "{32827EA2-D86C-46B0-8C23-A74CF6DB46BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,9 +49,16 @@ Global
 		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D143C779-3A17-4761-A4DC-5F6D86680DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32827EA2-D86C-46B0-8C23-A74CF6DB46BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32827EA2-D86C-46B0-8C23-A74CF6DB46BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32827EA2-D86C-46B0-8C23-A74CF6DB46BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32827EA2-D86C-46B0-8C23-A74CF6DB46BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32827EA2-D86C-46B0-8C23-A74CF6DB46BC} = {C5200AEC-3E8C-4E80-AAC6-08A1D97F38E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1026EB1B-F172-49C7-BC6C-95A72DB2DBE8}

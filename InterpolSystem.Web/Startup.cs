@@ -5,6 +5,7 @@
     using Data;
     using Data.Models;
     using Infrastructure.Extensions;
+    using InterpolSystem.Languages;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,9 @@
             .AddDefaultTokenProviders();
 
             services.AddDomainServices(); // auto adds services
+
+            // package dependencies
+            services.AddLanguagesDependencies();
 
             services.AddAutoMapper(typeof(AutoMapperProfile)); // automapper assembly
 
